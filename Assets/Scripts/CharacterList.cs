@@ -6,13 +6,19 @@ public static class CharacterList
 {
     public static List<Character> characters = new List<Character>
     {
-        new Character(null, "RI_241", "Mythri'theia", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
-        new Character(null, "LI_K21", "Kiaj'uyiana", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
-        new Character(null, "LI_S22", "Shiar'iakyia", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
-        new Character(null, "VAL_K42", "Krist'ven", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
-        new Character(null, "SP_SPAR32", "Spa'riat", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
+        new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), "RI_241", "Mythri'theia", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
+        new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), "LI_K21", "Kiaj'uyiana", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
+        new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), "LI_S22", "Shiar'iakyia", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
+        new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), "VAL_K42", "Krist'ven", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
+        new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), "SP_SPAR32", "Spa'riat", 1000f, 0f, 100f, 0f, 65.6f, 1.2f, 0f),
     };
-    
+
+
+    private static Sprite LoadSpriteByGUID(string spriteGUID)
+    {
+        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(spriteGUID);
+        return UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(path);
+    }
 }
 
 public static class InnateSkills
@@ -44,7 +50,7 @@ public class Character
     // character identification
     private string characterId;
     private string characterName;
-    private Sprite characterSprite;
+    public Sprite characterSprite;
 
     // stat controls
     private float maximumHealth;
@@ -76,10 +82,10 @@ public class Character
         // Initialize other properties as needed.
     }
 
-    public Sprite getCharacterSprite()
-    {
-        return characterSprite;
-    }
+    //public Sprite getCharacterSprite()
+    //{
+    //    return characterSprite;
+    //}
 }
 
 public abstract class Skill
