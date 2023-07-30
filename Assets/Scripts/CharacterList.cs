@@ -19,6 +19,12 @@ public static class CharacterList
         string path = UnityEditor.AssetDatabase.GUIDToAssetPath(spriteGUID);
         return UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(path);
     }
+
+    private static Animator LoadAnimatorByGUID(string spriteGUID)
+    {
+        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(spriteGUID);
+        return UnityEditor.AssetDatabase.LoadAssetAtPath<Animator>(path);
+    }
 }
 
 public static class InnateSkills
@@ -51,6 +57,7 @@ public class Character
     private string characterId;
     private string characterName;
     public Sprite characterSprite;
+    public Animator animator;
 
     // stat controls
     private float maximumHealth;
@@ -90,20 +97,42 @@ public class Character
 
 public abstract class Skill
 {
-
+    public abstract void function();
 }
 
-public class PassivePerk
+public abstract class Passive
 {
+    public abstract void function();
+}
 
+public class PassivePerk : Passive
+{
+    override public void function()
+    {
+
+    }
+}
+
+public class CharacterPerk : Passive
+{
+    override public void function()
+    {
+
+    }
 }
 
 public class InnateSkill : Skill
 {
+    override public void function()
+    {
 
+    }
 }
 
 public class ActiveSkill : Skill
 {
+    override public void function()
+    {
 
+    }
 }
