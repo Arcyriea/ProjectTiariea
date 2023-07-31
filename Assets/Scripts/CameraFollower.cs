@@ -7,12 +7,13 @@ public class CameraFollower : MonoBehaviour
     // Start is called before the first frame update
     public float followSpeed = 2f;
     public float partyTravelSpeed = 60f;
-    public Transform target;
+    public GameObject partyMembers;
     private float zoom;
+    private int memCap = 6;
 
     private void Start()
     {
-        //zoom = 
+        
     }
     // Update is called once per frame
     void Update()
