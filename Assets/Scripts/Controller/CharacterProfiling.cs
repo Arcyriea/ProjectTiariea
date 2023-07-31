@@ -7,15 +7,34 @@ public class CharacterProfiling : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     
-    [SerializeField] private Character character;
+    public Character character;
     private Animator animator;
     private int partyPositions;
 
+    public float Health { get; private set; }
+    public float? Shield { get; private set; }
+    public float? Mana { get; private set; }
+
     // status control
-    private enum CharacterStatus { InMelee, Silenced, Stunned, Immobilized }
     private bool isDead = false;
     private int RespawnTimer = 0;
-    private LinkedList<CharacterStatus> currentStatuses = new LinkedList<CharacterStatus>();
+
+    private class StatusEffect
+    {
+        public Enums.StatusEffectType type;
+        public int stackCount;
+        public int maxStack;
+        public float duration;
+
+        public StatusEffect(Enums.StatusEffectType type, int stackCount, float duration)
+        {
+            this.type = type;
+            this.stackCount = stackCount;
+            this.duration = duration;
+        }
+    }
+
+    private LinkedList<StatusEffect> statusEffects = new LinkedList<StatusEffect>();
     public CharacterProfiling(Character character, int partyPositions)
     {
         this.character = character;
@@ -29,6 +48,9 @@ public class CharacterProfiling : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (character == null) return;
+        Health = character.maximumHealth;
+        Shield = character.maximumShield;
+        Mana = character.maximumMana;
         if (character.characterSprite != null) spriteRenderer.sprite = character.characterSprite;
         if (character.characterAnimator != null) animator = character.characterAnimator;
     }
