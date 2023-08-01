@@ -10,10 +10,9 @@ public class PartyController : MonoBehaviour
     public float followSpeed = 2f;
     public float partyTravelSpeed = 60f;
     public GameObject partyMembers;
+    public Character[] characters;
     private float zoom;
-    public int memCap = 6;
-
-    public List<Character> selectedCharacters = new List<Character> ();
+    private int memCap;
     public List<CustomFormation> customFormations;
 
     private List<GameObject> spawnedPrefabs = new List<GameObject>();
@@ -21,18 +20,24 @@ public class PartyController : MonoBehaviour
     private int selectedPrefabIndex = -1;
     public float spacing = 2f;
 
+    public LayerMask prefabLayer;
+
     private void Start()
     {
-        Vector3 spawnPosition = Camera.main.transform.position;
-        for (int i = 0; i < memCap && i < selectedCharacters.Count - 1; i++)
+        memCap = characters.Length;
+        Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
+        for (int i = 0; i < memCap; i++)
         {
-            Vector3 offset = new Vector3((i - (memCap - 1) / 2f) * spacing, 0f, 0f);
-            CharacterProfiling prefabCharacter = partyMembers.GetComponent<CharacterProfiling>();
-            prefabCharacter.character = selectedCharacters[i];
-            GameObject prefabInstance = Instantiate(partyMembers, spawnPosition + offset, Quaternion.identity);
+            Vector3 offset = new Vector3(
+                (i - (memCap - 1) / 2f) * spacing, //(i - (memCap - 1) / 2f) * spacing, 
+                0f, 
+                0f);
+            //CharacterProfiling prefabCharacter = partyMembers.GetComponent<CharacterProfiling>();
+            //prefabCharacter.character = selectedCharacters[i];
+            GameObject prefabInstance = Instantiate(characters[i].characterPrefab, spawnPosition + offset, Quaternion.identity);
+            prefabInstance.layer = prefabLayer;
+            spawnedPrefabs.Add(prefabInstance);
             
-            if(prefabCharacter != null) spawnedPrefabs.Add(prefabInstance);
-            else Destroy(prefabInstance.gameObject);
         }//Khoi tao nhan vat trong doi
 
         if (customFormations.Count > 0)
@@ -50,9 +55,9 @@ public class PartyController : MonoBehaviour
 
         foreach (GameObject member in spawnedPrefabs)
         {
-            Vector3 memMove = new Vector3(member.transform.position.x + (partyTravelSpeed * Time.deltaTime), member.transform.position.y, -10f);
-            Vector3 offset = member.transform.position - transform.position;
-            member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime) + offset;
+            Vector3 memMove = new Vector3(member.transform.position.x + (partyTravelSpeed * Time.deltaTime), member.transform.position.y, 0f);
+            //Vector3 offset = member.transform.position - transform.position;
+            member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime);// + offset;
         }
 
         Vector3 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -13,6 +13,8 @@ public class SpawnManager : MonoBehaviour
     public float spawnInterval = 3f; // Time interval between enemy spawns
     private float nextSpawnTime;
 
+    public LayerMask prefabLayer;
+
     private void Start()
     {
         nextSpawnTime = Time.time + spawnInterval;
@@ -38,7 +40,7 @@ public class SpawnManager : MonoBehaviour
         Enemy enemyData = enemyTypes[randomEnemyIndex];
 
         // Get the camera's position and add an offset to move it to the right side
-        Vector3 cameraPosition = Camera.main.transform.position;
+        Vector3 cameraPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
         Vector3 spawnOffset = new Vector3(10f, 0f, 0f); // Adjust the offset to your desired distance from the camera
 
         // Calculate the spawn position by adding the offset to the camera position and using the spawn point's position
@@ -46,6 +48,7 @@ public class SpawnManager : MonoBehaviour
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         newEnemy.GetComponent<EnemyProfiling>().enemyData = enemyData;
+        newEnemy.layer = prefabLayer;
     }
 }
 

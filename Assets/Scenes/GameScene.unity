@@ -225,9 +225,18 @@ MonoBehaviour:
   followSpeed: 2
   partyTravelSpeed: 6
   partyMembers: {fileID: 3462239808932946287, guid: edc84031970c2af4ea66b043006ee043, type: 3}
-  memCap: 6
+  characters:
+  - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
+  - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
+  - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
+  - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
+  - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
+  - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
   customFormations: []
   spacing: 2
+  prefabLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!50 &519420034
 Rigidbody2D:
   serializedVersion: 4
@@ -269,6 +278,9 @@ MonoBehaviour:
   - {fileID: 519420032}
   - {fileID: 519420032}
   spawnInterval: 3
+  prefabLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &1573040662
 GameObject:
   m_ObjectHideFlags: 0

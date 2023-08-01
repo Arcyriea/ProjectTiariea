@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyId: HZ-512
   enemyName: Zealot
-  enemySprite: {fileID: 0}
-  enemyAnimator: {fileID: 0}
+  enemyPrefab: {fileID: 6367482206822494237, guid: 0aaeb687083d073488e0044258777a10, type: 3}
   enemyClass: 3
   maximumHealth: 1000
   attackRange: 120

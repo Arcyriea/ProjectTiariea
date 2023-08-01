@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: RI_241
   characterName: Mythri'theia
-  characterSprite: {fileID: -9095717837082945937, guid: c7c4a9ea76059ed41997952a7ba94da2, type: 3}
-  characterAnimator: {fileID: 0}
+  characterPrefab: {fileID: 3462239808932946287, guid: edc84031970c2af4ea66b043006ee043, type: 3}
   characterClass: 5
   maximumHealth: 2210
   maximumShield: 1120
@@ -31,6 +30,7 @@ MonoBehaviour:
   meleeRange: 120
   meleeDamage: 224
   swingTime: 4
+  movementSpeed: 10
   innateSkill: {fileID: 0}
   activeSkill: {fileID: 0}
   characterPerk: {fileID: 0}

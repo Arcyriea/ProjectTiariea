@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 
   characterName: 
-  characterSprite: {fileID: 0}
-  characterAnimator: {fileID: 0}
+  characterPrefab: {fileID: 0}
   characterClass: 0
   maximumHealth: 0
   maximumShield: 0
@@ -31,6 +30,7 @@ MonoBehaviour:
   meleeRange: 0
   meleeDamage: 0
   swingTime: 0
+  movementSpeed: 10
   innateSkill: {fileID: 0}
   activeSkill: {fileID: 0}
   characterPerk: {fileID: 0}

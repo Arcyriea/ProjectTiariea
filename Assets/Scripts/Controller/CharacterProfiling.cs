@@ -8,7 +8,6 @@ public class CharacterProfiling : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     
     public Character character;
-    private Animator animator;
     private int partyPositions;
 
     public float Health { get; private set; }
@@ -45,7 +44,6 @@ public class CharacterProfiling : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (character == null) return;
         Health = character.maximumHealth;

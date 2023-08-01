@@ -36,20 +36,20 @@ public class Enemy : ScriptableObject
     }
 }
 
-public static class Enemies
-{
-    public static List<Enemy> enemies = new List<Enemy>();
+//public static class Enemies
+//{
+//    public static List<Enemy> enemies = new List<Enemy>();
 
 
-    private static Sprite LoadSpriteByGUID(string spriteGUID)
-    {
-        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(spriteGUID);
-        return UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(path);
-    }
+//    private static Sprite LoadSpriteByGUID(string spriteGUID)
+//    {
+//        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(spriteGUID);
+//        return UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(path);
+//    }
 
-    private static Animator LoadAnimatorByGUID(string animGUID)
-    {
-        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(animGUID);
-        return UnityEditor.AssetDatabase.LoadAssetAtPath<Animator>(path);
-    }
-}
+//    private static Animator LoadAnimatorByGUID(string animGUID)
+//    {
+//        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(animGUID);
+//        return UnityEditor.AssetDatabase.LoadAssetAtPath<Animator>(path);
+//    }
+//}
