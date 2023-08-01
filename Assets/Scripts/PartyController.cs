@@ -12,7 +12,7 @@ public class PartyController : MonoBehaviour
     public float partyTravelSpeed = 60f;
     public Character[] characters;
     private float zoom;
-    private int memCap;
+    private int memCap = 6;
     public List<CustomFormation> customFormations;
 
     private List<GameObject> spawnedPrefabs = new List<GameObject>();
@@ -28,25 +28,25 @@ public class PartyController : MonoBehaviour
 
     private void Start()
     {
-        memCap = characters.Length;
+        
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
-        for (int i = 0; i < memCap; i++)
+        for (int i = 0; i < characters.Length; i++)
         {
             Vector3 offset = new Vector3(
                 (i - (memCap - 1) / 2f) * spacing, //(i - (memCap - 1) / 2f) * spacing, 
-                0f, 
+                0f,
                 0f);
             //CharacterProfiling prefabCharacter = partyMembers.GetComponent<CharacterProfiling>();
             //prefabCharacter.character = selectedCharacters[i];
             GameObject prefabInstance = Instantiate(characters[i].characterPrefab, spawnPosition + offset, Quaternion.identity);
             prefabInstance.layer = prefabLayer;
             CharacterProfiling prefabCharProfile = prefabInstance.GetComponent<CharacterProfiling>();
-            
+
             prefabCharProfile.character = characters[i];
 
             UnityEngine.Debug.Log("Their name is: " + prefabCharProfile.character.characterName);
             spawnedPrefabs.Add(prefabInstance);
-            
+
         }//Khoi tao nhan vat trong doi
 
         if (customFormations.Count > 0)
@@ -63,6 +63,7 @@ public class PartyController : MonoBehaviour
         Camera.main.transform.position = Vector3.Lerp(transform.position, newPos, followSpeed * Time.deltaTime);
 
         ZoomControl();
+        PartyMarchCommand();
 
         foreach (GameObject member in spawnedPrefabs)
         {
@@ -98,5 +99,91 @@ public class PartyController : MonoBehaviour
         float newFOV = Camera.main.fieldOfView - zoomInput * zoomSpeed;
         newFOV = Mathf.Clamp(newFOV, minFOV, maxFOV); // Clamp the FOV within the specified range
         Camera.main.fieldOfView = newFOV;
+    }
+
+    private void PartyMarchCommand()
+    {
+        switch (Input.GetAxisRaw("Horizontal"))
+        {
+            case > 0:
+                partyTravelSpeed = Mathf.Clamp(partyTravelSpeed + (Input.GetAxisRaw("Horizontal") * 0.6f), 0, 180f);
+                break;
+            case < 0:
+                partyTravelSpeed = Mathf.Clamp(partyTravelSpeed + (Input.GetAxisRaw("Horizontal") * 0.6f), 0, 180f);
+                break;
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            partyTravelSpeed = 0;
+        }
+    }
+
+    public void AddCharacterToParty(Character character)
+    {
+        if (IsCharacterInParty(character))
+        {
+            UnityEngine.Debug.LogWarning("Character " + character.characterName + " is already in the party.");
+            return;
+        }
+
+        if (characters.Length >= memCap)
+        {
+            UnityEngine.Debug.LogWarning("Party is already full. Cannot add more characters.");
+            return;
+        }
+
+        Character[] updatedCharacters = new Character[characters.Length + 1];
+
+        // Copy the existing characters to the new array
+        for (int i = 0; i < characters.Length; i++)
+        {
+            updatedCharacters[i] = characters[i];
+        }
+
+        updatedCharacters[characters.Length] = character;
+        characters = updatedCharacters;
+    }
+
+    public void RemoveCharacterFromParty(Character character)
+    {
+        if (!IsCharacterInParty(character))
+        {
+            UnityEngine.Debug.LogWarning("Character " + character.characterName + " is not in the party.");
+            return;
+        }
+
+        Character[] updatedCharacters = new Character[characters.Length - 1];
+
+        int newIndex = 0;
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i] != character)
+            {
+                updatedCharacters[newIndex] = characters[i];
+                newIndex++;
+            }
+        }
+
+        characters = updatedCharacters;
+
+    }
+
+    // Function to check if a character is in the party
+    public bool IsCharacterInParty(Character character)
+    {
+        foreach (Character partyCharacter in characters)
+        {
+            if (partyCharacter == character)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void SetSelectedFormation(CustomFormation formation)
+    {
+
     }
 }

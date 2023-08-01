@@ -280,6 +280,7 @@ MonoBehaviour:
   - {fileID: 519420032}
   - {fileID: 519420032}
   spawnInterval: 3
+  despawnDistance: 30
   prefabLayer:
     serializedVersion: 2
     m_Bits: 1
