@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,8 +35,8 @@ public class SpawnManager : MonoBehaviour
         if (enemyTypes.Count == 0 || spawnPoints.Length == 0)
             return;
 
-        int randomEnemyIndex = Random.Range(0, enemyTypes.Count);
-        int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
+        int randomEnemyIndex = UnityEngine.Random.Range(0, enemyTypes.Count);
+        int randomSpawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
 
         Enemy enemyData = enemyTypes[randomEnemyIndex];
 
@@ -44,7 +45,8 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnOffset = new Vector3(10f, 0f, 0f); // Adjust the offset to your desired distance from the camera
 
         // Calculate the spawn position by adding the offset to the camera position and using the spawn point's position
-        Vector3 spawnPosition = cameraPosition + spawnOffset + spawnPoints[randomSpawnPointIndex].position;
+        Vector3 randomDeviation = new Vector3(UnityEngine.Random.Range(20f, 40f), UnityEngine.Random.Range(-10f, 10f), 0f); // Adjust the ranges for the desired deviation
+        Vector3 spawnPosition = cameraPosition + spawnOffset + spawnPoints[randomSpawnPointIndex].position + randomDeviation;
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         newEnemy.GetComponent<EnemyProfiling>().enemyData = enemyData;
