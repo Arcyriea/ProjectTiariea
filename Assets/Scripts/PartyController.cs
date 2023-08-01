@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class PartyController : MonoBehaviour
     // Start is called before the first frame update
     public float followSpeed = 2f;
     public float partyTravelSpeed = 60f;
-    public GameObject partyMembers;
     public Character[] characters;
     private float zoom;
     private int memCap;
@@ -21,6 +21,10 @@ public class PartyController : MonoBehaviour
     public float spacing = 2f;
 
     public LayerMask prefabLayer;
+
+    public float zoomSpeed = 5f; // Adjust this value to control the zoom speed
+    public float minFOV = 30f; // Set the minimum FOV for zooming in
+    public float maxFOV = 120f; // Set the maximum FOV for zooming out
 
     private void Start()
     {
@@ -36,6 +40,11 @@ public class PartyController : MonoBehaviour
             //prefabCharacter.character = selectedCharacters[i];
             GameObject prefabInstance = Instantiate(characters[i].characterPrefab, spawnPosition + offset, Quaternion.identity);
             prefabInstance.layer = prefabLayer;
+            CharacterProfiling prefabCharProfile = prefabInstance.GetComponent<CharacterProfiling>();
+            
+            prefabCharProfile.character = characters[i];
+
+            UnityEngine.Debug.Log("Their name is: " + prefabCharProfile.character.characterName);
             spawnedPrefabs.Add(prefabInstance);
             
         }//Khoi tao nhan vat trong doi
@@ -52,6 +61,8 @@ public class PartyController : MonoBehaviour
 
         Vector3 newPos = new Vector3(Camera.main.transform.position.x + (partyTravelSpeed * Time.deltaTime), Camera.main.transform.position.y, -10f);
         Camera.main.transform.position = Vector3.Lerp(transform.position, newPos, followSpeed * Time.deltaTime);
+
+        ZoomControl();
 
         foreach (GameObject member in spawnedPrefabs)
         {
@@ -79,5 +90,13 @@ public class PartyController : MonoBehaviour
                 spawnedPrefabs[i].transform.position = Camera.main.transform.position + selectedFormation.prefabPositions[i];
             }
         }
+    }
+
+    private void ZoomControl()
+    {
+        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+        float newFOV = Camera.main.fieldOfView - zoomInput * zoomSpeed;
+        newFOV = Mathf.Clamp(newFOV, minFOV, maxFOV); // Clamp the FOV within the specified range
+        Camera.main.fieldOfView = newFOV;
     }
 }

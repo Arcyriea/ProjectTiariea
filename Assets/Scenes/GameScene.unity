@@ -177,7 +177,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -224,7 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 2
   partyTravelSpeed: 6
-  partyMembers: {fileID: 3462239808932946287, guid: edc84031970c2af4ea66b043006ee043, type: 3}
   characters:
   - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
   - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
@@ -237,6 +236,9 @@ MonoBehaviour:
   prefabLayer:
     serializedVersion: 2
     m_Bits: 1
+  zoomSpeed: 5
+  minFOV: 30
+  maxFOV: 120
 --- !u!50 &519420034
 Rigidbody2D:
   serializedVersion: 4
