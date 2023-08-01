@@ -8,8 +8,7 @@ public class Enemy : ScriptableObject
     // Enemy identification
     public string enemyId;
     public string enemyName;
-    public Sprite enemySprite;
-    public Animator enemyAnimator;
+    public GameObject enemyPrefab;
     public Enums.ClassType enemyClass;
 
     // Enemy stats and behavior attributes
@@ -25,12 +24,11 @@ public class Enemy : ScriptableObject
         // Implement enemy behavior here
     }
 
-    public Enemy(string id, string name, Sprite sprite, Animator animator, float health, float range, float damage, float cooldown)
+    public Enemy(GameObject prefab, string id, string name, Sprite sprite, Animator animator, float health, float range, float damage, float cooldown)
     {
+        enemyPrefab = prefab;
         enemyId = id;
         enemyName = name;   
-        enemySprite = sprite;
-        enemyAnimator = animator;
         maximumHealth = health;
         attackRange = range;
         attackDamage = damage;

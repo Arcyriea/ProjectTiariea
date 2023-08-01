@@ -8,8 +8,7 @@ public class Character : ScriptableObject
     // character identification
     public string characterId;
     public string characterName;
-    public Sprite characterSprite;
-    public Animator characterAnimator;
+    public GameObject characterPrefab;
     public Enums.ClassType characterClass;
 
     // stat controls
@@ -38,11 +37,10 @@ public class Character : ScriptableObject
 
     [SerializeField] public PassivePerk passivePerk; //each chars will have an unique passive perk
 
-    public Character(Sprite sprite, Animator animator, string id, string name, float health, float shield, float shootingRange, float meleeRange, float rangedDamage, float meleeDamage, float swingTime, float fireRate
+    public Character(GameObject characterPrefab, string id, string name, float health, float shield, float shootingRange, float meleeRange, float rangedDamage, float meleeDamage, float swingTime, float fireRate
         , CharacterPerk characterPerk, PassivePerk passivePerk, InnateSkill innateSkill, ActiveSkill activeSkill, float movementSpeed)
     {
-        characterSprite = sprite;
-        characterAnimator = animator;
+        this.characterPrefab = characterPrefab;
         characterId = id;
         characterName = name;
         maximumHealth = health;

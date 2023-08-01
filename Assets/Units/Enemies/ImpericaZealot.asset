@@ -16,6 +16,7 @@ MonoBehaviour:
   enemyName: Zealot
   enemySprite: {fileID: 0}
   enemyAnimator: {fileID: 0}
+  enemyClass: 10
   maximumHealth: 1000
   attackRange: 120
   attackDamage: 10

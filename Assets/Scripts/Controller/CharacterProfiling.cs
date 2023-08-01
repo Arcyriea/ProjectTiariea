@@ -51,8 +51,6 @@ public class CharacterProfiling : MonoBehaviour
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
-        if (character.characterSprite != null) spriteRenderer.sprite = character.characterSprite;
-        if (character.characterAnimator != null) animator = character.characterAnimator;
     }
 
     // Update is called once per frame

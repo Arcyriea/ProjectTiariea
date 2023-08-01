@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bac95266fc7f44c9c973f9134888d6, type: 3}
   m_Name: HarmonicaZealot
   m_EditorClassIdentifier: 
-  enemyId: 
-  enemyName: 
+  enemyId: HZ-512
+  enemyName: Zealot
   enemySprite: {fileID: 0}
   enemyAnimator: {fileID: 0}
-  enemyClass: 0
-  maximumHealth: 0
-  attackRange: 0
-  attackDamage: 0
-  attackCooldown: 0
+  enemyClass: 3
+  maximumHealth: 1000
+  attackRange: 120
+  attackDamage: 7.5
+  attackCooldown: 1.8
