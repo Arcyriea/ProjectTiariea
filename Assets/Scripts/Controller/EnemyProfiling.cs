@@ -36,7 +36,7 @@ public class EnemyProfiling : MonoBehaviour
     void Update()
     {
         enemyData.EnemyBehavior();
-        CheckDespawn();
+        //CheckDespawn();
     }
 
     private void CheckDespawn()
@@ -50,7 +50,6 @@ public class EnemyProfiling : MonoBehaviour
         
            
         float distanceToDespawn = transform.position.x - despawnPosition.x;
-        UnityEngine.Debug.Log("Despawn Distance = " + distanceToDespawn);
         if (distanceToDespawn < -despawnDistance) Destroy(gameObject);
                     
             

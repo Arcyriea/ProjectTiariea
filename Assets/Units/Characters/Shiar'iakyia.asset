@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 
   characterName: 
-  characterPrefab: {fileID: 3462239808932946287, guid: edc84031970c2af4ea66b043006ee043, type: 3}
+  characterPrefab: {fileID: 3462239808932946287, guid: 87d6808c68ccddb419137a29e3ec8201, type: 3}
   characterClass: 0
   maximumHealth: 0
   maximumShield: 0

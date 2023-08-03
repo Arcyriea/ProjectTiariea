@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea268dcbd792b34381a47614c639fe3, type: 3}
   m_Name: Arcyriea
   m_EditorClassIdentifier: 
-  characterId: 
-  characterName: 
-  characterPrefab: {fileID: 0}
-  characterClass: 0
+  characterId: NIA-35
+  characterName: Arcyriea
+  characterPrefab: {fileID: 3462239808932946287, guid: 6079cd18c38791d4cb5b39fb8b194952, type: 3}
+  characterClass: 3
   maximumHealth: 0
   maximumShield: 0
   ShieldIdentity: 0
@@ -24,10 +24,10 @@ MonoBehaviour:
   maximumMana: 0
   maximumAmmo: 0
   maximumGas: 0
-  shootingRange: 0
+  shootingRange: 26
   rangedDamage: 0
   fireRate: 0
-  meleeRange: 0
+  meleeRange: 4
   meleeDamage: 0
   swingTime: 0
   movementSpeed: 10

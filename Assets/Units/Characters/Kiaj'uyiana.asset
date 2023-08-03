@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: Kiaj'uyiana
   m_EditorClassIdentifier: 
   characterId: 
-  characterName: 
-  characterPrefab: {fileID: 0}
+  characterName: Kiaj'uyiana
+  characterPrefab: {fileID: 3462239808932946287, guid: 92a8b880baaf22944a1ac3a4c354bda3, type: 3}
   characterClass: 0
-  maximumHealth: 0
-  maximumShield: 0
-  ShieldIdentity: 0
-  defense: 0
-  maximumEnergy: 0
-  maximumMana: 0
+  maximumHealth: 2481
+  maximumShield: 1232
+  ShieldIdentity: 2
+  defense: 232
+  maximumEnergy: 2141
+  maximumMana: 212
   maximumAmmo: 0
   maximumGas: 0
-  shootingRange: 0
-  rangedDamage: 0
-  fireRate: 0
-  meleeRange: 0
-  meleeDamage: 0
-  swingTime: 0
+  shootingRange: 12
+  rangedDamage: 28
+  fireRate: 3
+  meleeRange: 2
+  meleeDamage: 521
+  swingTime: 2
   movementSpeed: 10
   innateSkill: {fileID: 0}
   activeSkill: {fileID: 0}

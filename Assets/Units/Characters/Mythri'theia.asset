@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: RI_241
   characterName: Mythri'theia
-  characterPrefab: {fileID: 3462239808932946287, guid: edc84031970c2af4ea66b043006ee043, type: 3}
+  characterPrefab: {fileID: 3462239808932946287, guid: da163934275028e4ab695b897837a148, type: 3}
   characterClass: 5
   maximumHealth: 2210
   maximumShield: 1120
@@ -24,10 +24,10 @@ MonoBehaviour:
   maximumMana: 2413.22
   maximumAmmo: 0
   maximumGas: 0
-  shootingRange: 0
-  rangedDamage: 0
-  fireRate: 0
-  meleeRange: 120
+  shootingRange: 24
+  rangedDamage: 184
+  fireRate: 2
+  meleeRange: 3
   meleeDamage: 224
   swingTime: 4
   movementSpeed: 10

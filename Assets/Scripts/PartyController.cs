@@ -9,7 +9,7 @@ public class PartyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float followSpeed = 2f;
-    public float partyTravelSpeed = 60f;
+    public static float partyTravelSpeed = 60f;
     public Character[] characters;
     private float zoom;
     private int memCap = 6;
@@ -36,13 +36,12 @@ public class PartyController : MonoBehaviour
                 (i - (memCap - 1) / 2f) * spacing, //(i - (memCap - 1) / 2f) * spacing, 
                 0f,
                 0f);
-            //CharacterProfiling prefabCharacter = partyMembers.GetComponent<CharacterProfiling>();
-            //prefabCharacter.character = selectedCharacters[i];
+
             GameObject prefabInstance = Instantiate(characters[i].characterPrefab, spawnPosition + offset, Quaternion.identity);
             prefabInstance.layer = prefabLayer;
             CharacterProfiling prefabCharProfile = prefabInstance.GetComponent<CharacterProfiling>();
 
-            prefabCharProfile.character = characters[i];
+            prefabCharProfile.GetCharacterFromScriptableObject(characters[i]);
 
             UnityEngine.Debug.Log("Their name is: " + prefabCharProfile.character.characterName);
             spawnedPrefabs.Add(prefabInstance);
@@ -71,15 +70,6 @@ public class PartyController : MonoBehaviour
             //Vector3 offset = member.transform.position - transform.position;
             member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime);// + offset;
         }
-
-        Vector3 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        targetPosition.z = 0f;
-
-        // Handle input to move the selected prefab
-        if (selectedPrefabIndex != -1 && Input.GetMouseButton(0))
-        {
-            spawnedPrefabs[selectedPrefabIndex].transform.position = targetPosition;
-        }
     }
 
     private void UpdateFormation()
@@ -103,16 +93,8 @@ public class PartyController : MonoBehaviour
 
     private void PartyMarchCommand()
     {
-        switch (Input.GetAxisRaw("Horizontal"))
-        {
-            case > 0:
-                partyTravelSpeed = Mathf.Clamp(partyTravelSpeed + (Input.GetAxisRaw("Horizontal") * 0.6f), 0, 180f);
-                break;
-            case < 0:
-                partyTravelSpeed = Mathf.Clamp(partyTravelSpeed + (Input.GetAxisRaw("Horizontal") * 0.6f), 0, 180f);
-                break;
-        }
-
+        partyTravelSpeed = Mathf.Clamp(partyTravelSpeed + (Input.GetAxisRaw("Horizontal") * 0.6f), 0, 180f);
+ 
         if (Input.GetKey(KeyCode.Space))
         {
             partyTravelSpeed = 0;

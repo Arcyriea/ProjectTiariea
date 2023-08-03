@@ -7,7 +7,7 @@ public class CharacterProfiling : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     
-    public Character character;
+    public Character character { get; private set; }
     private int partyPositions;
 
     public float Health { get; private set; }
@@ -55,6 +55,11 @@ public class CharacterProfiling : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void GetCharacterFromScriptableObject(Character character)
+    {
+        this.character = character;
     }
 }
 
