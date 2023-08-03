@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public List<Enemy> enemyTypes; // List of different enemy types to spawn
-    public GameObject enemyPrefab; // Reference to the enemy prefab in the Unity Editor
-
+    public Enemy[] enemyTypes; // List of different enemy types to spawn
     public Transform[] spawnPoints; // Array of spawn points for enemies
 
     public float spawnInterval = 3f; // Time interval between enemy spawns
@@ -31,10 +29,10 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnRandomEnemy()
     {
-        if (enemyTypes.Count == 0 || spawnPoints.Length == 0)
+        if (enemyTypes.Length == 0 || spawnPoints.Length == 0)
             return;
 
-        int randomEnemyIndex = UnityEngine.Random.Range(0, enemyTypes.Count);
+        int randomEnemyIndex = UnityEngine.Random.Range(0, enemyTypes.Length);
         int randomSpawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
 
         Enemy enemyData = enemyTypes[randomEnemyIndex];
@@ -48,7 +46,7 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPosition = cameraPosition + spawnOffset + spawnPoints[randomSpawnPointIndex].position + randomDeviation;
         spawnPosition.z = 0f;
 
-        GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemyData.enemyPrefab, spawnPosition, Quaternion.identity);
         newEnemy.GetComponent<EnemyProfiling>().enemyData = enemyData;
         newEnemy.layer = prefabLayer;
     }

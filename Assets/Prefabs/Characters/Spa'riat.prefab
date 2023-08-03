@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 8234216430878079729}
   - component: {fileID: -3430273861930833225}
   m_Layer: 0
-  m_Name: Party Character
-  m_TagString: Untagged
+  m_Name: Spa'riat
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +207,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

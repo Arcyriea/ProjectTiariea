@@ -11,24 +11,24 @@ public class PartyController : MonoBehaviour
     public float followSpeed = 2f;
     public static float partyTravelSpeed = 60f;
     public Character[] characters;
-    private float zoom;
     private int memCap = 6;
     public List<CustomFormation> customFormations;
 
     private List<GameObject> spawnedPrefabs = new List<GameObject>();
     private CustomFormation selectedFormation;
-    private int selectedPrefabIndex = -1;
     public float spacing = 2f;
 
     public LayerMask prefabLayer;
 
+    public static Camera orthoCamera { get; private set; }
     public float zoomSpeed = 5f; // Adjust this value to control the zoom speed
     public float minFOV = 30f; // Set the minimum FOV for zooming in
     public float maxFOV = 120f; // Set the maximum FOV for zooming out
 
     private void Start()
     {
-        
+        orthoCamera = GetComponent<Camera>();
+
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
         for (int i = 0; i < characters.Length; i++)
         {
@@ -86,9 +86,31 @@ public class PartyController : MonoBehaviour
     private void ZoomControl()
     {
         float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-        float newFOV = Camera.main.fieldOfView - zoomInput * zoomSpeed;
-        newFOV = Mathf.Clamp(newFOV, minFOV, maxFOV); // Clamp the FOV within the specified range
-        Camera.main.fieldOfView = newFOV;
+        
+        if(orthoCamera.orthographic == true)
+        {
+            float newSize = orthoCamera.orthographicSize - zoomInput * zoomSpeed;
+            newSize = Mathf.Clamp(newSize, 30f, 60f);
+            orthoCamera.orthographicSize = newSize;
+        } else {
+            float newFOV = Camera.main.fieldOfView - zoomInput * zoomSpeed;
+            newFOV = Mathf.Clamp(newFOV, minFOV, maxFOV); // Clamp the FOV within the specified range
+            Camera.main.fieldOfView = newFOV;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.M)) { 
+            switch (orthoCamera.orthographic)
+            {
+                case true:
+                    orthoCamera.orthographic = false;
+                    break;
+                case false:
+                    orthoCamera.orthographic = true;
+                    break;
+            }
+
+        }
     }
 
     private void PartyMarchCommand()
