@@ -19,7 +19,7 @@ public class Enemy : ScriptableObject
     // Add more attributes as needed to represent enemy behaviors and stats
 
     // Method to handle enemy behavior (e.g., AI logic, attack patterns, etc.)
-    public void EnemyBehavior()
+    public virtual void EnemyBehavior()
     {
         // Implement enemy behavior here
     }

@@ -31,6 +31,7 @@ MonoBehaviour:
   meleeDamage: 0
   swingTime: 0
   movementSpeed: 10
+  LivesModifier: 1
   innateSkill: {fileID: 0}
   activeSkill: {fileID: 0}
   characterPerk: {fileID: 0}

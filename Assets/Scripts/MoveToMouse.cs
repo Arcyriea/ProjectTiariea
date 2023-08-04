@@ -60,7 +60,7 @@ public class MoveToMouse : MonoBehaviour
 
 
 
-            if (Input.GetMouseButton(0) && PartyController.orthoCamera.orthographic == true)
+            if (Input.GetMouseButton(1) && PartyController.orthoCamera.orthographic == true)
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePosition.z = transform.position.z; // Ensure the z-coordinate is the same as the character's z-position

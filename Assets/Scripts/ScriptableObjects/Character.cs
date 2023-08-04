@@ -9,6 +9,7 @@ public class Character : ScriptableObject
     public string characterId;
     public string characterName;
     public GameObject characterPrefab;
+    public GameObject mountPrefab;
     public Enums.ClassType characterClass;
 
     // stat controls
@@ -28,7 +29,7 @@ public class Character : ScriptableObject
     public float meleeDamage;
     public float swingTime;
     public float movementSpeed; //control the speed the character will relocate to a new position within the party formation
-
+    public int LivesModifier;
 
     [SerializeField] public InnateSkill innateSkill; //native character skill
     [SerializeField] public ActiveSkill activeSkill; //additional skill, which any char can have
@@ -37,10 +38,11 @@ public class Character : ScriptableObject
 
     [SerializeField] public PassivePerk passivePerk; //each chars will have an unique passive perk
 
-    public Character(GameObject characterPrefab, string id, string name, float health, float shield, float shootingRange, float meleeRange, float rangedDamage, float meleeDamage, float swingTime, float fireRate
+    public Character(GameObject characterPrefab, GameObject mountPrefab, string id, string name, float health, float shield, float shootingRange, float meleeRange, float rangedDamage, float meleeDamage, float swingTime, float fireRate
         , CharacterPerk characterPerk, PassivePerk passivePerk, InnateSkill innateSkill, ActiveSkill activeSkill, float movementSpeed)
     {
         this.characterPrefab = characterPrefab;
+        this.mountPrefab = mountPrefab;
         characterId = id;
         characterName = name;
         maximumHealth = health;
@@ -57,6 +59,11 @@ public class Character : ScriptableObject
         this.activeSkill = activeSkill;
         this.movementSpeed = movementSpeed;
         // Initialize other properties as needed.
+    }
+
+    public virtual void CharacterBehaviour()
+    {
+
     }
 }
 
@@ -107,6 +114,8 @@ public static class PassivePerks
     {
 
     };
+
+    
 }
 
 

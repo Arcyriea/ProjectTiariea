@@ -13,6 +13,7 @@ public class CharacterProfiling : MonoBehaviour
     public float Health { get; private set; }
     public float? Shield { get; private set; }
     public float? Mana { get; private set; }
+    public int Lives { get; private set; }
 
     // status control
     private bool isDead = false;
@@ -49,18 +50,69 @@ public class CharacterProfiling : MonoBehaviour
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
+        Lives = 3 + character.LivesModifier;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Health <= 0)
+        {
+            isDead = true;
+            Lives -= 1;
+            RespawnTimer = 5;
+        }
+        if (Lives >= 0) CheckRespawn();
+    }
 
+    private void CheckRespawn()
+    {
+        if (isDead)
+        {
+            character.characterPrefab.SetActive(false);
+            StartCoroutine(WaitForRespawn());
+            if (RespawnTimer <= 0)
+            {
+                character.characterPrefab.SetActive(true);
+                ResetStats();
+                isDead = false;
+            }
+        }
+    }
+
+    IEnumerator WaitForRespawn()
+    {
+        while (RespawnTimer >= 0)
+        {
+            yield return new WaitForSeconds(1); // Wait 1 second
+            RespawnTimer -= 1;
+        }
+        
+    }
+
+    void ResetStats()
+    {
+        Health = character.maximumHealth;
+        Shield = character.maximumShield;
+        Mana = character.maximumMana;
+    }
+
+    public void Heal(float Healing)
+    {
+        Health += Healing;
+    }
+
+    public void grantExtraLives(int Lives)
+    {
+        this.Lives += Lives;
     }
 
     public void GetCharacterFromScriptableObject(Character character)
     {
         this.character = character;
     }
+
+    
 }
 
 
