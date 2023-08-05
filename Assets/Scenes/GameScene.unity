@@ -745,8 +745,8 @@ MonoBehaviour:
   - {fileID: 1433120607}
   - {fileID: 432321307}
   - {fileID: 2034738707}
-  fullHeart: {fileID: 0}
-  emptyHeart: {fileID: 0}
+  fullHeart: {fileID: 494073539, guid: af2dee7ecfcea4142a77eb5a0137bbba, type: 3}
+  emptyHeart: {fileID: -144826027, guid: af2dee7ecfcea4142a77eb5a0137bbba, type: 3}
 --- !u!1 &566469291
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,8 +782,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -336.61, y: 142.4}
-  m_SizeDelta: {x: 23.224, y: 41.7954}
+  m_AnchoredPosition: {x: -317.8863, y: 145.74}
+  m_SizeDelta: {x: 60.6714, y: 35.108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &566469293
 MonoBehaviour:
@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

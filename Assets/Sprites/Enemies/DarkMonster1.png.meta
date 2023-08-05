@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,7 +115,1330 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: DarkMonster1_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 1828
+        width: 100
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d3b5090cc5c25240aa1799ba95e52bc
+      internalID: 695553970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_1
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 1832
+        width: 105
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4844567793d32247bcd5bf4e4b50899
+      internalID: -1064191533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_2
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 1838
+        width: 98
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5f3eff5ff0d0c94da39de1690eb2f8c
+      internalID: 944594894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_3
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 1842
+        width: 100
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ccab969d5f09641ac270523a93f6f2
+      internalID: -1498343183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_4
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 1844
+        width: 106
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fc16d8fa627fde4490a025f9af37b0d
+      internalID: -2075191027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_5
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 1842
+        width: 111
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34b9f0a9223f9e14f8edef855f2465c6
+      internalID: 450159427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_9
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 1618
+        width: 87
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f00fa8e906f4ea549be0c497f25bb149
+      internalID: 1116957897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_10
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 1625
+        width: 89
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96c47f2c19c7d10439f32fe1843d1e03
+      internalID: -2030296717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_11
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 1630
+        width: 75
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b61bc2248373ba40b10ebf1249ac0ab
+      internalID: 1789007022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_12
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1626
+        width: 73
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31d22f96e57128947bc0e45d177cf51b
+      internalID: 1515955147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_14
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 1633
+        width: 74
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50b045bbdb3c9b84088429974dfb92a5
+      internalID: -638189944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_15
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 1633
+        width: 74
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72685bf13c614564da9368caa3f3345a
+      internalID: 588403915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_16
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 1395
+        width: 100
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0425193b7eccb4c85abcef7c428854
+      internalID: -1259127925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_17
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 1406
+        width: 105
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a3912d645d0bfe4db18c3d7eceefc56
+      internalID: 1479167112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_18
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 1412
+        width: 98
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f16286d9c56cdeb4d950a046a24b4644
+      internalID: -348189268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_19
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 1416
+        width: 100
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be1f6b49141382c4e95c9ba3a5329bc4
+      internalID: 1092979570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_20
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 1420
+        width: 106
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3490da317d30c7b4a82629f658d11d1f
+      internalID: -1982993609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_21
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 1411
+        width: 111
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9380b11e560f82140a32c4284bea7f0e
+      internalID: 120390036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_24
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 1150
+        width: 92
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a1e080be34a6ba47b9f1b515c201cce
+      internalID: -81597443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_25
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 1161
+        width: 90
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4a1ad0e52f299642b3f0c78a8d8d3ba
+      internalID: 626893003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_26
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 1164
+        width: 79
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5ba11be057bbc543adf7980ef674a59
+      internalID: -352085814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_28
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 1168
+        width: 75
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78f79488c9dc82b4290bb9a360b5bf8c
+      internalID: 240912883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_29
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 1174
+        width: 75
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33b6b603129c8474d9d721841430fc1b
+      internalID: -342393338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_30
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 1176
+        width: 78
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7d38b5feabc8c4da127dfd80b28693
+      internalID: -1673948665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_31
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 940
+        width: 106
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f097251f7feef91498bd930991eb4148
+      internalID: -1570086832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_32
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 935
+        width: 93
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27158f7d5ffa6ba469326a350006338a
+      internalID: 1548464481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_33
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 935
+        width: 93
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 368cf8156d17a714ca561345327734f4
+      internalID: -1086143266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_34
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 933
+        width: 94
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 379bab665493fa84bbc1211dcbd4800c
+      internalID: 2106936097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_35
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 931
+        width: 94
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c626a89c343d194478d20255be761a39
+      internalID: -1144456881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_36
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 926
+        width: 135
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2173e77ca5998a24097b47e08a317a1d
+      internalID: 679160648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_37
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 920
+        width: 207
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a6f2039ca6bf643ba7edddd0b80baf
+      internalID: -296598110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_38
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 919
+        width: 209
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0c413ad77ffe4846948bd1ed7345115
+      internalID: 139569240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_39
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 797
+        width: 53
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df4cd9c9045fea438a2be11ecf41882
+      internalID: -1500695715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_40
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 795
+        width: 60
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 144afe39798e64741b5e27f47cc6634c
+      internalID: -697110400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_41
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 840
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03e1dc184e7e2064197d4d948209a0af
+      internalID: -1434989639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_42
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 794
+        width: 61
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e22821f77a14e74594ec00a78c2f37c
+      internalID: 1283062765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_43
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 792
+        width: 61
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 273809253d8d3d94d951106ee21f2acd
+      internalID: 1128539478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_44
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 839
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8e3f3197eddc7f429206c0296a09113
+      internalID: 1944825632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_45
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 790
+        width: 62
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3693a0b3215961141a3fad88aa1770d9
+      internalID: -365625254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_46
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 836
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5170d15efc8f6cd4db047041615959d6
+      internalID: 1230128041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_47
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 791
+        width: 64
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5fa7d0e0c4142247a824f994520bde1
+      internalID: 1758376395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_48
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 791
+        width: 65
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acfcc01bc32c56747bc0ed3f0db28faa
+      internalID: -904655155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_49
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 836
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8fc77897c3679745bfdde8617e21ff2
+      internalID: -235022538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_50
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 809
+        width: 41
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da4ca48892167104c8709a891f68e683
+      internalID: 1993175949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_51
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 791
+        width: 62
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 471b786fbeb59d6409869118c7feaccd
+      internalID: 2084123211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_53
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 575
+        width: 74
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebe36155729e8ea42a7aa83c1b9a10d3
+      internalID: 1304587474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_54
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 575
+        width: 69
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b212257549baf49408257c09d2988ab8
+      internalID: 827264350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_55
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 576
+        width: 67
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3704fe8eec5fcb740bf1ddefbd254ca1
+      internalID: 2041230378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_56
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 574
+        width: 66
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b85407545df3de46b9a1e3508175d11
+      internalID: -1173143858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_57
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 573
+        width: 66
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 228f50940a5680049899c09b27d474af
+      internalID: 957213421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_58
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 566
+        width: 104
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1118d8d63597b0e45938ecae8d107492
+      internalID: -319377505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_59
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 570
+        width: 139
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52f9b0d4a739da54eb64fa560955b2e8
+      internalID: -2091524611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_60
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 570
+        width: 142
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffacf0632fbc363408c619cf6cd4f4d8
+      internalID: -469483153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_61
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 317
+        width: 93
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6bdb81387f8bb14f9fdc97236cade95
+      internalID: 846195015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_62
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 313
+        width: 111
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cac4b960033d66c42a37512a9f0b918f
+      internalID: -1657373857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_63
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 309
+        width: 136
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 179fd0318802cae41904358eba7b972f
+      internalID: 1281853963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_64
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 303
+        width: 171
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61c5141178f4c2943a4d2f0709a77236
+      internalID: -1294811074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_65
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 313
+        width: 171
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d63355bab5f52ed41a88173f62a18310
+      internalID: 1480045481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_68
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 31
+        width: 94
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b70addf01b57594386d3d6050c7aaeb
+      internalID: 941993735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_69
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 46
+        width: 126
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43bd9ba888a5b094199d01cdb7751482
+      internalID: 1085873970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_71
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 56
+        width: 74
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d0a49d159b05c428e0bae052ea690a
+      internalID: -449065078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_72
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 41
+        width: 73
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ab38c85f4a387b49a6951e405df04b4
+      internalID: -1365072739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkMonster1_73
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 35
+        width: 126
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb7365137bc8e254cb43102b9848c61b
+      internalID: 53977070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +1449,81 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DarkMonster1_0: 695553970
+      DarkMonster1_1: -1064191533
+      DarkMonster1_10: -2030296717
+      DarkMonster1_11: 1789007022
+      DarkMonster1_12: 1515955147
+      DarkMonster1_13: -1815471917
+      DarkMonster1_14: -638189944
+      DarkMonster1_15: 588403915
+      DarkMonster1_16: -1259127925
+      DarkMonster1_17: 1479167112
+      DarkMonster1_18: -348189268
+      DarkMonster1_19: 1092979570
+      DarkMonster1_2: 944594894
+      DarkMonster1_20: -1982993609
+      DarkMonster1_21: 120390036
+      DarkMonster1_22: -1699691777
+      DarkMonster1_23: 210523747
+      DarkMonster1_24: -81597443
+      DarkMonster1_25: 626893003
+      DarkMonster1_26: -352085814
+      DarkMonster1_27: 1588560662
+      DarkMonster1_28: 240912883
+      DarkMonster1_29: -342393338
+      DarkMonster1_3: -1498343183
+      DarkMonster1_30: -1673948665
+      DarkMonster1_31: -1570086832
+      DarkMonster1_32: 1548464481
+      DarkMonster1_33: -1086143266
+      DarkMonster1_34: 2106936097
+      DarkMonster1_35: -1144456881
+      DarkMonster1_36: 679160648
+      DarkMonster1_37: -296598110
+      DarkMonster1_38: 139569240
+      DarkMonster1_39: -1500695715
+      DarkMonster1_4: -2075191027
+      DarkMonster1_40: -697110400
+      DarkMonster1_41: -1434989639
+      DarkMonster1_42: 1283062765
+      DarkMonster1_43: 1128539478
+      DarkMonster1_44: 1944825632
+      DarkMonster1_45: -365625254
+      DarkMonster1_46: 1230128041
+      DarkMonster1_47: 1758376395
+      DarkMonster1_48: -904655155
+      DarkMonster1_49: -235022538
+      DarkMonster1_5: 450159427
+      DarkMonster1_50: 1993175949
+      DarkMonster1_51: 2084123211
+      DarkMonster1_52: -865447099
+      DarkMonster1_53: 1304587474
+      DarkMonster1_54: 827264350
+      DarkMonster1_55: 2041230378
+      DarkMonster1_56: -1173143858
+      DarkMonster1_57: 957213421
+      DarkMonster1_58: -319377505
+      DarkMonster1_59: -2091524611
+      DarkMonster1_6: 726723916
+      DarkMonster1_60: -469483153
+      DarkMonster1_61: 846195015
+      DarkMonster1_62: -1657373857
+      DarkMonster1_63: 1281853963
+      DarkMonster1_64: -1294811074
+      DarkMonster1_65: 1480045481
+      DarkMonster1_66: 2107906236
+      DarkMonster1_67: -286490569
+      DarkMonster1_68: 941993735
+      DarkMonster1_69: 1085873970
+      DarkMonster1_7: 1024440652
+      DarkMonster1_70: -526047799
+      DarkMonster1_71: -449065078
+      DarkMonster1_72: -1365072739
+      DarkMonster1_73: 53977070
+      DarkMonster1_8: 1356974459
+      DarkMonster1_9: 1116957897
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
