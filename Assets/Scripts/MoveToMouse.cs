@@ -13,6 +13,7 @@ public class MoveToMouse : MonoBehaviour
 
     private bool isInsideSelectionBox = false;
     private GameObject selectionBox;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class MoveToMouse : MonoBehaviour
         if (characterProfiling != null)
         {
             speed = characterProfiling.character.movementSpeed;
+            animator = characterProfiling.character.characterPrefab.GetComponent<Animator>();
         }
         movementObjects.Add(this);
     }
@@ -44,6 +46,7 @@ public class MoveToMouse : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 y += speed / 10;
+                //set animator
             }
             if (Input.GetKey(KeyCode.S))
             {

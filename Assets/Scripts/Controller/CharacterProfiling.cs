@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterProfiling : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    
+
     public Character character { get; private set; }
     private int partyPositions;
 
@@ -41,6 +41,11 @@ public class CharacterProfiling : MonoBehaviour
         this.partyPositions = partyPositions;
     }
 
+    public CharacterProfiling()
+    {
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,10 +64,9 @@ public class CharacterProfiling : MonoBehaviour
         if (Health <= 0)
         {
             isDead = true;
-            Lives -= 1;
             RespawnTimer = 5;
         }
-        if (Lives >= 0) CheckRespawn();
+        if (Lives > 0) CheckRespawn();
     }
 
     private void CheckRespawn()
@@ -70,24 +74,16 @@ public class CharacterProfiling : MonoBehaviour
         if (isDead)
         {
             character.characterPrefab.SetActive(false);
-            StartCoroutine(WaitForRespawn());
+            RespawnTimer -= (int) Time.fixedDeltaTime;
             if (RespawnTimer <= 0)
             {
                 character.characterPrefab.SetActive(true);
                 ResetStats();
+                RespawnTimer = 0;
                 isDead = false;
+                Lives -= 1;
             }
         }
-    }
-
-    IEnumerator WaitForRespawn()
-    {
-        while (RespawnTimer >= 0)
-        {
-            yield return new WaitForSeconds(1); // Wait 1 second
-            RespawnTimer -= 1;
-        }
-        
     }
 
     void ResetStats()
@@ -100,6 +96,7 @@ public class CharacterProfiling : MonoBehaviour
     public void Heal(float Healing)
     {
         Health += Healing;
+        if (Health > character.maximumHealth) Health = character.maximumHealth;
     }
 
     public void grantExtraLives(int Lives)
@@ -112,7 +109,11 @@ public class CharacterProfiling : MonoBehaviour
         this.character = character;
     }
 
-    
+    public virtual void CharacterAction(string action)
+    {
+
+    }
+
 }
 
 
