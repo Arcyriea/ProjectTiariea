@@ -7,6 +7,13 @@ public class SelectionBox : MonoBehaviour
     private LineRenderer lineRenderer;
     private Vector2 initialMousePosition, currentMousePosition;
     private BoxCollider2D boxCollider;// Start is called before the first frame update
+    public bool isActive { get; private set; }
+
+    void Awake()
+    {
+        isActive = false;
+    }
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -31,6 +38,7 @@ public class SelectionBox : MonoBehaviour
                 boxCollider = gameObject.AddComponent<BoxCollider2D>();
                 boxCollider.isTrigger = true;
                 boxCollider.offset = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                isActive = true;
             }
 
             if (Input.GetMouseButton(0))
@@ -50,14 +58,22 @@ public class SelectionBox : MonoBehaviour
                     );
             }
 
+
+        }
+
+    }
+
+    void LateUpdate()
+    {
+        if (PartyController.orthoCamera.orthographic == true)
+        {
             if (Input.GetMouseButtonUp(0))
             {
                 lineRenderer.positionCount = 0;
                 Destroy(boxCollider);
                 transform.position = Vector3.zero;
+                isActive = false;
             }
         }
-        
     }
-
 }

@@ -15,6 +15,7 @@ MonoBehaviour:
   characterId: 
   characterName: 
   characterPrefab: {fileID: 3462239808932946287, guid: d981dd4a81101784eaee0feefa3d4247, type: 3}
+  mountPrefab: {fileID: 0}
   characterClass: 0
   maximumHealth: 0
   maximumShield: 0
@@ -31,6 +32,7 @@ MonoBehaviour:
   meleeDamage: 0
   swingTime: 0
   movementSpeed: 0
+  LivesModifier: 0
   innateSkill: {fileID: 0}
   activeSkill: {fileID: 0}
   characterPerk: {fileID: 0}

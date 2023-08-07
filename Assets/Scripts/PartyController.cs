@@ -24,10 +24,15 @@ public class PartyController : MonoBehaviour
     public float zoomSpeed = 5f; // Adjust this value to control the zoom speed
     public float minFOV = 30f; // Set the minimum FOV for zooming in
     public float maxFOV = 120f; // Set the maximum FOV for zooming out
+    
 
-    private void Start()
+    private void Awake()
     {
         orthoCamera = GetComponent<Camera>();
+    }
+    private void Start()
+    {
+        
 
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
         for (int i = 0; i < characters.Length; i++)

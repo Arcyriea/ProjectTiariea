@@ -13,19 +13,27 @@ public class MoveToMouse : MonoBehaviour
 
     private bool isInsideSelectionBox = false;
     private GameObject selectionBox;
+    private SelectionBox selectScript;
     private Animator animator;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         selectionBox = GameObject.Find("BoxSelector");
-        if (selectionBox != null) UnityEngine.Debug.Log("Successfully retrieved BoxSelector");
+        selectScript = selectionBox.GetComponent<SelectionBox>();
         CharacterProfiling characterProfiling = this.GetComponent<CharacterProfiling>();
         if (characterProfiling != null)
         {
             speed = characterProfiling.character.movementSpeed;
             animator = characterProfiling.character.characterPrefab.GetComponent<Animator>();
         }
+    }
+    // Start is called before the first frame update\
+    void Start()
+    {
+
+        if (selectionBox != null) UnityEngine.Debug.Log("Successfully retrieved BoxSelector");
+
         movementObjects.Add(this);
     }
 
@@ -61,7 +69,10 @@ public class MoveToMouse : MonoBehaviour
                 x += speed / 10;
             }
 
-
+            if (Input.GetMouseButtonUp(0) && selectScript.isActive) { 
+                
+                selected = isInsideSelectionBox ? true : false;
+            }
 
             if (Input.GetMouseButton(1) && PartyController.orthoCamera.orthographic == true)
             {
@@ -93,6 +104,24 @@ public class MoveToMouse : MonoBehaviour
 
                 obj.selected = false;
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Check if the character enters the selection box trigger
+        if (collision.CompareTag("SelectionBox"))
+        {
+            isInsideSelectionBox = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Check if the character exits the selection box trigger
+        if (collision.CompareTag("SelectionBox"))
+        {
+            isInsideSelectionBox = false;
         }
     }
 
