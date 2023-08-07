@@ -47,7 +47,7 @@ public class SpawnManager : MonoBehaviour
         spawnPosition.z = 0f;
 
         GameObject newEnemy = Instantiate(enemyData.enemyPrefab, spawnPosition, Quaternion.identity);
-        newEnemy.GetComponent<EnemyProfiling>().enemyData = enemyData;
+        newEnemy.GetComponent<EnemyProfiling>().SetEnemyData(enemyData);
         newEnemy.layer = prefabLayer;
     }
 
