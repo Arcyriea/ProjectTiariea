@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9eff5fd90fd3f488f87cbebdfc9235, type: 3}
   m_Name: BulletSmall
   m_EditorClassIdentifier: 
-  damage: 10
-  lifetime: 0
-  speed: 0
-  explodeRadius: 0
-  size: 0
+  size: 1
   growRate: 0
   bulletPrefab: {fileID: 1490463374563602654, guid: 62f3ed7521736f84887b488d91cafb37, type: 3}

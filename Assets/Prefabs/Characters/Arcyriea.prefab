@@ -9,14 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3778811758816263762}
-  - component: {fileID: 7827491810723200412}
-  - component: {fileID: 5356431420227105370}
+  - component: {fileID: -3867913682139796830}
   - component: {fileID: -1673728156050828842}
-  - component: {fileID: 4414839737980122803}
+  - component: {fileID: 7114041827661540843}
   - component: {fileID: 6906117712860513972}
   - component: {fileID: 6066332462456808460}
   - component: {fileID: 8234216430878079729}
-  - component: {fileID: -3430273861930833225}
+  - component: {fileID: -7085844924125143520}
   m_Layer: 0
   m_Name: Arcyriea
   m_TagString: Player
@@ -39,19 +38,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7827491810723200412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3462239808932946287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f76a92db7708bb4439fa0f88a3ee902c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5356431420227105370
+--- !u!114 &-3867913682139796830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f7177246370e748888e6f28f22f4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4414839737980122803
+--- !u!114 &7114041827661540843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,7 +115,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 32dc5ecac0cdcdd418a03e1fefe71891, type: 3}
+  m_Sprite: {fileID: -2135585597343286014, guid: cd3b70c7ff200144ebf2fe2f311700e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,7 +136,7 @@ Animator:
   m_GameObject: {fileID: 3462239808932946287}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9f574f10456e976479668d4a22170dc2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3fe8c277f94a881468074ce9fe9fe67e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -177,7 +164,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.8828125, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -205,7 +192,7 @@ PolygonCollider2D:
       - {x: 0.40234375, y: 0.29296875}
       - {x: 0.29296875, y: 0.40234375}
       - {x: 0.15234375, y: 0.47265625}
---- !u!50 &-3430273861930833225
+--- !u!50 &-7085844924125143520
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

@@ -58,22 +58,23 @@ public class SelectionBox : MonoBehaviour
                     );
             }
 
-
         }
 
     }
 
-    void LateUpdate()
+    public void setActive(bool isActive)
     {
+
         if (PartyController.orthoCamera.orthographic == true)
         {
-            if (Input.GetMouseButtonUp(0))
+            if (isActive == false)
             {
                 lineRenderer.positionCount = 0;
                 Destroy(boxCollider);
                 transform.position = Vector3.zero;
-                isActive = false;
+                this.isActive = isActive;
             }
         }
+            
     }
 }

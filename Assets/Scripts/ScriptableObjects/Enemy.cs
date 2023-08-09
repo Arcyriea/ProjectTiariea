@@ -15,6 +15,8 @@ public class Enemy : ScriptableObject
     public float maximumHealth;
     public float attackRange;
     public float attackDamage;
+    public float splashRadius;
+    public float projectileSpeed;
     public float attackCooldown;
     // Add more attributes as needed to represent enemy behaviors and stats
 
@@ -24,7 +26,7 @@ public class Enemy : ScriptableObject
         // Implement enemy behavior here
     }
 
-    public Enemy(GameObject prefab, string id, string name, Sprite sprite, Animator animator, float health, float range, float damage, float cooldown)
+    public Enemy(GameObject prefab, string id, string name, Sprite sprite, Animator animator, float health, float range, float damage, float splash, float projSpeed, float cooldown)
     {
         enemyPrefab = prefab;
         enemyId = id;
@@ -32,6 +34,8 @@ public class Enemy : ScriptableObject
         maximumHealth = health;
         attackRange = range;
         attackDamage = damage;
+        splashRadius = splash;
+        projectileSpeed = projSpeed;
         attackCooldown = cooldown;
     }
 }

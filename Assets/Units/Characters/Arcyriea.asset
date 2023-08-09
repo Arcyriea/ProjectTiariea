@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: NIA-35
   characterName: Arcyriea
-  characterPrefab: {fileID: 3462239808932946287, guid: 7408f8f784dcf4243a5ec57a32c31f78, type: 3}
+  characterPrefab: {fileID: 3462239808932946287, guid: 61b4c8575f0413d4887a2ebe6382221c, type: 3}
   mountPrefab: {fileID: 0}
   characterClass: 3
-  maximumHealth: 0
-  maximumShield: 0
-  ShieldIdentity: 0
+  maximumHealth: 1823
+  maximumShield: 1221
+  ShieldIdentity: 2
   defense: 0
   maximumEnergy: 0
   maximumMana: 0

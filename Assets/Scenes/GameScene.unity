@@ -732,8 +732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b130cc757654f2648beb6918882fb6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heart: 10
-  numOfHearts: 10
+  heart: 99
+  numOfHearts: 120
   textHeart: {fileID: 566469293}
   hearts:
   - {fileID: 1101629179}

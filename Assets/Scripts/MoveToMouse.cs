@@ -11,7 +11,6 @@ public class MoveToMouse : MonoBehaviour
     public float speed { get; private set; }
     public bool selected { get; private set; }
 
-    private bool isInsideSelectionBox = false;
     private GameObject selectionBox;
     private SelectionBox selectScript;
     private Animator animator;
@@ -21,17 +20,17 @@ public class MoveToMouse : MonoBehaviour
     {
         selectionBox = GameObject.Find("BoxSelector");
         selectScript = selectionBox.GetComponent<SelectionBox>();
+       
+    }
+    // Start is called before the first frame update\
+    void Start()
+    {
         CharacterProfiling characterProfiling = this.GetComponent<CharacterProfiling>();
         if (characterProfiling != null)
         {
             speed = characterProfiling.character.movementSpeed;
             animator = characterProfiling.character.characterPrefab.GetComponent<Animator>();
         }
-    }
-    // Start is called before the first frame update\
-    void Start()
-    {
-
         if (selectionBox != null) UnityEngine.Debug.Log("Successfully retrieved BoxSelector");
 
         movementObjects.Add(this);
@@ -46,7 +45,14 @@ public class MoveToMouse : MonoBehaviour
         float x = transform.position.x;
         float y = transform.position.y;
 
+
+        if (Input.GetMouseButtonDown(0)) selected = false;
         //SelectMultipleCharacters();
+        if (Input.GetMouseButtonUp(0))
+        {
+            UnityEngine.Debug.Log("Selection Script Triggered");
+            selectScript.setActive(false);
+        }
 
         if (selected)
         {
@@ -69,10 +75,7 @@ public class MoveToMouse : MonoBehaviour
                 x += speed / 10;
             }
 
-            if (Input.GetMouseButtonUp(0) && selectScript.isActive) { 
-                
-                selected = isInsideSelectionBox ? true : false;
-            }
+            
 
             if (Input.GetMouseButton(1) && PartyController.orthoCamera.orthographic == true)
             {
@@ -110,19 +113,10 @@ public class MoveToMouse : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the character enters the selection box trigger
-        if (collision.CompareTag("SelectionBox"))
+        if (collision.CompareTag("SelectionBox") && selectScript.isActive == true)
         {
-            isInsideSelectionBox = true;
+            selected = true;
+            UnityEngine.Debug.Log("Inside Selection Box, selected: " + selected);
         }
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Check if the character exits the selection box trigger
-        if (collision.CompareTag("SelectionBox"))
-        {
-            isInsideSelectionBox = false;
-        }
-    }
-
 }

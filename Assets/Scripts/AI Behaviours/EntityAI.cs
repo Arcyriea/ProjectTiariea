@@ -6,6 +6,7 @@ public class EntityAI : MonoBehaviour
 {
     public float detectionRange = 5f; // Adjust the detection range as needed
     public float attackCooldown = 1f; // Time between attacks
+    public string attackType;
 
     private EnemyProfiling entityProfiling;
     private bool inMeleeRange = false;

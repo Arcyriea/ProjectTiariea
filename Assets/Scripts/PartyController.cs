@@ -9,12 +9,12 @@ public class PartyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float followSpeed = 2f;
-    public static float partyTravelSpeed = 60f;
+    public float partyTravelSpeed { get; private set; }
     public Character[] characters;
     private int memCap = 6;
     public List<CustomFormation> customFormations;
 
-    private List<GameObject> spawnedPrefabs = new List<GameObject>();
+    public List<GameObject> spawnedPrefabs { get; private set; }
     private CustomFormation selectedFormation;
     public float spacing = 2f;
 
@@ -25,15 +25,16 @@ public class PartyController : MonoBehaviour
     public float minFOV = 30f; // Set the minimum FOV for zooming in
     public float maxFOV = 120f; // Set the maximum FOV for zooming out
     
-
     private void Awake()
     {
-        orthoCamera = GetComponent<Camera>();
+        partyTravelSpeed = 60f;
+        spawnedPrefabs = new List<GameObject>();
     }
+
     private void Start()
     {
         
-
+        orthoCamera = GetComponent<Camera>();
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
         for (int i = 0; i < characters.Length; i++)
         {
@@ -47,7 +48,7 @@ public class PartyController : MonoBehaviour
             CharacterProfiling prefabCharProfile = prefabInstance.GetComponent<CharacterProfiling>();
 
             prefabCharProfile.GetCharacterFromScriptableObject(characters[i]);
-
+            prefabInstance.SetActive(true);
             UnityEngine.Debug.Log("Their name is: " + prefabCharProfile.character.characterName);
             spawnedPrefabs.Add(prefabInstance);
 

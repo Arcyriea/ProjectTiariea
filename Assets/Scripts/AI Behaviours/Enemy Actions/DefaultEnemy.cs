@@ -28,6 +28,18 @@ public class DefaultEnemy : EnemyProfiling
         }
     }
 
+    protected override void Start()
+    {
+        base.Start(); // Call the base class's Start method first
+        // Additional behavior specific to the derived class's Start method
+    }
+
+    protected override void Update()
+    {
+        base.Update(); // Call the base class's Update method first
+        // Additional behavior specific to the derived class's Update method
+    }
+
     private void PerformAttack()
     {
         // Define your attack logic here
@@ -37,8 +49,23 @@ public class DefaultEnemy : EnemyProfiling
 
     private void PerformRanged()
     {
-        // Define your attack logic here
-        // For example, reduce enemy health or apply status effects
+        List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
+        if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+
+        GameObject bulletGO = Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity);
+
+        // Get the BulletController component from the instantiated bullet
+        BulletController bulletController = bulletGO.GetComponent<BulletController>();
+
+        if (bulletController != null)
+        {
+            // Initialize the bullet's properties
+            bulletController.Initialize(this.gameObject.tag, this.enemyData.attackDamage, this.enemyData.attackRange / this.enemyData.projectileSpeed, this.enemyData.projectileSpeed, this.enemyData.splashRadius);
+
+            // Set the direction of the bullet (adjust this based on your game logic)
+            Vector3 bulletDirection = Vector3.right; // Example direction
+            bulletController.SetDirection(bulletDirection);
+        }
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 

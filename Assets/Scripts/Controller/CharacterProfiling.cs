@@ -16,7 +16,7 @@ public class CharacterProfiling : MonoBehaviour
     public int Lives { get; private set; }
 
     // status control
-    private bool isDead = false;
+    public bool isDead { get; private set; }
     private int RespawnTimer = 0;
 
     private class StatusEffect
@@ -46,9 +46,13 @@ public class CharacterProfiling : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        isDead = false;
+    }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (character == null) return;
@@ -59,7 +63,7 @@ public class CharacterProfiling : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (Health <= 0)
         {

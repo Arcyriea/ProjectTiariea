@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class ArcyrieaActions : CharacterProfiling
+public class ShiariakyiaActions : CharacterProfiling
 {
     public override void CharacterAction(string action)
     {
@@ -35,7 +35,7 @@ public class ArcyrieaActions : CharacterProfiling
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
+       base.Update();
     }
 
     private void PerformAttack()

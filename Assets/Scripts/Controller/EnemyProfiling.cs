@@ -29,15 +29,14 @@ public class EnemyProfiling : MonoBehaviour
     private LinkedList<StatusEffect> statusEffects = new LinkedList<StatusEffect>();
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        homeworld = GameObject.Find("Main Camera").GetComponent<HomeworldHearts>();
+        homeworld = GameObject.Find("Main Camera")?.GetComponent<HomeworldHearts>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        enemyData.EnemyBehavior();
         CheckDespawn();
     }
 
@@ -70,7 +69,7 @@ public class EnemyProfiling : MonoBehaviour
 
     public virtual void EnemyAction(string action)
     {
-
+        UnityEngine.Debug.Log("Got into EnemyAction");
     }
             
 }
