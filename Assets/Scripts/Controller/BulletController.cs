@@ -25,7 +25,7 @@ public class BulletController : MonoBehaviour
         this.direction = direction;
     }
 
-    private void Awake() { 
+    private void Start() { 
         gameObject.tag = sideTag;
     }
 

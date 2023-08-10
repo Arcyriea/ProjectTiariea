@@ -38,6 +38,79 @@ public class DefaultEnemy : EnemyProfiling
     {
         base.Update(); // Call the base class's Update method first
         // Additional behavior specific to the derived class's Update method
+        MeleeDetection();
+        if (CanAttack())
+        {
+            UnityEngine.Debug.Log("The enemy is able to attack");
+            if (inMeleeRange == true) AttackMode("melee"); 
+            else AttackMode("ranged");
+        }
+
+    }
+
+    private bool CanAttack()
+    {
+        return Time.time - lastAttackTime >= base.enemyData.attackCooldown;
+    }
+
+    private bool IsEnemy(GameObject other)
+    {
+        return other.CompareTag("Player");
+    }
+
+    private void MeleeDetection()
+    {
+        Collider2D[] detectionColliders = Physics2D.OverlapCircleAll(transform.position, meleeDetectionRange);
+        List<Collider2D> enemies = new List<Collider2D>();
+
+        foreach (Collider2D detectionCollider in detectionColliders)
+        {
+            if (IsEnemy(detectionCollider.gameObject))
+            {
+                enemies.Add(detectionCollider);
+                inMeleeRange = true;
+            }
+        }
+
+        if (enemies.Count <= 0)
+        {
+            inMeleeRange = false;
+        }
+
+        UnityEngine.Debug.Log("Melee Detection Script is Active, Status of Melee: " + inMeleeRange);
+    }
+
+    private void AttackMode(string attackType)
+    {
+        Collider2D[] hitColliders;
+
+        if (attackType == "melee")
+        {
+            hitColliders = Physics2D.OverlapCircleAll(transform.position, meleeDetectionRange);
+        }
+        else
+        {
+            hitColliders = Physics2D.OverlapCircleAll(transform.position, base.enemyData.attackRange);
+        }
+
+        foreach (Collider2D hitCollider in hitColliders)
+        {
+            if (IsEnemy(hitCollider.gameObject))
+            {
+                lastAttackTime = Time.time;
+                // Perform melee/ranged attack on the enemy
+                switch (attackType)
+                {
+                    case "melee":
+                        PerformAttack();
+                        break;
+                    case "ranged":
+                        PerformRanged();
+                        break;
+                }
+                // Implement your attack logic here
+            }
+        }
     }
 
     private void PerformAttack()
@@ -60,7 +133,8 @@ public class DefaultEnemy : EnemyProfiling
         if (bulletController != null)
         {
             // Initialize the bullet's properties
-            bulletController.Initialize(this.gameObject.tag, this.enemyData.attackDamage, this.enemyData.attackRange / this.enemyData.projectileSpeed, this.enemyData.projectileSpeed, this.enemyData.splashRadius);
+
+            bulletController.Initialize(gameObject.tag, enemyData.attackDamage, enemyData.attackRange / enemyData.projectileSpeed, enemyData.projectileSpeed, enemyData.splashRadius);
 
             // Set the direction of the bullet (adjust this based on your game logic)
             Vector3 bulletDirection = Vector3.right; // Example direction

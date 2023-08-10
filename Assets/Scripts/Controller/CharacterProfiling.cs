@@ -15,6 +15,8 @@ public class CharacterProfiling : MonoBehaviour
     public float? Mana { get; private set; }
     public int Lives { get; private set; }
 
+    protected MoveToMouse moveToMouse { get; private set; }
+
     // status control
     public bool isDead { get; private set; }
     private int RespawnTimer = 0;
@@ -55,6 +57,7 @@ public class CharacterProfiling : MonoBehaviour
     protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        moveToMouse = GetComponent<MoveToMouse>();
         if (character == null) return;
         Health = character.maximumHealth;
         Shield = character.maximumShield;

@@ -36,6 +36,10 @@ public class MythritheiaActions : CharacterProfiling
     protected override void Update()
     {
         base.Update();
+        if (base.moveToMouse.selected == true)
+        {
+
+        }
     }
 
     private void PerformAttack()

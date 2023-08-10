@@ -35,7 +35,11 @@ public class LashianeActions : CharacterProfiling
     // Update is called once per frame
     protected override void Update()
     {
-       base.Update();
+        base.Update();
+        if (base.moveToMouse.selected == true)
+        {
+
+        }
     }
 
     private void PerformAttack()

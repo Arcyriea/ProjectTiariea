@@ -35,7 +35,14 @@ public class KiajuyianaActions : CharacterProfiling
     // Update is called once per frame
     protected override void Update()
     {
-       base.Update();
+        base.Update();
+        if (base.moveToMouse.selected == true)
+        {
+            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
+            {
+                CharacterAction("ranged");
+            }
+        }
     }
 
     private void PerformAttack()

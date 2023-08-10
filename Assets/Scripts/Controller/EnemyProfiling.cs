@@ -12,6 +12,12 @@ public class EnemyProfiling : MonoBehaviour
     private float despawnDistance = 75f;
     private HomeworldHearts homeworld;
 
+    //new arguments
+    protected float meleeDetectionRange = 0.2f; // Adjust the detection range as needed
+    protected bool inMeleeRange = false;
+    protected float lastAttackTime = 0f;
+    //
+
     private class StatusEffect
     {
         public Enums.StatusEffectType type;

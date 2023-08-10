@@ -47,7 +47,8 @@ public class CharacterAI : MonoBehaviour
             }
         }
 
-        if (enemies.Count <= 0 && inMeleeRange != false) { 
+        if (enemies.Count <= 0 && inMeleeRange != false)
+        {
             inMeleeRange = false;
             return;
         }
@@ -69,7 +70,7 @@ public class CharacterAI : MonoBehaviour
             {
                 switch (attackType)
                 {
-                    case "melee": 
+                    case "melee":
                         UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing melee attack on enemy: " + hitCollider.gameObject.name);
                         break;
                     case "ranged":
@@ -79,6 +80,15 @@ public class CharacterAI : MonoBehaviour
             }
         }
 
-        
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, characterProfiling.character.meleeRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, characterProfiling.character.shootingRange);
     }
 }// testing phase, not sure if function properly
