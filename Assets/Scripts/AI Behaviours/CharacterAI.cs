@@ -30,7 +30,12 @@ public class CharacterAI : MonoBehaviour
         }
     }
 
-    private void PerformAttack(string attackType)
+    protected virtual void PerformAction(string actionType)
+    {
+
+    }
+
+    protected void PerformAttack(string attackType)
     {
 
         // Detect enemies within melee range
@@ -71,9 +76,11 @@ public class CharacterAI : MonoBehaviour
                 switch (attackType)
                 {
                     case "melee":
+                        characterProfiling.CharacterAction("attack");
                         UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing melee attack on enemy: " + hitCollider.gameObject.name);
                         break;
                     case "ranged":
+                        characterProfiling.CharacterAction("ranged");
                         UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing ranged attack on enemy: " + hitCollider.gameObject.name);
                         break;
                 }
@@ -91,4 +98,4 @@ public class CharacterAI : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, characterProfiling.character.shootingRange);
     }
-}// testing phase, not sure if function properly
+}

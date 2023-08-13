@@ -8,4 +8,6 @@ public class BulletProperties : ScriptableObject
     public float size;
     public float growRate;
     public GameObject bulletPrefab;
+    public bool intercept;
+    public bool penetrate;
 }

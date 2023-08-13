@@ -10,6 +10,7 @@ public class Enemy : ScriptableObject
     public string enemyName;
     public GameObject enemyPrefab;
     public Enums.ClassType enemyClass;
+    public Enums.Team team;
 
     // Enemy stats and behavior attributes
     public float maximumHealth;

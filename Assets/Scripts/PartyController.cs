@@ -48,6 +48,7 @@ public class PartyController : MonoBehaviour
             CharacterProfiling prefabCharProfile = prefabInstance.GetComponent<CharacterProfiling>();
 
             prefabCharProfile.GetCharacterFromScriptableObject(characters[i]);
+            prefabCharProfile.SetTeam(Enums.Team.ALLIES);
             prefabInstance.SetActive(true);
             UnityEngine.Debug.Log("Their name is: " + prefabCharProfile.character.characterName);
             spawnedPrefabs.Add(prefabInstance);

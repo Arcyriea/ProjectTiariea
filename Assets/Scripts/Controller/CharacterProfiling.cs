@@ -14,12 +14,16 @@ public class CharacterProfiling : MonoBehaviour
     public float? Shield { get; private set; }
     public float? Mana { get; private set; }
     public int Lives { get; private set; }
+    public Enums.Team team { get; private set; }
 
     protected MoveToMouse moveToMouse { get; private set; }
+    //protected LayerMask enemyLayerMask;
 
     // status control
     public bool isDead { get; private set; }
     private int RespawnTimer = 0;
+    public bool punctured = false;
+    private int punctureCooldown;
 
     private class StatusEffect
     {
@@ -63,6 +67,8 @@ public class CharacterProfiling : MonoBehaviour
         Shield = character.maximumShield;
         Mana = character.maximumMana;
         Lives = 3 + character.LivesModifier;
+        //GenerateEnemyLayerMask(team);
+
     }
 
     // Update is called once per frame
@@ -81,14 +87,15 @@ public class CharacterProfiling : MonoBehaviour
         if (isDead)
         {
             character.characterPrefab.SetActive(false);
-            RespawnTimer -= (int) Time.fixedDeltaTime;
+            RespawnTimer -= (int)Time.fixedDeltaTime;
+            Lives -= 1;
             if (RespawnTimer <= 0)
             {
                 character.characterPrefab.SetActive(true);
                 ResetStats();
                 RespawnTimer = 0;
                 isDead = false;
-                Lives -= 1;
+
             }
         }
     }
@@ -98,6 +105,11 @@ public class CharacterProfiling : MonoBehaviour
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
+    }
+
+    public void TakeDamage(float Damage)
+    {
+        Health -= Damage;
     }
 
     public void Heal(float Healing)
@@ -120,6 +132,34 @@ public class CharacterProfiling : MonoBehaviour
     {
 
     }
+
+    public void SetTeam(Enums.Team team)
+    {
+        this.team = team;
+    }
+
+    //protected LayerMask GenerateEnemyLayerMask(Enums.Team ownTeam)
+    //{
+    //    int allEnemyLayers = GetAllEnemyLayers(ownTeam);
+    //    return (1 << allEnemyLayers);
+    //}
+
+    //protected int GetAllEnemyLayers(Enums.Team ownTeam)
+    //{
+    //    int allEnemyLayers = 0;
+    //    foreach (Enums.Team team in System.Enum.GetValues(typeof(Enums.Team)))
+    //    {
+    //        if (team != ownTeam)
+    //        {
+    //            int teamLayer = LayerMask.NameToLayer(team.ToString());
+    //            if (teamLayer != -1) // Check if the layer exists
+    //            {
+    //                allEnemyLayers |= (1 << teamLayer);
+    //            }
+    //        }
+    //    }
+    //    return allEnemyLayers;
+    //}
 
 }
 

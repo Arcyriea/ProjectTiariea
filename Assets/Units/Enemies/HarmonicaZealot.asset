@@ -16,6 +16,7 @@ MonoBehaviour:
   enemyName: Zealot
   enemyPrefab: {fileID: 6367482206822494237, guid: 0aaeb687083d073488e0044258777a10, type: 3}
   enemyClass: 3
+  team: 1
   maximumHealth: 1000
   attackRange: 120
   attackDamage: 7.5

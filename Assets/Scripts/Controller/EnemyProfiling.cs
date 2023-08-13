@@ -9,14 +9,19 @@ public class EnemyProfiling : MonoBehaviour
     public Enemy enemyData { get; private set; }
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private float despawnDistance = 75f;
+    private float despawnDistance = 150f;
     private HomeworldHearts homeworld;
+    public Enums.Team team { get; private set; } // This variable can be temporarly set to a different team in case of dealing with entities that are capable to convert or mind control to their side
 
     //new arguments
     protected float meleeDetectionRange = 0.2f; // Adjust the detection range as needed
     protected bool inMeleeRange = false;
     protected float lastAttackTime = 0f;
+    public bool punctured = false;
+    private int punctureCooldown;
     //
+
+    public float Health { get; private set; }
 
     private class StatusEffect
     {
@@ -44,20 +49,22 @@ public class EnemyProfiling : MonoBehaviour
     protected virtual void Update()
     {
         CheckDespawn();
+
+        if (Health > enemyData.maximumHealth) Health = enemyData.maximumHealth;
+        //if (team != enemyData.team) team = enemyData.team;
     }
 
     public void SetEnemyData(Enemy enemy)
     {
         enemyData = enemy;
+        Health = enemy.maximumHealth;
+        team = enemy.team;
     }
 
     private void CheckDespawn()
     {
-        
+        if (Health <= 0) Destroy(gameObject);
 
-        // Loop through all spawned enemies and check their distance to the left of the camera
-        
-           
         float distanceToDespawn = transform.position.x - Camera.main.transform.position.x;
         if (distanceToDespawn < -despawnDistance)
         {
@@ -77,6 +84,16 @@ public class EnemyProfiling : MonoBehaviour
     {
         UnityEngine.Debug.Log("Got into EnemyAction");
     }
-            
+
+    public void SetTeam(Enums.Team team)
+    {
+        this.team = team;
+    }
+
+    public void TakeDamage(float Damage)
+    {
+        Health -= Damage;
+    }
+
 }
-    
+

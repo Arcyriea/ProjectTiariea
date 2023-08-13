@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class DefaultEnemy : EnemyProfiling
@@ -38,14 +40,20 @@ public class DefaultEnemy : EnemyProfiling
     {
         base.Update(); // Call the base class's Update method first
         // Additional behavior specific to the derived class's Update method
+        MoveToTheLeft();
         MeleeDetection();
         if (CanAttack())
         {
             UnityEngine.Debug.Log("The enemy is able to attack");
-            if (inMeleeRange == true) AttackMode("melee"); 
+            if (inMeleeRange == true) AttackMode("melee");
             else AttackMode("ranged");
         }
 
+    }
+
+    private void MoveToTheLeft()
+    {
+        transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y, transform.position.z);
     }
 
     private bool CanAttack()
@@ -93,22 +101,28 @@ public class DefaultEnemy : EnemyProfiling
             hitColliders = Physics2D.OverlapCircleAll(transform.position, base.enemyData.attackRange);
         }
 
+
+        
+        //For Single Attack
+        switch (attackType)
+        {
+            case "melee":
+                PerformAttack();
+                break;
+            case "ranged":
+                PerformRanged();
+                break;
+        }
+        
+        lastAttackTime = Time.time;
+
+
+        //For attack all
         foreach (Collider2D hitCollider in hitColliders)
         {
             if (IsEnemy(hitCollider.gameObject))
             {
-                lastAttackTime = Time.time;
-                // Perform melee/ranged attack on the enemy
-                switch (attackType)
-                {
-                    case "melee":
-                        PerformAttack();
-                        break;
-                    case "ranged":
-                        PerformRanged();
-                        break;
-                }
-                // Implement your attack logic here
+                
             }
         }
     }
@@ -132,13 +146,14 @@ public class DefaultEnemy : EnemyProfiling
 
         if (bulletController != null)
         {
-            // Initialize the bullet's properties
+            bulletController.Initialize(gameObject.tag, enemyData.team, enemyData.attackDamage, enemyData.attackRange / enemyData.projectileSpeed, enemyData.projectileSpeed, enemyData.splashRadius, bullet.intercept, bullet.penetrate);
 
-            bulletController.Initialize(gameObject.tag, enemyData.attackDamage, enemyData.attackRange / enemyData.projectileSpeed, enemyData.projectileSpeed, enemyData.splashRadius);
-
-            // Set the direction of the bullet (adjust this based on your game logic)
-            Vector3 bulletDirection = Vector3.right; // Example direction
+            Vector3 bulletDirection = Vector3.left;
             bulletController.SetDirection(bulletDirection);
+
+            // Rotate the bullet sprite to match the initial direction
+            float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
+            bulletGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
