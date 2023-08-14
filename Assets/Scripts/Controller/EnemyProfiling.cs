@@ -43,6 +43,7 @@ public class EnemyProfiling : MonoBehaviour
     protected virtual void Start()
     {
         homeworld = GameObject.Find("Main Camera")?.GetComponent<HomeworldHearts>();
+        animator = enemyData == null ? null : enemyData.enemyPrefab.GetComponent<Animator>();
     }
 
     // Update is called once per frame

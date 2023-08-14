@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterProfiling : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     public Character character { get; private set; }
     private int partyPositions;
@@ -63,6 +64,7 @@ public class CharacterProfiling : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         moveToMouse = GetComponent<MoveToMouse>();
         if (character == null) return;
+        animator = character.characterPrefab.GetComponent<Animator>();
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
