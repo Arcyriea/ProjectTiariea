@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - SelectionBox
+  - Bullet
+  - Beam
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,8 @@ public class Character : ScriptableObject
     public int maximumAmmo; //For ranged characters which uses physical ammunitions
     public float maximumGas; //For ranged char that uses liquid to fuel their gas based weaponries
     public float shootingRange;
+    public float accelerateSpeed; //Relevant for bullets, but for beam it may control how fast they boot up the beam intensity to full power
+    public float explodeRadius;
     public float rangedDamage;
     public float fireRate;
     public float meleeRange;

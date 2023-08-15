@@ -56,53 +56,16 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     public void PerformAttack()
     {
-        if (meleeAttackPoint == null) return;
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, base.character.meleeRange, 0);
-        // Define your attack logic here
-        // For example, reduce enemy health or apply status effects
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            EnemyProfiling entity = enemy.GetComponent<EnemyProfiling>();
-            CharacterProfiling chara = enemy.GetComponent<CharacterProfiling>();
-
-            if (entity != null)
-            {
-                if (entity.team != team) entity.TakeDamage(base.character.meleeDamage);
-            }
-
-            if (chara != null)
-            {
-                if (chara.team != team) chara.TakeDamage(base.character.meleeDamage);
-            }
-        }
+        GenericActions.MeleeAttack(meleeAttackPoint, team, character);
 
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
     public void PerformRanged()
     {
-        if (bullet == null)
-        {
-            UnityEngine.Debug.Log(character.characterName + " bullet property not defined!");
-            return;
-        }
 
-        GameObject bulletGO = Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity);
+        GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
 
-        // Get the BulletController component from the instantiated bullet
-        BulletController bulletController = bulletGO.GetComponent<BulletController>();
-
-        if (bulletController != null)
-        {
-            bulletController.Initialize("", base.team, base.character.rangedDamage, base.character.shootingRange / 0.5f, 0.5f, 0f, bullet.intercept, bullet.penetrate);
-
-            Vector3 bulletDirection = Vector3.right;
-            bulletController.SetDirection(bulletDirection);
-
-            // Rotate the bullet sprite to match the initial direction
-            float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
-            bulletGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
 

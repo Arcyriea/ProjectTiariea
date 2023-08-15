@@ -38,7 +38,7 @@ public class BulletController : MonoBehaviour
 
     private void Start()
     {
-        gameObject.tag = sideTag;
+        gameObject.tag = "Bullet";
     }
 
     private void Update()
