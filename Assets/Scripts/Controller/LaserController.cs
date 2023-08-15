@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LaserController : MonoBehaviour
 {
+    public LineRenderer lineRenderer;
+    public Transform laserPosition;
     // Start is called before the first frame update
     void Start()
     {

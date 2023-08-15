@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class KiajuyianaActions : CharacterProfiling
+public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 {
     public BulletProperties bullet;
     public Transform meleeAttackPoint;
@@ -54,7 +54,7 @@ public class KiajuyianaActions : CharacterProfiling
         }
     }
 
-    private void PerformAttack()
+    public void PerformAttack()
     {
         if (meleeAttackPoint == null) return;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, base.character.meleeRange, 0);
@@ -79,7 +79,7 @@ public class KiajuyianaActions : CharacterProfiling
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
-    private void PerformRanged()
+    public void PerformRanged()
     {
         if (bullet == null)
         {
@@ -106,14 +106,14 @@ public class KiajuyianaActions : CharacterProfiling
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
 
-    private void PerformHeal()
+    public void PerformHeal()
     {
         // Define your healing logic here
         // For example, increase Health or remove status effects
         UnityEngine.Debug.Log(character.characterName + " performs a heal!");
     }
 
-    private void PerformUltimate()
+    public void PerformUltimate()
     {
         // Define your ultimate ability logic here
         // For example, deal massive damage or apply powerful effects
