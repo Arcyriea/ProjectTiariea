@@ -70,7 +70,7 @@ public static class GenericActions
         }
         else
         {
-            UnityEngine.Debug.LogError("Invalid Object Type for MeleeAttack method of static GenericActions class");
+            UnityEngine.Debug.LogError("Invalid Object Type for BulletAttack method of static GenericActions class");
             return;
         }
 

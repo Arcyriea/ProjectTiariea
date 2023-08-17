@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterProfiling : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    private Animator animator;
+    protected Animator animator;
 
     public Character character { get; private set; }
     private int partyPositions;

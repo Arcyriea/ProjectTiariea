@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -56,15 +57,36 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     public void PerformAttack()
     {
+        int random = UnityEngine.Random.Range(1, 3);
+        switch (random)
+        {
+            case 1:
+                animator.SetBool("Attack1", true);
+                break;
+            case 2:
+                animator.SetBool("Attack2", true);
+                break;
+        }
         GenericActions.MeleeAttack(meleeAttackPoint, team, character);
+        Invoke("ResetAnimation", 0.15f);
 
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
     public void PerformRanged()
     {
-
+        int random = UnityEngine.Random.Range(1, 3);
+        switch (random)
+        {
+            case 1:
+                animator.SetBool("Ranged1", true);
+                break;
+            case 2:
+                animator.SetBool("Ranged2", true);
+                break;
+        }
         GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
+        Invoke("ResetAnimation", 0.15f);
 
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
@@ -89,4 +111,11 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         Gizmos.DrawWireSphere(meleeAttackPoint.position, 1.5f);
     }
 
+    private void ResetAnimation()
+    {
+        if (animator.GetBool("Attack1") != false) animator.SetBool("Attack1", false);
+        if (animator.GetBool("Attack2") != false) animator.SetBool("Attack2", false);
+        if (animator.GetBool("Ranged1") != false) animator.SetBool("Ranged1", false);
+        if (animator.GetBool("Ranged2") != false) animator.SetBool("Ranged2", false);
+    }
 }

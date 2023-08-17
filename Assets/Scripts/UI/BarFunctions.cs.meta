@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: e1f055d9076462f44b1612f2bf43247a
+guid: f2a0818e2c03135418eb7752b16fa113
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - bullet: {fileID: 11400000, guid: 22a686b84de5fd844bee1fc0f4ba7a7e, type: 2}
-  - meleeAttackPoint: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
