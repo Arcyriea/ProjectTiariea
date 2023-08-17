@@ -12,8 +12,9 @@ public class CharacterProfiling : MonoBehaviour
     private int partyPositions;
 
     public float Health { get; private set; }
-    public float? Shield { get; private set; }
-    public float? Mana { get; private set; }
+    public float Shield { get; private set; }
+    public float Mana { get; private set; }
+    public float Energy { get; private set; }
     public int Lives { get; private set; }
     public Enums.Team team { get; private set; }
 
@@ -68,6 +69,7 @@ public class CharacterProfiling : MonoBehaviour
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
+        Energy = character.maximumEnergy;
         Lives = 3 + character.LivesModifier;
         //GenerateEnemyLayerMask(team);
 
@@ -107,6 +109,7 @@ public class CharacterProfiling : MonoBehaviour
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
+        Energy = character.maximumEnergy;
     }
 
     public void TakeDamage(float Damage)

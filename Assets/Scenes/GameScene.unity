@@ -162,7 +162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98.9, y: -90.1}
+  m_AnchoredPosition: {x: -96.1, y: -133.3}
   m_SizeDelta: {x: 103.5659, y: 37.524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &24885622
@@ -181,6 +181,7 @@ MonoBehaviour:
   shieldSlider: {fileID: 1778939325}
   manaSlider: {fileID: 1248369925}
   energySlider: {fileID: 1938076944}
+  charName: {fileID: 1833907753}
 --- !u!1 &25372743
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -99.47, y: -151.24496}
+  m_AnchoredPosition: {x: -96.67001, y: -194.44498}
   m_SizeDelta: {x: 103.5659, y: 37.524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25372745
@@ -239,6 +240,7 @@ MonoBehaviour:
   shieldSlider: {fileID: 1302876781}
   manaSlider: {fileID: 1313992290}
   energySlider: {fileID: 1038999928}
+  charName: {fileID: 119325933}
 --- !u!1 &46363998
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -209.8, y: -151.24496}
+  m_AnchoredPosition: {x: -207.00002, y: -194.44498}
   m_SizeDelta: {x: 103.5659, y: 37.524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &46364000
@@ -297,6 +299,7 @@ MonoBehaviour:
   shieldSlider: {fileID: 1600588205}
   manaSlider: {fileID: 2143797167}
   energySlider: {fileID: 1373059936}
+  charName: {fileID: 238491928}
 --- !u!1 &79550801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,6 +1433,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: db7562587b846984881adae5eef93ee4, type: 2}
   - {fileID: 11400000, guid: 4e317977bebbbef418fa6cd7781c0b15, type: 2}
   customFormations: []
+  characterStatSliders:
+  - {fileID: 946001530}
+  - {fileID: 1101511387}
+  - {fileID: 46363998}
+  - {fileID: 25372743}
+  - {fileID: 684148323}
+  - {fileID: 24885620}
   spacing: 2
   prefabLayer:
     serializedVersion: 2
@@ -2058,7 +2068,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -209.23001, y: -90.09999}
+  m_AnchoredPosition: {x: -206.43002, y: -133.29999}
   m_SizeDelta: {x: 103.5659, y: 37.524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &684148325
@@ -2077,6 +2087,7 @@ MonoBehaviour:
   shieldSlider: {fileID: 1345317733}
   manaSlider: {fileID: 520644371}
   energySlider: {fileID: 1443688807}
+  charName: {fileID: 687317327}
 --- !u!1 &687317325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,7 +2968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -329.68753, y: -96.99195}
+  m_AnchoredPosition: {x: -326.88754, y: -140.19196}
   m_SizeDelta: {x: 122.5449, y: 59.2458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &946001532
@@ -2976,6 +2987,7 @@ MonoBehaviour:
   shieldSlider: {fileID: 1692492097}
   manaSlider: {fileID: 724321232}
   energySlider: {fileID: 1763080031}
+  charName: {fileID: 1603310970}
 --- !u!1 &946740351
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,7 +3718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -320.2, y: -151.24496}
+  m_AnchoredPosition: {x: -317.40002, y: -194.44498}
   m_SizeDelta: {x: 103.5659, y: 37.524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1101511389
@@ -3725,6 +3737,7 @@ MonoBehaviour:
   shieldSlider: {fileID: 1868504100}
   manaSlider: {fileID: 1033045839}
   energySlider: {fileID: 795427030}
+  charName: {fileID: 764215335}
 --- !u!1 &1101629177
 GameObject:
   m_ObjectHideFlags: 0

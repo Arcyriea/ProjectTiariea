@@ -14,6 +14,7 @@ public class PartyController : MonoBehaviour
     private int memCap = 6;
     public List<CustomFormation> customFormations;
 
+    public GameObject[] characterStatSliders;
     public List<GameObject> spawnedPrefabs { get; private set; }
     private CustomFormation selectedFormation;
     public float spacing = 2f;
@@ -54,6 +55,15 @@ public class PartyController : MonoBehaviour
             spawnedPrefabs.Add(prefabInstance);
 
         }//Khoi tao nhan vat trong doi
+
+        for (int i = 0; i < spawnedPrefabs.Count; i++)
+        {
+            if (spawnedPrefabs[i] != null)
+            {
+                BarFunctions statController = characterStatSliders[i].GetComponent<BarFunctions>();
+                statController.SetCharProfile(spawnedPrefabs[i].GetComponent<CharacterProfiling>());
+            }
+        }
 
         if (customFormations.Count > 0)
         {
