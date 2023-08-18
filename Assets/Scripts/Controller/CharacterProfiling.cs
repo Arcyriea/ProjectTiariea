@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterProfiling : MonoBehaviour
+public class CharacterProfiling : MonoBehaviour, IDefaultActions
 {
     private SpriteRenderer spriteRenderer;
     protected Animator animator;
@@ -17,6 +17,8 @@ public class CharacterProfiling : MonoBehaviour
     public float Energy { get; private set; }
     public int Lives { get; private set; }
     public Enums.Team team { get; private set; }
+
+    public float UltimateMeter { get; private set; }
 
     public float meleeAttackTime { get; protected set; }
     public float rangedAttackTime { get; protected set; }
@@ -83,15 +85,17 @@ public class CharacterProfiling : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        while (meleeAttackTime <= character.swingTime)
+        meleeAttackTime += Time.deltaTime;
+        rangedAttackTime += Time.deltaTime;
+
+        if (punctured && punctureCooldown <= 0)
         {
-            meleeAttackTime += 0.1f;
+            punctureCooldown = 3;
         }
 
-        while (rangedAttackTime <= character.fireRate)
-        {
-            meleeAttackTime += 0.1f;
-        }
+        punctureCooldown -= (int) Time.fixedDeltaTime;
+        if (punctureCooldown <= 0) punctured = false;
+
 
         if (Health <= 0)
         {
@@ -106,7 +110,7 @@ public class CharacterProfiling : MonoBehaviour
         if (isDead)
         {
             character.characterPrefab.SetActive(false);
-            RespawnTimer -= (int)Time.fixedDeltaTime;
+            RespawnTimer -= (int) Time.fixedDeltaTime;
             Lives -= 1;
             if (RespawnTimer <= 0)
             {
@@ -158,29 +162,25 @@ public class CharacterProfiling : MonoBehaviour
         this.team = team;
     }
 
-    //protected LayerMask GenerateEnemyLayerMask(Enums.Team ownTeam)
-    //{
-    //    int allEnemyLayers = GetAllEnemyLayers(ownTeam);
-    //    return (1 << allEnemyLayers);
-    //}
+    public virtual void PerformAttack()
+    {
+        throw new NotImplementedException();
+    }
 
-    //protected int GetAllEnemyLayers(Enums.Team ownTeam)
-    //{
-    //    int allEnemyLayers = 0;
-    //    foreach (Enums.Team team in System.Enum.GetValues(typeof(Enums.Team)))
-    //    {
-    //        if (team != ownTeam)
-    //        {
-    //            int teamLayer = LayerMask.NameToLayer(team.ToString());
-    //            if (teamLayer != -1) // Check if the layer exists
-    //            {
-    //                allEnemyLayers |= (1 << teamLayer);
-    //            }
-    //        }
-    //    }
-    //    return allEnemyLayers;
-    //}
+    public virtual void PerformRanged()
+    {
+        throw new NotImplementedException();
+    }
 
+    public virtual void PerformHeal()
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void PerformUltimate()
+    {
+        throw new NotImplementedException();
+    }
 }
 
 

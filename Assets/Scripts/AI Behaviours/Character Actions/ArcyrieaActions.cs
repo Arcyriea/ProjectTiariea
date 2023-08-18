@@ -7,24 +7,7 @@ public class ArcyrieaActions : CharacterProfiling, IDefaultActions
 {
     public override void CharacterAction(string action)
     {
-        switch (action)
-        {
-            case "attack":
-                PerformAttack();
-                break;
-            case "heal":
-                PerformHeal();
-                break;
-            case "ranged":
-                PerformRanged();
-                break;
-            case "ultimate":
-                PerformUltimate();
-                break;
-            default:
-                UnityEngine.Debug.LogError("Invalid action: " + action);
-                break;
-        }
+        GenericActions.ExecuteAction(this, action);
     }
 
     protected override void Start()
@@ -42,28 +25,28 @@ public class ArcyrieaActions : CharacterProfiling, IDefaultActions
         }
     }
 
-    public void PerformAttack()
+    public override void PerformAttack()
     {
         // Define your attack logic here
         // For example, reduce enemy health or apply status effects
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
-    public void PerformRanged()
+    public override void PerformRanged()
     {
         // Define your attack logic here
         // For example, reduce enemy health or apply status effects
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
 
-    public void PerformHeal()
+    public override void PerformHeal()
     {
         // Define your healing logic here
         // For example, increase Health or remove status effects
         UnityEngine.Debug.Log(character.characterName + " performs a heal!");
     }
 
-    public void PerformUltimate()
+    public override void PerformUltimate()
     {
         // Define your ultimate ability logic here
         // For example, deal massive damage or apply powerful effects

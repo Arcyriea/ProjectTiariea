@@ -1,9 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public static class GenericActions
 {
+    public static void ExecuteAction(CharacterProfiling profiling, string action)
+    {
+        Character character = profiling.character;
+        float meleeAttackTime = profiling.meleeAttackTime;
+        float rangedAttackTime = profiling.rangedAttackTime;
+        switch (action)
+        {
+            case "attack":
+                if (meleeAttackTime >= character.swingTime)
+                {
+                    profiling.PerformAttack();
+                    meleeAttackTime = 0f;
+                }
+                break;
+            case "heal":
+                if (rangedAttackTime >= character.fireRate)
+                {
+                    profiling.PerformHeal();
+                    rangedAttackTime = 0f;
+                }
+                break;
+            case "ranged":
+                if (rangedAttackTime >= character.fireRate)
+                {
+                    profiling.PerformRanged();
+                    rangedAttackTime = 0f;
+                }
+                break;
+            case "ultimate":
+                profiling.PerformUltimate();
+                break;
+            default:
+                UnityEngine.Debug.LogError("Invalid action: " + action);
+                break;
+        }
+    }
+
     public static void MeleeAttack(Transform meleeAttackPoint, Enums.Team team, Object obj)
     {
         if (meleeAttackPoint == null) return;

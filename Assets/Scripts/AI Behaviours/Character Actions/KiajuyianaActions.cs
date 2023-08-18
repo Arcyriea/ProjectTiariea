@@ -12,36 +12,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     public override void CharacterAction(string action)
     {
-        switch (action)
-        {
-            case "attack":
-                if (meleeAttackTime >= character.swingTime)
-                {
-                    PerformAttack();
-                    meleeAttackTime = 0f;
-                }
-                break;
-            case "heal":
-                if (rangedAttackTime >= character.fireRate)
-                {
-                    PerformHeal();
-                    rangedAttackTime = 0f;
-                }
-                break;
-            case "ranged":
-                if (rangedAttackTime >= character.fireRate)
-                {
-                    PerformRanged();
-                    rangedAttackTime = 0f;
-                }
-                break;
-            case "ultimate":
-                PerformUltimate();
-                break;
-            default:
-                UnityEngine.Debug.LogError("Invalid action: " + action);
-                break;
-        }
+        GenericActions.ExecuteAction(this, action);
     }
 
     protected override void Start()
@@ -67,7 +38,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         }
     }
 
-    public void PerformAttack()
+    public override void PerformAttack()
     {
         int random = UnityEngine.Random.Range(1, 3);
         switch (random)
@@ -85,7 +56,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
-    public void PerformRanged()
+    public override void PerformRanged()
     {
         int random = UnityEngine.Random.Range(1, 3);
         switch (random)
@@ -103,14 +74,14 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
 
-    public void PerformHeal()
+    public override void PerformHeal()
     {
         // Define your healing logic here
         // For example, increase Health or remove status effects
         UnityEngine.Debug.Log(character.characterName + " performs a heal!");
     }
 
-    public void PerformUltimate()
+    public override void PerformUltimate()
     {
         // Define your ultimate ability logic here
         // For example, deal massive damage or apply powerful effects
@@ -125,9 +96,11 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     private void ResetAnimation()
     {
-        if (animator.GetBool("melee1") != false) animator.SetBool("melee1", false);
-        if (animator.GetBool("melee2") != false) animator.SetBool("melee2", false);
-        if (animator.GetBool("ranged1") != false) animator.SetBool("ranged1", false);
-        if (animator.GetBool("ranged2") != false) animator.SetBool("ranged2", false);
+        string[] animationNames = { "melee1", "melee2", "ranged1", "ranged2" };
+
+        foreach(string animationName in animationNames)
+        {
+            if (animator.GetBool(animationName) != false) animator.SetBool(animationName, false);
+        }
     }
 }

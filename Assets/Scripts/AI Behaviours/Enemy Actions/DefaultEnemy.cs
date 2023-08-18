@@ -44,7 +44,6 @@ public class DefaultEnemy : EnemyProfiling
         MeleeDetection();
         if (CanAttack())
         {
-            UnityEngine.Debug.Log("The enemy is able to attack");
             if (inMeleeRange == true) AttackMode("melee");
             else AttackMode("ranged");
         }
