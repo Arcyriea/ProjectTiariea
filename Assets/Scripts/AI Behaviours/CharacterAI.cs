@@ -17,15 +17,17 @@ public class CharacterAI : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (!moveToMouse.selected) // Check if the character is unselected
         {
             if (inMeleeRange)
             {
-                PerformAttack("melee");
+                if (characterProfiling.meleeAttackTime >= characterProfiling.character.swingTime) PerformAttack("melee");
             }
             else if (!inMeleeRange)
             {
-                PerformAttack("ranged");
+                if (characterProfiling.rangedAttackTime >= characterProfiling.character.fireRate) PerformAttack("ranged");
             }
         }
     }
@@ -77,11 +79,11 @@ public class CharacterAI : MonoBehaviour
                 {
                     case "melee":
                         characterProfiling.CharacterAction("attack");
-                        UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing melee attack on enemy: " + hitCollider.gameObject.name);
+                        //UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing melee attack on enemy: " + hitCollider.gameObject.name);
                         break;
                     case "ranged":
                         characterProfiling.CharacterAction("ranged");
-                        UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing ranged attack on enemy: " + hitCollider.gameObject.name);
+                        //UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing ranged attack on enemy: " + hitCollider.gameObject.name);
                         break;
                 }
             }

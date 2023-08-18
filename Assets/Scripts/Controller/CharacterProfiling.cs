@@ -18,6 +18,9 @@ public class CharacterProfiling : MonoBehaviour
     public int Lives { get; private set; }
     public Enums.Team team { get; private set; }
 
+    public float meleeAttackTime { get; protected set; }
+    public float rangedAttackTime { get; protected set; }
+
     protected MoveToMouse moveToMouse { get; private set; }
     //protected LayerMask enemyLayerMask;
 
@@ -26,6 +29,8 @@ public class CharacterProfiling : MonoBehaviour
     private int RespawnTimer = 0;
     public bool punctured = false;
     private int punctureCooldown;
+
+
 
     private class StatusEffect
     {
@@ -78,6 +83,16 @@ public class CharacterProfiling : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        while (meleeAttackTime <= character.swingTime)
+        {
+            meleeAttackTime += 0.1f;
+        }
+
+        while (rangedAttackTime <= character.fireRate)
+        {
+            meleeAttackTime += 0.1f;
+        }
+
         if (Health <= 0)
         {
             isDead = true;

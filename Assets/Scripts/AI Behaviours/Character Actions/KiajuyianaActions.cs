@@ -15,13 +15,25 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         switch (action)
         {
             case "attack":
-                PerformAttack();
+                if (meleeAttackTime >= character.swingTime)
+                {
+                    PerformAttack();
+                    meleeAttackTime = 0f;
+                }
                 break;
             case "heal":
-                PerformHeal();
+                if (rangedAttackTime >= character.fireRate)
+                {
+                    PerformHeal();
+                    rangedAttackTime = 0f;
+                }
                 break;
             case "ranged":
-                PerformRanged();
+                if (rangedAttackTime >= character.fireRate)
+                {
+                    PerformRanged();
+                    rangedAttackTime = 0f;
+                }
                 break;
             case "ultimate":
                 PerformUltimate();
@@ -61,10 +73,10 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         switch (random)
         {
             case 1:
-                animator.SetBool("Attack1", true);
+                animator.SetBool("melee1", true);
                 break;
             case 2:
-                animator.SetBool("Attack2", true);
+                animator.SetBool("melee2", true);
                 break;
         }
         GenericActions.MeleeAttack(meleeAttackPoint, team, character);
@@ -79,10 +91,10 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         switch (random)
         {
             case 1:
-                animator.SetBool("Ranged1", true);
+                animator.SetBool("ranged1", true);
                 break;
             case 2:
-                animator.SetBool("Ranged2", true);
+                animator.SetBool("ranged2", true);
                 break;
         }
         GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
@@ -113,9 +125,9 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     private void ResetAnimation()
     {
-        if (animator.GetBool("Attack1") != false) animator.SetBool("Attack1", false);
-        if (animator.GetBool("Attack2") != false) animator.SetBool("Attack2", false);
-        if (animator.GetBool("Ranged1") != false) animator.SetBool("Ranged1", false);
-        if (animator.GetBool("Ranged2") != false) animator.SetBool("Ranged2", false);
+        if (animator.GetBool("melee1") != false) animator.SetBool("melee1", false);
+        if (animator.GetBool("melee2") != false) animator.SetBool("melee2", false);
+        if (animator.GetBool("ranged1") != false) animator.SetBool("ranged1", false);
+        if (animator.GetBool("ranged2") != false) animator.SetBool("ranged2", false);
     }
 }

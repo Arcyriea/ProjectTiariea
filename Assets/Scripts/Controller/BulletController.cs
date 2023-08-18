@@ -55,11 +55,14 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         BulletController otherBullet = collision.gameObject.GetComponent<BulletController>();
         CharacterProfiling character = collision.gameObject.GetComponent<CharacterProfiling>();
         EnemyProfiling entity = collision.gameObject.GetComponent<EnemyProfiling>();
+
+        UnityEngine.Debug.Log("Bullet Collision Triggered");
+
 
         if (otherBullet != null && interceptCollision == true)
         {
@@ -68,6 +71,7 @@ public class BulletController : MonoBehaviour
             {
                 // Handle the collision based on team affiliation
                 HandleBulletCollision(otherBullet);
+                UnityEngine.Debug.Log("otherBullet Triggered");
             }
         }
 
@@ -75,7 +79,7 @@ public class BulletController : MonoBehaviour
         {
             if (character.team != team)
             {
-               
+                UnityEngine.Debug.Log("characterBulletCollision Triggered");
                 if (character.Health > damage)
                 {
                     if (penetrates != true)
@@ -97,7 +101,7 @@ public class BulletController : MonoBehaviour
         {
             if (entity.team != team)
             {
-               
+                UnityEngine.Debug.Log("entityBulletCollision Triggered");
                 if (entity.Health > damage)
                 {
                     if (penetrates != true)
