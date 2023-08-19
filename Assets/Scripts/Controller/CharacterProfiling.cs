@@ -85,9 +85,6 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     // Update is called once per frame
     protected virtual void Update()
     {
-        meleeAttackTime += Time.deltaTime;
-        rangedAttackTime += Time.deltaTime;
-
         if (punctured && punctureCooldown <= 0)
         {
             punctureCooldown = 3;

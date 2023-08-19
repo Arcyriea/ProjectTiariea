@@ -9,7 +9,7 @@ public class PartyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float followSpeed = 2f;
-    public float partyTravelSpeed { get; private set; }
+    public static float partyTravelSpeed { get; private set; }
     public Character[] characters;
     private int memCap = 6;
     public List<CustomFormation> customFormations;
@@ -28,7 +28,7 @@ public class PartyController : MonoBehaviour
     
     private void Awake()
     {
-        partyTravelSpeed = 60f;
+        partyTravelSpeed = 0f;
         spawnedPrefabs = new List<GameObject>();
     }
 

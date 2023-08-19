@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -13,24 +14,24 @@ public static class GenericActions
         switch (action)
         {
             case "attack":
-                if (meleeAttackTime >= character.swingTime)
+                if (Time.time - meleeAttackTime >= character.swingTime)
                 {
                     profiling.PerformAttack();
-                    meleeAttackTime = 0f;
+                    meleeAttackTime = Time.time;
                 }
                 break;
             case "heal":
-                if (rangedAttackTime >= character.fireRate)
+                if (Time.time - rangedAttackTime >= character.fireRate)
                 {
                     profiling.PerformHeal();
-                    rangedAttackTime = 0f;
+                    rangedAttackTime = Time.time;
                 }
                 break;
             case "ranged":
-                if (rangedAttackTime >= character.fireRate)
+                if (Time.time - rangedAttackTime >= character.fireRate)
                 {
                     profiling.PerformRanged();
-                    rangedAttackTime = 0f;
+                    rangedAttackTime = Time.time;
                 }
                 break;
             case "ultimate":
@@ -96,7 +97,7 @@ public static class GenericActions
         {
             Range = character.shootingRange;
             Damage = character.rangedDamage;
-            Speed = character.accelerateSpeed;
+            Speed = character.accelerateSpeed + PartyController.partyTravelSpeed;
             Explosion = character.explodeRadius;
         }
         else if (enemy != null && character == null)
