@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 44ad3e0d949ed1f42992ca989475bb65
+guid: 353b55552b693974bba4889cc855fbd0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_10
+      name: Kiaj'uyiana Spritesheet 1_10
       rect:
         serializedVersion: 2
         x: 146
@@ -125,20 +125,20 @@ TextureImporter:
         width: 416
         height: 507
       alignment: 9
-      pivot: {x: 0.44699052, y: 0.501318}
+      pivot: {x: 0.45093596, y: 0.50805277}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98d4258dee36bae478c108e3ad7839ae
-      internalID: -1636796638
+      spriteID: b6e309c8da9c26849b25f0278d83c2d9
+      internalID: 1336750815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_12
+      name: Kiaj'uyiana Spritesheet 1_12
       rect:
         serializedVersion: 2
         x: 1125
@@ -146,20 +146,20 @@ TextureImporter:
         width: 309
         height: 558
       alignment: 9
-      pivot: {x: 0.6716139, y: 0.65941113}
+      pivot: {x: 0.6717415, y: 0.6902083}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9774c2ea243daa543aef188cdc357475
-      internalID: 1685988213
+      spriteID: 7ba497c1ae6daf146801797fe870f58a
+      internalID: -1212992351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_37
+      name: Kiaj'uyiana Spritesheet 1_32
       rect:
         serializedVersion: 2
         x: 1093
@@ -167,20 +167,41 @@ TextureImporter:
         width: 608
         height: 415
       alignment: 9
-      pivot: {x: 0.3073897, y: 0.6152391}
+      pivot: {x: 0.3120061, y: 0.6082019}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbdc3c8b26ee16d479a2d817a40b4d2e
-      internalID: 492147144
+      spriteID: 22b699179ed3a264daf92830159543b3
+      internalID: -437832701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_39
+      name: Kiaj'uyiana Spritesheet 1_35
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 854
+        width: 502
+        height: 475
+      alignment: 9
+      pivot: {x: 0.37802336, y: 0.5515646}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e10ae0fefbeb194a99c4a40aaced5e4
+      internalID: 646107186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kiaj'uyiana Spritesheet 1_36
       rect:
         serializedVersion: 2
         x: 1918
@@ -188,41 +209,41 @@ TextureImporter:
         width: 622
         height: 343
       alignment: 9
-      pivot: {x: 0.6718797, y: 0.51005423}
+      pivot: {x: 0.670637, y: 0.5952109}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b214711e42d59c3489783c915f0f2294
-      internalID: 1694433630
+      spriteID: ce39ed4559eab87428384dd45b39780d
+      internalID: -1177628066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_45
+      name: Kiaj'uyiana Spritesheet 1_43
       rect:
         serializedVersion: 2
         x: 1838
-        y: 625
+        y: 629
         width: 385
         height: 403
       alignment: 9
-      pivot: {x: 0.54849076, y: 0.5308832}
+      pivot: {x: 0.5530153, y: 0.6418119}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efd2fd34ea578cf4faea9f733216ee91
-      internalID: -1785585672
+      spriteID: cc4d211b4d2de944f95f0eac5b5433a5
+      internalID: -1693554626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_46
+      name: Kiaj'uyiana Spritesheet 1_44
       rect:
         serializedVersion: 2
         x: 2324
@@ -230,20 +251,20 @@ TextureImporter:
         width: 567
         height: 401
       alignment: 9
-      pivot: {x: 0.7136988, y: 0.51328176}
+      pivot: {x: 0.72318715, y: 0.5610799}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe53debf294475a4abe780f7c40c73bb
-      internalID: -1142045097
+      spriteID: a63fcd4c4a1f62d4792f661537da026b
+      internalID: 1103963446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_51
+      name: Kiaj'uyiana Spritesheet 1_47
       rect:
         serializedVersion: 2
         x: 148
@@ -251,20 +272,20 @@ TextureImporter:
         width: 516
         height: 579
       alignment: 9
-      pivot: {x: 0.37111723, y: 0.4472058}
+      pivot: {x: 0.3575994, y: 0.45064774}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0159ba0a8eaf5274b9cc2be76034a95f
-      internalID: 486242273
+      spriteID: 8b038f0cb5dc2774585f5f52045b3dc1
+      internalID: 1108346106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kiaj'uyiana Spritesheet_54
+      name: Kiaj'uyiana Spritesheet 1_50
       rect:
         serializedVersion: 2
         x: 2154
@@ -272,14 +293,14 @@ TextureImporter:
         width: 394
         height: 411
       alignment: 9
-      pivot: {x: 0.51579416, y: 0.5227112}
+      pivot: {x: 0.5103611, y: 0.54966116}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c16ebaa44689e24eae9a613829926a3
-      internalID: 1335741131
+      spriteID: 7fb58cb9cb92bed4ea5bdb89f7c9c1d3
+      internalID: -128593954
       vertices: []
       indices: 
       edges: []
@@ -295,63 +316,60 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Kiaj'uyiana Spritesheet_0: -829153934
-      Kiaj'uyiana Spritesheet_1: 2085970118
-      Kiaj'uyiana Spritesheet_10: -1636796638
-      Kiaj'uyiana Spritesheet_11: 1521246083
-      Kiaj'uyiana Spritesheet_12: 1685988213
-      Kiaj'uyiana Spritesheet_13: 36787294
-      Kiaj'uyiana Spritesheet_14: 991040391
-      Kiaj'uyiana Spritesheet_15: -1444505818
-      Kiaj'uyiana Spritesheet_16: 1092466284
-      Kiaj'uyiana Spritesheet_17: 294747452
-      Kiaj'uyiana Spritesheet_18: -275460447
-      Kiaj'uyiana Spritesheet_19: 1420745284
-      Kiaj'uyiana Spritesheet_2: -1557710677
-      Kiaj'uyiana Spritesheet_20: 1141366263
-      Kiaj'uyiana Spritesheet_21: -1753077186
-      Kiaj'uyiana Spritesheet_22: 1177600521
-      Kiaj'uyiana Spritesheet_23: -149759244
-      Kiaj'uyiana Spritesheet_24: 1848298434
-      Kiaj'uyiana Spritesheet_25: -2002933883
-      Kiaj'uyiana Spritesheet_26: 946290222
-      Kiaj'uyiana Spritesheet_27: 1896647895
-      Kiaj'uyiana Spritesheet_28: -2013704940
-      Kiaj'uyiana Spritesheet_29: 247809543
-      Kiaj'uyiana Spritesheet_3: 839263052
-      Kiaj'uyiana Spritesheet_30: 319012594
-      Kiaj'uyiana Spritesheet_31: 1997923350
-      Kiaj'uyiana Spritesheet_32: 627534843
-      Kiaj'uyiana Spritesheet_33: -1893884255
-      Kiaj'uyiana Spritesheet_34: -1548711971
-      Kiaj'uyiana Spritesheet_35: -1683547351
-      Kiaj'uyiana Spritesheet_36: -1594185792
-      Kiaj'uyiana Spritesheet_37: 492147144
-      Kiaj'uyiana Spritesheet_38: -1691464388
-      Kiaj'uyiana Spritesheet_39: 1694433630
-      Kiaj'uyiana Spritesheet_4: -1341300144
-      Kiaj'uyiana Spritesheet_40: -521131443
-      Kiaj'uyiana Spritesheet_41: 1995323237
-      Kiaj'uyiana Spritesheet_42: 1899124948
-      Kiaj'uyiana Spritesheet_43: -1371114840
-      Kiaj'uyiana Spritesheet_44: -1202297496
-      Kiaj'uyiana Spritesheet_45: -1785585672
-      Kiaj'uyiana Spritesheet_46: -1142045097
-      Kiaj'uyiana Spritesheet_47: 620327043
-      Kiaj'uyiana Spritesheet_48: 549694139
-      Kiaj'uyiana Spritesheet_49: 385278945
-      Kiaj'uyiana Spritesheet_5: 791667188
-      Kiaj'uyiana Spritesheet_50: -736285829
-      Kiaj'uyiana Spritesheet_51: 486242273
-      Kiaj'uyiana Spritesheet_52: -1370272849
-      Kiaj'uyiana Spritesheet_53: 1360598282
-      Kiaj'uyiana Spritesheet_54: 1335741131
-      Kiaj'uyiana Spritesheet_55: 660764149
-      Kiaj'uyiana Spritesheet_56: 576305931
-      Kiaj'uyiana Spritesheet_6: 358690282
-      Kiaj'uyiana Spritesheet_7: -1620870284
-      Kiaj'uyiana Spritesheet_8: -1418252713
-      Kiaj'uyiana Spritesheet_9: 1097736846
+      Kiaj'uyiana Spritesheet 1_0: 1733549834
+      Kiaj'uyiana Spritesheet 1_1: 1028441737
+      Kiaj'uyiana Spritesheet 1_10: 1336750815
+      Kiaj'uyiana Spritesheet 1_11: 1568044817
+      Kiaj'uyiana Spritesheet 1_12: -1212992351
+      Kiaj'uyiana Spritesheet 1_13: 227656080
+      Kiaj'uyiana Spritesheet 1_14: -510802057
+      Kiaj'uyiana Spritesheet 1_15: -691835360
+      Kiaj'uyiana Spritesheet 1_16: 1799626404
+      Kiaj'uyiana Spritesheet 1_17: 1296194679
+      Kiaj'uyiana Spritesheet 1_18: 1213932956
+      Kiaj'uyiana Spritesheet 1_19: -1938365678
+      Kiaj'uyiana Spritesheet 1_2: -1693801228
+      Kiaj'uyiana Spritesheet 1_20: -206569313
+      Kiaj'uyiana Spritesheet 1_21: -1165181215
+      Kiaj'uyiana Spritesheet 1_22: 1393133610
+      Kiaj'uyiana Spritesheet 1_23: -97089071
+      Kiaj'uyiana Spritesheet 1_24: -700095014
+      Kiaj'uyiana Spritesheet 1_25: -1468821718
+      Kiaj'uyiana Spritesheet 1_26: 749320712
+      Kiaj'uyiana Spritesheet 1_27: -1737188359
+      Kiaj'uyiana Spritesheet 1_28: -641919553
+      Kiaj'uyiana Spritesheet 1_29: 1152476666
+      Kiaj'uyiana Spritesheet 1_3: -1726500237
+      Kiaj'uyiana Spritesheet 1_30: 1453794942
+      Kiaj'uyiana Spritesheet 1_31: -865019436
+      Kiaj'uyiana Spritesheet 1_32: -437832701
+      Kiaj'uyiana Spritesheet 1_33: 2023638802
+      Kiaj'uyiana Spritesheet 1_34: 307599511
+      Kiaj'uyiana Spritesheet 1_35: 646107186
+      Kiaj'uyiana Spritesheet 1_36: -1177628066
+      Kiaj'uyiana Spritesheet 1_37: -168382727
+      Kiaj'uyiana Spritesheet 1_38: -156117308
+      Kiaj'uyiana Spritesheet 1_39: -1792818665
+      Kiaj'uyiana Spritesheet 1_4: 1646514994
+      Kiaj'uyiana Spritesheet 1_40: -1188090254
+      Kiaj'uyiana Spritesheet 1_41: -699397878
+      Kiaj'uyiana Spritesheet 1_42: -1351183887
+      Kiaj'uyiana Spritesheet 1_43: -1693554626
+      Kiaj'uyiana Spritesheet 1_44: 1103963446
+      Kiaj'uyiana Spritesheet 1_45: -1176620667
+      Kiaj'uyiana Spritesheet 1_46: 375134964
+      Kiaj'uyiana Spritesheet 1_47: 1108346106
+      Kiaj'uyiana Spritesheet 1_48: 1165813543
+      Kiaj'uyiana Spritesheet 1_49: 1192710440
+      Kiaj'uyiana Spritesheet 1_5: 865131967
+      Kiaj'uyiana Spritesheet 1_50: -128593954
+      Kiaj'uyiana Spritesheet 1_51: -1324092348
+      Kiaj'uyiana Spritesheet 1_52: -1021352629
+      Kiaj'uyiana Spritesheet 1_53: -445858760
+      Kiaj'uyiana Spritesheet 1_6: -1533545924
+      Kiaj'uyiana Spritesheet 1_7: 1828499610
+      Kiaj'uyiana Spritesheet 1_8: -223690335
+      Kiaj'uyiana Spritesheet 1_9: -271167547
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
