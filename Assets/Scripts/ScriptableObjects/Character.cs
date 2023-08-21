@@ -14,15 +14,15 @@ public class Character : ScriptableObject
     public Enums.Team team; // can be changed programatically and through game character selection, reserved for storyline.
 
     // stat controls
-    public float maximumHealth;
-    public float maximumShield;
+    public float maximumHealth, healthRegen;
+    public float maximumShield, shieldRegen;
 
     public Enums.ShieldType ShieldIdentity;
     public float defense; //damage reduction stat
-    public float maximumEnergy; //Used for Shield regeneration if either TECNICAL or HYBRID, can also be used to power up energy weaponries
-    public float maximumMana; //For characters that is capable of arcanic capability, could act as alternate for shield generation if their type is ARCANIC or HYBRID
-    public int maximumAmmo; //For ranged characters which uses physical ammunitions
-    public float maximumGas; //For ranged char that uses liquid to fuel their gas based weaponries
+    public float maximumEnergy, energyRegen; //Used for Shield regeneration if either TECNICAL or HYBRID, can also be used to power up energy weaponries
+    public float maximumMana, manaRegen; //For characters that is capable of arcanic capability, could act as alternate for shield generation if their type is ARCANIC or HYBRID
+    public int maximumAmmo, ammoReplicate; //For ranged characters which uses physical ammunitions
+    public float maximumGas, gasSynthesis; //For ranged char that uses liquid to fuel their gas based weaponries
     public float shootingRange;
     public float accelerateSpeed; //Relevant for bullets, but for beam it may control how fast they boot up the beam intensity to full power
     public float explodeRadius;

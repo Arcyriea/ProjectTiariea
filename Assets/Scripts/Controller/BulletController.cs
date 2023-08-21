@@ -12,7 +12,14 @@ public class BulletController : MonoBehaviour
     private Vector3 direction;
     private bool interceptCollision;
     private bool penetrates;
+
+    public float growRate { get; private set; }
+
     public Enums.Team team { get; private set; }
+
+    protected BoxCollider2D boxCollider;
+    protected CapsuleCollider2D capsuleCollider;
+    protected PolygonCollider2D polygonCollider;
 
     public void Initialize(string tag, Enums.Team team, float damage, float lifetime, float speed, float explodeRadius, bool intercept, bool penetrate)
     {
@@ -39,10 +46,12 @@ public class BulletController : MonoBehaviour
     private void Start()
     {
         gameObject.tag = "Bullet";
+        RetrieveColliders();
     }
 
     private void Update()
     {
+        UpdateGrowRate(); 
         // Move the bullet based on the direction and speed
         transform.position += direction * speed * Time.deltaTime;
 
@@ -93,7 +102,12 @@ public class BulletController : MonoBehaviour
                         character.punctured = true;
                     }
                 }
-                else damage -= character.Health;
+                else
+                {
+                    float remainingHealth = character.Health;
+                    character.TakeDamage(damage);
+                    damage -= remainingHealth;
+                }
             }
         }
 
@@ -115,11 +129,61 @@ public class BulletController : MonoBehaviour
                         entity.punctured = true;
                     }
                 }
-                else damage -= entity.Health;
+                else
+                {
+                    float remainingHealth = entity.Health;
+                    entity.TakeDamage(damage);
+                    damage -= remainingHealth;
+                }
             }
         }
     }
 
+    void UpdateGrowRate()
+    {
+        if (growRate > 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * growRate, transform.localScale.y * growRate, transform.localScale.z);
+            damage *= growRate;
+            if (polygonCollider != null)
+            {
+                Vector2[] newVertices = polygonCollider.points; // Get the current vertices
+
+                float wideningFactor = growRate; 
+
+                for (int i = 0; i < newVertices.Length; i++)
+                {
+                    newVertices[i].x *= wideningFactor;
+                    newVertices[i].y *= wideningFactor;
+                }
+
+                polygonCollider.SetPath(0, newVertices);
+            }
+
+            if (capsuleCollider != null)
+            {
+                Vector2 newSize = capsuleCollider.size;
+                newSize.x *= growRate;
+                newSize.y *= growRate;
+                capsuleCollider.size = newSize;
+            }
+
+            if (boxCollider != null)
+            {
+                Vector2 newSize = boxCollider.size;
+                newSize.x *= growRate; // Change the factor as needed
+                newSize.y *= growRate;
+                boxCollider.size = newSize;
+            }
+        }
+    }
+
+    public void SetGrowRate(float growRate)
+    {
+        if (growRate > 0)
+            this.growRate = 1f + growRate;
+        else this.growRate = 0;
+    }
 
     private void HandleBulletCollision(BulletController otherBullet)
     {
@@ -133,5 +197,22 @@ public class BulletController : MonoBehaviour
     public void DecrementDamage(float damage)
     {
         this.damage -= damage;
+    }
+
+    private void RetrieveColliders()
+    {
+        if (gameObject.GetComponent<PolygonCollider2D>() != null)
+        {
+            polygonCollider = gameObject.GetComponent<PolygonCollider2D>();
+        }
+        if (gameObject.GetComponent<CapsuleCollider2D>() != null)
+        {
+            capsuleCollider = gameObject.GetComponent<CapsuleCollider2D>();
+        }
+
+        if (gameObject.GetComponent<BoxCollider2D>() != null)
+        {
+            boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        }
     }
 }

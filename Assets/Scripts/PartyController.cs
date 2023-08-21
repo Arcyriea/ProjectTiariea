@@ -80,12 +80,44 @@ public class PartyController : MonoBehaviour
 
         ZoomControl();
         PartyMarchCommand();
+        SelectPartyMember();
 
         foreach (GameObject member in spawnedPrefabs)
         {
             Vector3 memMove = new Vector3(member.transform.position.x + (partyTravelSpeed * Time.deltaTime), member.transform.position.y, 0f);
             //Vector3 offset = member.transform.position - transform.position;
             member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime);// + offset;
+        }
+    }
+
+    private void SelectPartyMember()
+    {
+        bool[] KeyCodes = {
+            Input.GetKeyDown(KeyCode.Alpha1),
+            Input.GetKeyDown(KeyCode.Alpha2),
+            Input.GetKeyDown(KeyCode.Alpha3),
+            Input.GetKeyDown(KeyCode.Alpha4),
+            Input.GetKeyDown(KeyCode.Alpha5),
+            Input.GetKeyDown(KeyCode.Alpha6),
+        };
+
+        int num = 0;
+        foreach (var key in KeyCodes)
+        {
+            num += 1;
+            if (key)
+            {
+                for (int i = 0; i < spawnedPrefabs.Count; i++)
+                {
+                    if (i + 1 == num)
+                    {
+                        spawnedPrefabs[i].GetComponent<MoveToMouse>().SetSelected(true);
+                    } else
+                    {
+                        spawnedPrefabs[i].GetComponent<MoveToMouse>().SetSelected(false);
+                    }
+                }
+            }
         }
     }
 

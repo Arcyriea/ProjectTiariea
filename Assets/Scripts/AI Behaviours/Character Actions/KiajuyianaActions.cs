@@ -40,36 +40,46 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     public override void PerformAttack()
     {
-        int random = UnityEngine.Random.Range(1, 3);
-        switch (random)
-        {
-            case 1:
-                animator.SetBool("melee1", true);
-                break;
-            case 2:
-                animator.SetBool("melee2", true);
-                break;
+        if (animator.gameObject.activeSelf) {
+
+
+            int random = UnityEngine.Random.Range(1, 3);
+            switch (random)
+            {
+                case 1:
+                    animator.SetBool("melee1", true);
+                    break;
+                case 2:
+                    animator.SetBool("melee2", true);
+                    break;
+            }
+
         }
+        
         GenericActions.MeleeAttack(meleeAttackPoint, team, character);
-        Invoke("ResetAnimation", 0.15f);
+        Invoke("ResetAnimation", character.swingTime / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
     public override void PerformRanged()
     {
-        int random = UnityEngine.Random.Range(1, 3);
-        switch (random)
+        if (animator.gameObject.activeSelf)
         {
-            case 1:
-                animator.SetBool("ranged1", true);
-                break;
-            case 2:
-                animator.SetBool("ranged2", true);
-                break;
+            int random = UnityEngine.Random.Range(1, 3);
+            switch (random)
+            {
+                case 1:
+                    animator.SetBool("ranged1", true);
+                    break;
+                case 2:
+                    animator.SetBool("ranged2", true);
+                    break;
+            }
         }
+
         GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
-        Invoke("ResetAnimation", 0.15f);
+        Invoke("ResetAnimation", character.fireRate / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }

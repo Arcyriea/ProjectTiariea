@@ -72,7 +72,9 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         spriteRenderer = GetComponent<SpriteRenderer>();
         moveToMouse = GetComponent<MoveToMouse>();
         if (character == null) return;
-        animator = character.characterPrefab.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        if (animator == null) UnityEngine.Debug.LogWarning("Animator failed to be retrieved for the CharacterProfiling");
+
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
@@ -85,6 +87,8 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     // Update is called once per frame
     protected virtual void Update()
     {
+        Regeneration();
+
         if (punctured && punctureCooldown <= 0)
         {
             punctureCooldown = 3;
@@ -107,7 +111,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         if (isDead)
         {
             character.characterPrefab.SetActive(false);
-            RespawnTimer -= (int) Time.fixedDeltaTime;
+            RespawnTimer -= (int)Time.fixedDeltaTime;
             Lives -= 1;
             if (RespawnTimer <= 0)
             {
@@ -120,6 +124,15 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         }
     }
 
+    protected virtual void Regeneration()
+    {
+        if (Health < character.maximumHealth && character.healthRegen != 0) Health += character.healthRegen;
+        if (Shield < character.maximumShield && character.shieldRegen != 0) Shield += character.shieldRegen;
+        if (Energy < character.maximumEnergy && character.energyRegen != 0) Energy += character.energyRegen;
+        if (Mana < character.maximumMana && character.manaRegen != 0) Mana += character.manaRegen;
+
+    }
+
     void ResetStats()
     {
         Health = character.maximumHealth;
@@ -130,15 +143,30 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
     public void TakeDamage(float Damage)
     {
-        Health -= Damage;
+        if (Shield > 0) Shield -= Damage;
+        else Health -= Damage;
     }
 
-    public void Heal(float Healing)
+    public void TakeHealing(float Healing, bool healShield)
     {
         Health += Healing;
-        if (Health > character.maximumHealth) Health = character.maximumHealth;
+        if (Health > character.maximumHealth)
+        {
+            if (character.maximumShield > 0 && healShield)
+            {
+                float excessHealing = (Health - character.maximumHealth);
+                Shield += excessHealing;
+                if (Shield > character.maximumShield) Shield = character.maximumShield;
+            }
+            Health = character.maximumHealth;
+        }
     }
 
+    public void RestoreShield(float Healing)
+    {
+        Shield += Healing;
+        if (Shield > character.maximumShield) Shield = character.maximumShield;
+    }
     public void grantExtraLives(int Lives)
     {
         this.Lives += Lives;
@@ -151,7 +179,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
     public virtual void CharacterAction(string action)
     {
-
+        throw new NotImplementedException();
     }
 
     public void SetTeam(Enums.Team team)

@@ -29,7 +29,7 @@ public class MoveToMouse : MonoBehaviour
         if (characterProfiling != null)
         {
             speed = characterProfiling.character.movementSpeed;
-            animator = characterProfiling.character.characterPrefab.GetComponent<Animator>();
+            animator = characterProfiling.GetComponent<Animator>();
         }
         if (selectionBox != null) UnityEngine.Debug.Log("Successfully retrieved BoxSelector");
 
@@ -61,12 +61,12 @@ public class MoveToMouse : MonoBehaviour
             {
                 y += speed / 10;
                 //set animator
-                animator.SetFloat("movingVertical", animator.GetFloat("movingVertical") + speed / 10);
+                animator.SetFloat("movingVertical", speed / 10);
             }
             if (Input.GetKey(KeyCode.S))
             {
                 y -= speed / 10;
-                animator.SetFloat("movingVertical", animator.GetFloat("movingVertical") - speed / 10);
+                animator.SetFloat("movingVertical", speed / 10);
             }
 
             if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
@@ -77,12 +77,12 @@ public class MoveToMouse : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 x -= speed / 10;
-                animator.SetFloat("movingHorizontal", animator.GetFloat("movingHorizontal") - speed / 10);
+                animator.SetFloat("movingHorizontal", speed / 10);
             }
             if (Input.GetKey(KeyCode.D))
             {
                 x += speed / 10;
-                animator.SetFloat("movingHorizontal", animator.GetFloat("movingHorizontal") + speed / 10);
+                animator.SetFloat("movingHorizontal", speed / 10);
             }
 
             if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
@@ -133,5 +133,10 @@ public class MoveToMouse : MonoBehaviour
             selected = true;
             UnityEngine.Debug.Log("Inside Selection Box, selected: " + selected);
         }
+    }
+
+    public void SetSelected(bool selected)
+    {
+        this.selected = selected;
     }
 }
