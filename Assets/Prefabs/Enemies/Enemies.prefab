@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5493733631553957836}
   - component: {fileID: 7404437844918271247}
   - component: {fileID: 2238806738805438595}
+  - component: {fileID: 3661031080682091333}
   m_Layer: 0
   m_Name: Enemies
   m_TagString: Enemy
@@ -169,3 +170,19 @@ PolygonCollider2D:
       - {x: 0.40234375, y: 0.79296875}
       - {x: 0.29296875, y: 0.90234375}
       - {x: 0.15234375, y: 0.97265625}
+--- !u!70 &3661031080682091333
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367482206822494237}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0

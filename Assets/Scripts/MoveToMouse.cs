@@ -66,7 +66,7 @@ public class MoveToMouse : MonoBehaviour
             if (Input.GetKey(KeyCode.S))
             {
                 y -= speed / 10;
-                animator.SetFloat("movingVertical", speed / 10);
+                animator.SetFloat("movingVertical", -speed / 10);
             }
 
             if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
@@ -77,7 +77,7 @@ public class MoveToMouse : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 x -= speed / 10;
-                animator.SetFloat("movingHorizontal", speed / 10);
+                animator.SetFloat("movingHorizontal", -speed / 10);
             }
             if (Input.GetKey(KeyCode.D))
             {

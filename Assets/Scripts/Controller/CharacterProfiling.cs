@@ -20,8 +20,8 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
     public float UltimateMeter { get; private set; }
 
-    public float meleeAttackTime { get; protected set; }
-    public float rangedAttackTime { get; protected set; }
+    public float meleeAttackTime { get; set; }
+    public float rangedAttackTime { get; set; }
 
     protected MoveToMouse moveToMouse { get; private set; }
     //protected LayerMask enemyLayerMask;

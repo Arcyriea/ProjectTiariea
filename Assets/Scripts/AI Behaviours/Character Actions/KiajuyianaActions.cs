@@ -26,7 +26,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         base.Update();
         if (base.moveToMouse.selected == true)
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 CharacterAction("ranged");
             }
@@ -101,7 +101,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
     void OnDrawGizmosSelected()
     {
         if (meleeAttackPoint == null) return;
-        Gizmos.DrawWireSphere(meleeAttackPoint.position, 1.5f);
+        Gizmos.DrawWireSphere(meleeAttackPoint.position, 4.5f);
     }
 
     private void ResetAnimation()

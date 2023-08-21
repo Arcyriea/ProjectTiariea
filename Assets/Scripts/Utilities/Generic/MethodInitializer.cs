@@ -17,21 +17,21 @@ public static class GenericActions
                 if (Time.time - meleeAttackTime >= character.swingTime)
                 {
                     profiling.PerformAttack();
-                    meleeAttackTime = Time.time;
+                    profiling.meleeAttackTime = Time.time;
                 }
                 break;
             case "heal":
                 if (Time.time - rangedAttackTime >= character.fireRate)
                 {
                     profiling.PerformHeal();
-                    rangedAttackTime = Time.time;
+                    profiling.rangedAttackTime = Time.time;
                 }
                 break;
             case "ranged":
                 if (Time.time - rangedAttackTime >= character.fireRate)
                 {
                     profiling.PerformRanged();
-                    rangedAttackTime = Time.time;
+                    profiling.rangedAttackTime = Time.time;
                 }
                 break;
             case "ultimate":
@@ -76,12 +76,20 @@ public static class GenericActions
 
             if (entity != null)
             {
-                if (entity.team != team) entity.TakeDamage(Damage);
+                if (entity.team != team)
+                {
+                    entity.TakeDamage(Damage);
+                    UnityEngine.Debug.Log("Enemy got hit! HP: " + entity.Health);
+                }
             }
 
             if (chara != null)
             {
-                if (chara.team != team) chara.TakeDamage(Damage);
+                if (chara.team != team)
+                {
+                    chara.TakeDamage(Damage);
+                    UnityEngine.Debug.Log("Character got hit! HP: " + chara.Health);
+                }
             }
         }
     }
