@@ -19,21 +19,27 @@ MonoBehaviour:
   characterClass: 0
   team: 0
   maximumHealth: 2481
+  healthRegen: 0
   maximumShield: 1232
+  shieldRegen: 0
   ShieldIdentity: 2
   defense: 232
   maximumEnergy: 2141
+  energyRegen: 0
   maximumMana: 212
+  manaRegen: 0
   maximumAmmo: 0
+  ammoReplicate: 0
   maximumGas: 0
+  gasSynthesis: 0
   shootingRange: 12
   accelerateSpeed: 10.5
   explodeRadius: 0
   rangedDamage: 28
-  fireRate: 12.68
-  meleeRange: 2
+  fireRate: 3.51
+  meleeRange: 4.5
   meleeDamage: 521
-  swingTime: 4.86
+  swingTime: 0.5
   movementSpeed: 10
   LivesModifier: 2
   innateSkill: {fileID: 0}
