@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    private float scrollSpeed = 0f;
+    private float scrollSpeed = 0.2f;
     private float offset;
     private Material mat;
     void Start()
@@ -16,7 +16,7 @@ public class BackgroundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scrollSpeed = PartyController.partyTravelSpeed / 100f;
+        scrollSpeed = 0.2f + (PartyController.partyTravelSpeed / 100f);
         offset += (Time.deltaTime * scrollSpeed) / 10f;
         mat.SetTextureOffset("_MainTex", new Vector2(offset, 0));
     }

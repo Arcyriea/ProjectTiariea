@@ -15,6 +15,7 @@ public class LaserController : MonoBehaviour
     private Enums.Team team;
 
     private float damagePerSecond; // Damage per second
+    public float duration { private get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +52,7 @@ public class LaserController : MonoBehaviour
 
     void ExcecutePhysic(RaycastHit2D[] hits, bool penetrate, float range)
     {
-        
+        if (duration > 0) damagePerSecond /= duration;
 
         if (hits.Length > 0)
         {

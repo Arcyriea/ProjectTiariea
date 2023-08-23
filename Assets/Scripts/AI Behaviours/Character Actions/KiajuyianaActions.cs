@@ -31,7 +31,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
                 CharacterAction("ranged");
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButton(1))
             {
                 CharacterAction("attack");
             }

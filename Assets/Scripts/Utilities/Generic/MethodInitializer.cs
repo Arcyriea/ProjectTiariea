@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using static Enums;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public static class GenericActions
 {
@@ -47,8 +49,8 @@ public static class GenericActions
     {
         if (meleeAttackPoint == null) return;
 
-        Character character = obj.GetType() == typeof(Character) ? (Character) obj : null;
-        Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy) obj : null;
+        Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
+        Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
 
         float Range, Damage;
 
@@ -56,17 +58,19 @@ public static class GenericActions
         {
             Range = character.meleeRange;
             Damage = character.meleeDamage;
-        } else if(enemy != null && character == null)
+        }
+        else if (enemy != null && character == null)
         {
             Range = enemy.attackRange;
             Damage = enemy.attackDamage;
-        } else
+        }
+        else
         {
             UnityEngine.Debug.LogError("Invalid Object Type for MeleeAttack method of static GenericActions class");
             return;
         }
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, Range, 0);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, Range);
         // Define your attack logic here
         // For example, reduce enemy health or apply status effects
         foreach (Collider2D enmity in hitEnemies)
@@ -96,8 +100,8 @@ public static class GenericActions
 
     public static void BulletAttack(BulletProperties bullet, Enums.Team team, Object obj, GameObject bulletGO, Vector3 bulletDirection)
     {
-        Character character = obj.GetType() == typeof(Character) ? (Character) obj : null;
-        Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy) obj : null;
+        Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
+        Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
 
         float Range, Damage, Speed, Explosion;
 
@@ -143,9 +147,25 @@ public static class GenericActions
         }
     }
 
-    public static void BeamAttack()
+    public static void BeamAttack(float duration, LaserController controller)
     {
+        if (controller == null) { return; }
 
+        if (duration > 0)
+        {
+            controller.duration = duration;
+            if (!controller.lineRenderer.enabled)
+            {
+                controller.lineRenderer.enabled = true;
+            }
+
+            duration -= Time.deltaTime;
+
+            if (duration <= 0)
+            {
+                controller.lineRenderer.enabled = false;
+            }
+        }
     }
 
     public static void HealingAction()

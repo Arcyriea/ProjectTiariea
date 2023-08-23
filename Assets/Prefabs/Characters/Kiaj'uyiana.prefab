@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 6066332462456808460}
   - component: {fileID: -7085844924125143520}
   - component: {fileID: 4524704052537795680}
-  - component: {fileID: -685346080206058037}
   m_Layer: 0
   m_Name: Kiaj'uyiana
   m_TagString: Player
@@ -206,32 +205,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.03712341, y: -0.28503793}
   m_Size: {x: 1.5336554, y: 4.2102923}
   m_Direction: 0
---- !u!61 &-685346080206058037
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3462239808932946287}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.018158913, y: -0.3033687}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.45093596, y: 0.50805277}
-    oldSize: {x: 4.16, y: 5.0699997}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.202898, y: 4.0602236}
-  m_EdgeRadius: 0
 --- !u!1 &3484996910083477396
 GameObject:
   m_ObjectHideFlags: 0
