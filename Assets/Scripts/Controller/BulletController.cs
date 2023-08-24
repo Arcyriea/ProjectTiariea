@@ -9,7 +9,7 @@ public class BulletController : MonoBehaviour
     private float lifetime;
     private float speed;
     private float explodeRadius;
-    private Vector3 direction;
+    public Vector3 direction { get; private set; }
     private bool interceptCollision;
     private bool penetrates;
 
@@ -144,7 +144,7 @@ public class BulletController : MonoBehaviour
         if (growRate > 0)
         {
             transform.localScale = new Vector3(transform.localScale.x * growRate, transform.localScale.y * growRate, transform.localScale.z);
-            damage *= growRate;
+            damage *= 1f + (growRate * 0.5f);
             if (polygonCollider != null)
             {
                 Vector2[] newVertices = polygonCollider.points; // Get the current vertices

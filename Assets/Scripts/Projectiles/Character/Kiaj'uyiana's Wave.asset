@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kiaj'uyiana's Wave
   m_EditorClassIdentifier: 
   size: 0
-  growRate: 0.1
+  growRate: 2.1
   bulletPrefab: {fileID: 1905915935319085052, guid: 5a5ca423fb93eb94eac16050629c1f6f, type: 3}
   intercept: 1
   penetrate: 0

@@ -32,14 +32,14 @@ MonoBehaviour:
   ammoReplicate: 0
   maximumGas: 0
   gasSynthesis: 0
-  shootingRange: 12
-  accelerateSpeed: 10.5
+  shootingRange: 240
+  accelerateSpeed: 2.5
   explodeRadius: 0
-  rangedDamage: 28
+  rangedDamage: 367
   fireRate: 3.51
   meleeRange: 4.5
-  meleeDamage: 521
-  swingTime: 0.5
+  meleeDamage: 51
+  swingTime: 0.25
   movementSpeed: 10
   LivesModifier: 2
   innateSkill: {fileID: 0}

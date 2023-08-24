@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using static Enums;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public static class GenericActions
 {
@@ -45,7 +40,7 @@ public static class GenericActions
         }
     }
 
-    public static void MeleeAttack(Transform meleeAttackPoint, Enums.Team team, Object obj)
+    public static void MeleeAttack(Transform meleeAttackPoint, Team team, Object obj)
     {
         if (meleeAttackPoint == null) return;
 
@@ -71,8 +66,7 @@ public static class GenericActions
         }
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, Range);
-        // Define your attack logic here
-        // For example, reduce enemy health or apply status effects
+ 
         foreach (Collider2D enmity in hitEnemies)
         {
             EnemyProfiling entity = enmity.GetComponent<EnemyProfiling>();
@@ -98,7 +92,7 @@ public static class GenericActions
         }
     }
 
-    public static void BulletAttack(BulletProperties bullet, Enums.Team team, Object obj, GameObject bulletGO, Vector3 bulletDirection)
+    public static void BulletAttack(BulletProperties bullet, Team team, Object obj, GameObject bulletGO, Vector3 bulletDirection)
     {
         Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
         Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
@@ -142,7 +136,7 @@ public static class GenericActions
             bulletController.SetDirection(bulletDirection);
 
             // Rotate the bullet sprite to match the initial direction
-            float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(bulletController.direction.y, bulletController.direction.x) * Mathf.Rad2Deg;
             bulletGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
