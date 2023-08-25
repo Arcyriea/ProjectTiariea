@@ -21,6 +21,8 @@ public class BulletController : MonoBehaviour
     protected CapsuleCollider2D capsuleCollider;
     protected PolygonCollider2D polygonCollider;
 
+    private GameObject currentBullet;
+
     public void Initialize(string tag, Enums.Team team, float damage, float lifetime, float speed, float explodeRadius, bool intercept, bool penetrate)
     {
         sideTag = tag;
@@ -47,11 +49,13 @@ public class BulletController : MonoBehaviour
     {
         gameObject.tag = "Bullet";
         RetrieveColliders();
+
+        if (growRate > 0) ScaleBullet();
     }
 
     private void Update()
     {
-        UpdateGrowRate(); 
+        //UpdateGrowRate();
         // Move the bullet based on the direction and speed
         transform.position += direction * speed * Time.deltaTime;
 
@@ -62,6 +66,31 @@ public class BulletController : MonoBehaviour
             // Destroy the bullet when its lifetime expires or damage is drained out
             Destroy(gameObject);
         }
+    }
+
+    private void ScaleBullet()
+    {
+        currentBullet = Instantiate(gameObject, transform.position, Quaternion.identity);
+        StartCoroutine(GrowBullet());
+    }
+
+    private IEnumerator GrowBullet()
+    {
+        Vector3 initialScale = currentBullet.transform.localScale;
+        float startTime = Time.time;
+
+        while (Time.time - startTime < lifetime)
+        {
+            float progress = (Time.time - startTime) / lifetime;
+            currentBullet.transform.localScale = initialScale * (1 + progress); // Increase size over time
+
+            UpdateGrowRate(currentBullet); // Update collider sizes and damage based on growRate
+
+            yield return null;
+        }
+
+        // Bullet's lifetime has ended
+        Destroy(currentBullet);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -135,6 +164,43 @@ public class BulletController : MonoBehaviour
                     entity.TakeDamage(damage);
                     damage -= remainingHealth;
                 }
+            }
+        }
+    }
+
+    private void UpdateGrowRate(GameObject bullet)
+    {
+        Collider2D[] colliders = bullet.GetComponents<Collider2D>();
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider is PolygonCollider2D polygonCollider)
+            {
+                Vector2[] newVertices = polygonCollider.points;
+
+                float wideningFactor = growRate * Time.deltaTime;
+
+                for (int i = 0; i < newVertices.Length; i++)
+                {
+                    newVertices[i].x *= wideningFactor;
+                    newVertices[i].y *= wideningFactor;
+                }
+
+                polygonCollider.SetPath(0, newVertices);
+            }
+            else if (collider is CapsuleCollider2D capsuleCollider)
+            {
+                Vector2 newSize = capsuleCollider.size;
+                newSize.x *= growRate * Time.deltaTime;
+                newSize.y *= growRate * Time.deltaTime;
+                capsuleCollider.size = newSize;
+            }
+            else if (collider is BoxCollider2D boxCollider)
+            {
+                Vector2 newSize = boxCollider.size;
+                newSize.x *= growRate * Time.deltaTime;
+                newSize.y *= growRate * Time.deltaTime;
+                boxCollider.size = newSize;
             }
         }
     }

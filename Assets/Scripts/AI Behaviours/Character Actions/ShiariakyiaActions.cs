@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class ShiariakyiaActions : CharacterProfiling
 {
+    public BulletProperties bullet;
+    public Transform[] meleeAttackPoints;
+
+    public GameObject[] dartMinions;
+    private Transform[] dartMinionTransforms;
+    private float orbitRadius = 2f;
     public override void CharacterAction(string action)
     {
         GenericActions.ExecuteAction(this, action);
@@ -13,30 +19,101 @@ public class ShiariakyiaActions : CharacterProfiling
     protected override void Start()
     {
         base.Start();
+        InitializeDarts();
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-       base.Update();
-
-        if(base.moveToMouse.selected == true)
+        base.Update();
+        DartOrbit();
+        if (base.moveToMouse.selected == true)
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CharacterAction("ranged");
+            }
 
+            if (Input.GetMouseButton(1))
+            {
+                CharacterAction("attack");
+            }
+        }
+    }
+
+    private void InitializeDarts()
+    {
+        dartMinionTransforms = new Transform[dartMinions.Length];
+        for (int i = 0; i < dartMinions.Length; i++)
+        {
+            float angle = 2 * Mathf.PI * i / dartMinions.Length;
+            Vector3 offset = new Vector3(Mathf.Cos(angle) * orbitRadius,
+                                        Mathf.Sin(angle) * orbitRadius,
+                                        0f);
+            dartMinions[i].transform.position = transform.position + offset;
+            dartMinionTransforms[i] = dartMinions[i].transform;
+        }
+    }
+
+    private void DartOrbit()
+    {
+        // Update dartMinions' positions for formation
+        float orbitSpeed = 30f; // Adjust the speed of orbit
+
+        for (int i = 0; i < dartMinions.Length; i++)
+        {
+            float angle = (Time.time * orbitSpeed) + (2 * Mathf.PI * i / dartMinions.Length);
+            Vector3 offset = new Vector3(Mathf.Cos(angle) * orbitRadius,
+                                         Mathf.Sin(angle) * orbitRadius,
+                                         0f);
+            dartMinionTransforms[i].position = transform.position + offset;
         }
     }
 
     public override void PerformAttack()
     {
-        // Define your attack logic here
-        // For example, reduce enemy health or apply status effects
+        if (animator.gameObject.activeSelf)
+        {
+            int random = UnityEngine.Random.Range(1, 3);
+            switch (random)
+            {
+                case 1:
+                    animator.SetBool("melee1", true);
+                    break;
+                case 2:
+                    animator.SetBool("melee2", true);
+                    break;
+            }
+        }
+
+        foreach (Transform meleeAttackPoint in meleeAttackPoints)
+        {
+            GenericActions.MeleeAttack(meleeAttackPoint, team, character);
+        }
+        Invoke("ResetAnimation", character.swingTime / 10);
+
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
     public override void PerformRanged()
     {
-        // Define your attack logic here
-        // For example, reduce enemy health or apply status effects
+        if (animator.gameObject.activeSelf)
+        {
+            int random = UnityEngine.Random.Range(1, 3);
+            switch (random)
+            {
+                case 1:
+                    animator.SetBool("ranged1", true);
+                    break;
+                case 2:
+                    animator.SetBool("ranged2", true);
+                    break;
+            }
+        }
+
+        GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
+        Invoke("ResetAnimation", character.fireRate / 10);
+
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
 

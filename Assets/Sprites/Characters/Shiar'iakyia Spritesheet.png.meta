@@ -1,0 +1,380 @@
+fileFormatVersion: 2
+guid: 0b727966118531b4fab88cac950a66e1
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 1850
+        width: 323
+        height: 407
+      alignment: 9
+      pivot: {x: 0.5379148, y: 0.5802395}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0552f66dee0c2c46a8e7084c3811093
+      internalID: -2041499687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 1257
+        width: 322
+        height: 430
+      alignment: 9
+      pivot: {x: 0.6901628, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 231e93eca45258446ab55e0cdc173813
+      internalID: -1372182301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1227
+        width: 323
+        height: 403
+      alignment: 9
+      pivot: {x: 0.6642973, y: 0.53038824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bf25bff7fd7dba46bc9d4f0a37b23d9
+      internalID: -655007181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 757
+        width: 323
+        height: 416
+      alignment: 9
+      pivot: {x: 0.601106, y: 0.56869006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7125cabf1182ea43829b2c0495f8cdf
+      internalID: 1612200765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 2140
+        y: 1054
+        width: 306
+        height: 392
+      alignment: 9
+      pivot: {x: 0.6067238, y: 0.5520683}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e1d6149134446458347b8eee0e1c95
+      internalID: 1472803249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 1821
+        y: 659
+        width: 304
+        height: 384
+      alignment: 9
+      pivot: {x: 0.6477103, y: 0.54252213}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed0aa9f8711dc8e4fbea42e562b30636
+      internalID: -897680484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 2584
+        y: 633
+        width: 303
+        height: 383
+      alignment: 9
+      pivot: {x: 0.6751423, y: 0.5106585}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79faa259ca2e92f4a922f4c4b54392fe
+      internalID: -446005994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 2162
+        y: 229
+        width: 304
+        height: 373
+      alignment: 9
+      pivot: {x: 0.66113764, y: 0.543776}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb96367b2d2e1da4aa021332ca28103a
+      internalID: 1970434650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 140
+        width: 325
+        height: 406
+      alignment: 9
+      pivot: {x: 0.6758467, y: 0.55027276}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c607635283e7fbd499331a8d99fa2a70
+      internalID: 772339472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiar'iakyia Spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 120
+        width: 361
+        height: 418
+      alignment: 9
+      pivot: {x: 0.6017713, y: 0.57812726}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a505f41e961aca64fb209486a33fb81e
+      internalID: 2053031098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Shiar'iakyia Spritesheet_0: -2041499687
+      Shiar'iakyia Spritesheet_1: 731087601
+      Shiar'iakyia Spritesheet_10: -446005994
+      Shiar'iakyia Spritesheet_11: -1085523772
+      Shiar'iakyia Spritesheet_12: -1113839251
+      Shiar'iakyia Spritesheet_13: 457094971
+      Shiar'iakyia Spritesheet_14: -637065699
+      Shiar'iakyia Spritesheet_15: -267756348
+      Shiar'iakyia Spritesheet_16: -1120141902
+      Shiar'iakyia Spritesheet_17: 541104473
+      Shiar'iakyia Spritesheet_18: 1970434650
+      Shiar'iakyia Spritesheet_19: 793804160
+      Shiar'iakyia Spritesheet_2: -1061875314
+      Shiar'iakyia Spritesheet_20: 1059806388
+      Shiar'iakyia Spritesheet_21: 1337026996
+      Shiar'iakyia Spritesheet_22: 772339472
+      Shiar'iakyia Spritesheet_23: 2053031098
+      Shiar'iakyia Spritesheet_24: -1872288148
+      Shiar'iakyia Spritesheet_25: 1625236438
+      Shiar'iakyia Spritesheet_26: 1364661645
+      Shiar'iakyia Spritesheet_27: 1634621613
+      Shiar'iakyia Spritesheet_28: -182116796
+      Shiar'iakyia Spritesheet_29: -476503828
+      Shiar'iakyia Spritesheet_3: -1372182301
+      Shiar'iakyia Spritesheet_30: 709986412
+      Shiar'iakyia Spritesheet_31: -26239763
+      Shiar'iakyia Spritesheet_32: 1097575192
+      Shiar'iakyia Spritesheet_33: -334230711
+      Shiar'iakyia Spritesheet_34: 1073363842
+      Shiar'iakyia Spritesheet_4: -655007181
+      Shiar'iakyia Spritesheet_5: -1268696903
+      Shiar'iakyia Spritesheet_6: -1044745425
+      Shiar'iakyia Spritesheet_7: 1612200765
+      Shiar'iakyia Spritesheet_8: 1472803249
+      Shiar'iakyia Spritesheet_9: -897680484
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

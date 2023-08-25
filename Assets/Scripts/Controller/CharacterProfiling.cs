@@ -94,7 +94,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
             punctureCooldown = 3;
         }
 
-        punctureCooldown -= (int) Time.fixedDeltaTime;
+        punctureCooldown -= (int)Time.fixedDeltaTime;
         if (punctureCooldown <= 0) punctured = false;
 
 
@@ -205,6 +205,16 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     public virtual void PerformUltimate()
     {
         throw new NotImplementedException();
+    }
+
+    protected void ResetAnimation()
+    {
+        string[] animationNames = { "melee1", "melee2", "ranged1", "ranged2" };
+
+        foreach (string animationName in animationNames)
+        {
+            if (animator.GetBool(animationName) != false) animator.SetBool(animationName, false);
+        }
     }
 }
 

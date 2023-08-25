@@ -15,21 +15,31 @@ MonoBehaviour:
   characterId: 
   characterName: 
   characterPrefab: {fileID: 3462239808932946287, guid: 87d6808c68ccddb419137a29e3ec8201, type: 3}
+  mountPrefab: {fileID: 0}
   characterClass: 0
-  maximumHealth: 0
-  maximumShield: 0
+  team: 0
+  maximumHealth: 1000
+  healthRegen: 25
+  maximumShield: 500
+  shieldRegen: 15
   ShieldIdentity: 0
-  defense: 0
+  defense: 20
   maximumEnergy: 0
-  maximumMana: 0
+  energyRegen: 0
+  maximumMana: 2500
+  manaRegen: 25
   maximumAmmo: 0
+  ammoReplicate: 0
   maximumGas: 0
+  gasSynthesis: 0
   shootingRange: 0
-  rangedDamage: 0
-  fireRate: 0
-  meleeRange: 0
-  meleeDamage: 0
-  swingTime: 0
+  accelerateSpeed: 30
+  explodeRadius: 0
+  rangedDamage: 12
+  fireRate: 24
+  meleeRange: 5.5
+  meleeDamage: 10
+  swingTime: 1
   movementSpeed: 10
   LivesModifier: 1
   innateSkill: {fileID: 0}

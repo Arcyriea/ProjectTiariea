@@ -103,14 +103,4 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         if (meleeAttackPoint == null) return;
         Gizmos.DrawWireSphere(meleeAttackPoint.position, 4.5f);
     }
-
-    private void ResetAnimation()
-    {
-        string[] animationNames = { "melee1", "melee2", "ranged1", "ranged2" };
-
-        foreach(string animationName in animationNames)
-        {
-            if (animator.GetBool(animationName) != false) animator.SetBool(animationName, false);
-        }
-    }
 }
