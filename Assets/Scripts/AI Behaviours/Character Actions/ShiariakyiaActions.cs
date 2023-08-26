@@ -10,7 +10,8 @@ public class ShiariakyiaActions : CharacterProfiling
 
     public GameObject[] dartMinions;
     private Transform[] dartMinionTransforms;
-    private float orbitRadius = 2f;
+    private float orbitRadius = 4f;
+    private float dartRangedAttackTime;
     public override void CharacterAction(string action)
     {
         GenericActions.ExecuteAction(this, action);
@@ -31,14 +32,41 @@ public class ShiariakyiaActions : CharacterProfiling
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                CharacterAction("ranged");
+                SyncRangedAttacks();
             }
 
             if (Input.GetMouseButton(1))
             {
-                CharacterAction("attack");
+                SyncMeleeAttacks();
+            }
+        } 
+        else
+        {
+            ControlAI();
+        }
+    }
+
+    protected override void ControlAI()
+    {
+        foreach(Transform melee in meleeAttackPoints)
+        {
+            if (commandAI.MeleeDetection(melee))
+            {
+                commandAI.ReportStatus(true);
+                return;
             }
         }
+        commandAI.ReportStatus(false);
+    }
+    public override void SyncRangedAttacks()
+    {
+        DartAttacks();
+        CharacterAction("ranged");
+    }
+
+    public override void SyncMeleeAttacks()
+    {
+        CharacterAction("attack");
     }
 
     private void InitializeDarts()
@@ -67,6 +95,20 @@ public class ShiariakyiaActions : CharacterProfiling
                                          Mathf.Sin(angle) * orbitRadius,
                                          0f);
             dartMinionTransforms[i].position = transform.position + offset;
+        }
+    }
+
+    public void DartAttacks()
+    {
+        if (Time.time - dartRangedAttackTime >= character.fireRate / (dartMinions.Length * 3))
+        {
+            foreach (Transform transCoord in dartMinionTransforms)
+            {
+                Vector3 offset = new Vector3(transCoord.position.x + 5f, transCoord.position.y, transCoord.position.z);
+                GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, offset, Quaternion.identity), Vector3.right);
+            }
+
+            dartRangedAttackTime = Time.time;
         }
     }
 
@@ -111,7 +153,8 @@ public class ShiariakyiaActions : CharacterProfiling
             }
         }
 
-        GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
+        
+        
         Invoke("ResetAnimation", character.fireRate / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");

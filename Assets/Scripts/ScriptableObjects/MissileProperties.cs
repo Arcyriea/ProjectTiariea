@@ -9,9 +9,11 @@ public class MissileProperties : ScriptableObject
     public float health;
     public float damage;
     public float acceleration;
-    public float speed;
+    public float maxSpeed;
+    public float rotationSpeed;
     public float splashRadius;
     public float detectionRadius;
+    public float lifeTime;
     public bool boomerang;
     public bool penetrates;
     public int penetrationCount;

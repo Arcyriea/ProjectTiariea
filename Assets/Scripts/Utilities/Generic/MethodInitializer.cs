@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using UnityEngine;
 using static Enums;
 
@@ -40,7 +42,7 @@ public static class GenericActions
         }
     }
 
-    public static void MeleeAttack(Transform meleeAttackPoint, Team team, Object obj)
+    public static void MeleeAttack(Transform meleeAttackPoint, Team team, UnityEngine.Object obj)
     {
         if (meleeAttackPoint == null) return;
 
@@ -66,7 +68,7 @@ public static class GenericActions
         }
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeAttackPoint.position, Range);
- 
+
         foreach (Collider2D enmity in hitEnemies)
         {
             EnemyProfiling entity = enmity.GetComponent<EnemyProfiling>();
@@ -92,7 +94,7 @@ public static class GenericActions
         }
     }
 
-    public static void BulletAttack(BulletProperties bullet, Team team, Object obj, GameObject bulletGO, Vector3 bulletDirection)
+    public static void BulletAttack(BulletProperties bullet, Team team, UnityEngine.Object obj, GameObject bulletGO, Vector3 bulletDirection)
     {
         Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
         Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
@@ -165,5 +167,15 @@ public static class GenericActions
     public static void HealingAction()
     {
 
+    }
+}
+
+public static class Ultilty
+{
+    public static bool CheckIfVariableExists(object obj, string variableName)
+    {
+        Type type = obj.GetType();
+        FieldInfo field = type.GetField(variableName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        return field != null;
     }
 }

@@ -82,7 +82,9 @@ public class BulletController : MonoBehaviour
         while (Time.time - startTime < lifetime)
         {
             float progress = (Time.time - startTime) / lifetime;
-            currentBullet.transform.localScale = initialScale * (1 + progress); // Increase size over time
+            float currentGrowRate = growRate * progress; // Calculate the current grow rate
+            Vector3 newScale = initialScale * (1 + currentGrowRate); // Calculate the new scale over time
+            currentBullet.transform.localScale = newScale; // Update the local scale
 
             UpdateGrowRate(currentBullet); // Update collider sizes and damage based on growRate
 
@@ -209,13 +211,18 @@ public class BulletController : MonoBehaviour
     {
         if (growRate > 0)
         {
-            transform.localScale = new Vector3(transform.localScale.x * growRate, transform.localScale.y * growRate, transform.localScale.z);
+            // Update object's scale
+            transform.localScale *= growRate;
+
+            // Update damage
             damage *= 1f + (growRate * 0.5f);
+
+            // Update colliders
             if (polygonCollider != null)
             {
-                Vector2[] newVertices = polygonCollider.points; // Get the current vertices
+                Vector2[] newVertices = polygonCollider.points;
 
-                float wideningFactor = growRate; 
+                float wideningFactor = growRate;
 
                 for (int i = 0; i < newVertices.Length; i++)
                 {
@@ -237,7 +244,7 @@ public class BulletController : MonoBehaviour
             if (boxCollider != null)
             {
                 Vector2 newSize = boxCollider.size;
-                newSize.x *= growRate; // Change the factor as needed
+                newSize.x *= growRate;
                 newSize.y *= growRate;
                 boxCollider.size = newSize;
             }
@@ -267,18 +274,23 @@ public class BulletController : MonoBehaviour
 
     private void RetrieveColliders()
     {
-        if (gameObject.GetComponent<PolygonCollider2D>() != null)
-        {
-            polygonCollider = gameObject.GetComponent<PolygonCollider2D>();
-        }
-        if (gameObject.GetComponent<CapsuleCollider2D>() != null)
-        {
-            capsuleCollider = gameObject.GetComponent<CapsuleCollider2D>();
-        }
+        Collider2D[] colliders = gameObject.GetComponents<Collider2D>();
 
-        if (gameObject.GetComponent<BoxCollider2D>() != null)
+        foreach (Collider2D collider in colliders)
         {
-            boxCollider = gameObject.GetComponent<BoxCollider2D>();
+            if (collider is PolygonCollider2D polygon)
+            {
+                polygonCollider = polygon;
+            }
+            if (collider is CapsuleCollider2D capsule)
+            {
+                capsuleCollider = capsule;
+            }
+
+            if (collider is BoxCollider2D box)
+            {
+                boxCollider = box;
+            }
         }
     }
 }

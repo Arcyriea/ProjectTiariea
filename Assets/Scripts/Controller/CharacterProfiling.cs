@@ -7,7 +7,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 {
     private SpriteRenderer spriteRenderer;
     protected Animator animator;
-
+    protected CharacterAI commandAI;
     public Character character { get; private set; }
     private int partyPositions;
 
@@ -66,11 +66,21 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         isDead = false;
     }
 
+    public virtual void SyncRangedAttacks()
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void SyncMeleeAttacks()
+    {
+        throw new NotImplementedException();
+    }
     // Start is called before the first frame update
     protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         moveToMouse = GetComponent<MoveToMouse>();
+        commandAI = GetComponent<CharacterAI>();
         if (character == null) return;
         animator = GetComponent<Animator>();
         if (animator == null) UnityEngine.Debug.LogWarning("Animator failed to be retrieved for the CharacterProfiling");
@@ -215,6 +225,11 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         {
             if (animator.GetBool(animationName) != false) animator.SetBool(animationName, false);
         }
+    }
+
+    protected virtual void ControlAI()
+    {
+        throw new NotImplementedException();
     }
 }
 

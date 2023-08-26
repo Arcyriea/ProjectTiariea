@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterAI : MonoBehaviour
 {
     private CharacterProfiling characterProfiling;
     private MoveToMouse moveToMouse;
-    private bool inMeleeRange = false;
+    public bool inMeleeRange { get; private set; }
 
+
+    private void Awake()
+    {
+        inMeleeRange = false;
+    }
     private void Start()
     {
         characterProfiling = GetComponent<CharacterProfiling>();
@@ -17,87 +23,43 @@ public class CharacterAI : MonoBehaviour
 
     private void Update()
     {
-        
-
         if (!moveToMouse.selected) // Check if the character is unselected
         {
             if (inMeleeRange)
             {
-                if (characterProfiling.meleeAttackTime >= characterProfiling.character.swingTime) PerformAttack("melee");
+                characterProfiling.SyncMeleeAttacks();
             }
             else if (!inMeleeRange)
             {
-                if (characterProfiling.rangedAttackTime >= characterProfiling.character.fireRate) PerformAttack("ranged");
+                characterProfiling.SyncRangedAttacks();
             }
         }
     }
 
-    protected virtual void PerformAction(string actionType)
+    public void ReportStatus(bool status)
     {
-
+        inMeleeRange = status;
     }
-
-    protected void PerformAttack(string attackType)
+    public bool MeleeDetection(Transform meleeAttackPoint)
     {
-
-        // Detect enemies within melee range
-        Collider2D[] hitColliders;
-        Collider2D[] meleeCheck = Physics2D.OverlapCircleAll(transform.position, characterProfiling.character.meleeRange);
-        List<Collider2D> enemies = new List<Collider2D>();
+        
+        Collider2D[] meleeCheck = Physics2D.OverlapCircleAll(meleeAttackPoint.position, characterProfiling.character.meleeRange);
 
         foreach (Collider2D meleeCollider in meleeCheck)
         {
-            if (meleeCollider.CompareTag("Enemy"))
+            EnemyProfiling entity = meleeCollider.GetComponent<EnemyProfiling>();
+            CharacterProfiling chara = meleeCollider.GetComponent<CharacterProfiling>();
+            if (entity != null && entity.team != characterProfiling.team)
             {
-                enemies.Add(meleeCollider);
-                inMeleeRange = true;
+                return true;
+            }
+            if (chara != null && chara.team != characterProfiling.team)
+            {
+                return true;
             }
         }
-
-        if (enemies.Count <= 0 && inMeleeRange != false)
-        {
-            inMeleeRange = false;
-            return;
-        }
-
-
-        if (attackType == "melee")
-        {
-            hitColliders = meleeCheck;
-        }
-        else
-        {
-            hitColliders = Physics2D.OverlapCircleAll(transform.position, characterProfiling.character.shootingRange);
-        }
-
-
-        foreach (Collider2D hitCollider in hitColliders)
-        {
-            if (hitCollider.CompareTag("Enemy"))
-            {
-                switch (attackType)
-                {
-                    case "melee":
-                        characterProfiling.CharacterAction("attack");
-                        //UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing melee attack on enemy: " + hitCollider.gameObject.name);
-                        break;
-                    case "ranged":
-                        characterProfiling.CharacterAction("ranged");
-                        //UnityEngine.Debug.Log(characterProfiling.character.characterName + " Performing ranged attack on enemy: " + hitCollider.gameObject.name);
-                        break;
-                }
-            }
-        }
-
-
+        return false;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, characterProfiling.character.meleeRange);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, characterProfiling.character.shootingRange);
-    }
+    
 }

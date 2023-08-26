@@ -36,6 +36,31 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
                 CharacterAction("attack");
             }
         }
+        else
+        {
+            ControlAI();
+        }
+    }
+
+    protected override void ControlAI()
+    {
+        if (commandAI.MeleeDetection(meleeAttackPoint))
+        {
+            commandAI.ReportStatus(true);
+        } else
+        {
+            commandAI.ReportStatus(false);
+        }
+    }
+
+    public override void SyncMeleeAttacks()
+    {
+        CharacterAction("attack");
+    }
+
+    public override void SyncRangedAttacks()
+    {
+        CharacterAction("ranged");
     }
 
     public override void PerformAttack()
