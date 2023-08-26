@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   punctured: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 11400000, guid: fa4ca9b506262c942beed014f6cf71c2, type: 2}
   meleeAttackPoints:
   - {fileID: 5637175960342972207}
   - {fileID: 7661783822599208958}

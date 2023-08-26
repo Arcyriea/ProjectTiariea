@@ -5,18 +5,25 @@ using static Enums;
 
 public class MissileController : MonoBehaviour
 {
-    public MissileProperties missileProperties;
-
+    private Object parentEntity;
+    private MissileProperties properties;
     private Transform target;
     private Vector3 velocity;
     private bool hasTarget;
-    public Team team;
-    private float shortestDistance = Mathf.Infinity;
-    void Start()
-    {
-        Initialize();
-    }
+    //stat
+    public float health { get; private set; }
+    public float damage { get; private set; }
+    public float acceleration { get; private set; }
+    public float maxSpeed { get; private set; }
+    public float rotationSpeed { get; private set; }
+    public float splashRadius { get; private set; }
+    public float detectionRadius { get; private set; }
+    public float lifeTime { get; private set; }
 
+    public Vector3 direction { get; private set; }
+    public Team team { get; private set; }
+    private float shortestDistance = Mathf.Infinity;
+    
     void Update()
     {
         if (hasTarget)
@@ -29,13 +36,42 @@ public class MissileController : MonoBehaviour
         }
     }
 
-    void Initialize()
+    public void Initialize(string tag, Object obj, Team team, MissileProperties missileProperties)
     {
-        if (missileProperties == null || missileProperties.prefab == null)
+        parentEntity = obj;
+        gameObject.tag = tag;
+        this.team = team;
+        this.properties = missileProperties;
+
+        float parentHealth = 0;
+        float parentDamage = 0;
+        float parentRange = 0;
+        if(parentEntity is Character chara)
         {
-            Debug.LogError("Missile properties not set properly.");
+            parentHealth = chara.maximumHealth;
+            parentDamage = chara.rangedDamage;
+            parentRange = chara.shootingRange;
+        } else if (parentEntity is Enemy enemy)
+        {
+            parentHealth = enemy.maximumHealth;
+            parentDamage = enemy.attackDamage;
+            parentRange = enemy.attackRange;
+        } else
+        {
+            UnityEngine.Debug.LogError("Invalid Object assigned for Initialize method of MissileController");
             return;
         }
+
+        
+
+        health = missileProperties.health == 0 ? parentHealth / 10f : missileProperties.health;
+        damage = missileProperties.damage == 0 ? parentDamage : missileProperties.damage;
+        acceleration = missileProperties.acceleration;
+        maxSpeed = missileProperties.maxSpeed;
+        rotationSpeed = missileProperties.rotationSpeed;
+        splashRadius = missileProperties.splashRadius;
+        detectionRadius = missileProperties.detectionRadius;
+        lifeTime = missileProperties.lifeTime == 0 ? parentRange / missileProperties.maxSpeed : missileProperties.lifeTime;
 
         // Initialize missile properties
         // For example: health, damage, speed, etc.
@@ -44,13 +80,18 @@ public class MissileController : MonoBehaviour
         SearchForTarget();
     }
 
+    public void SetDirection(Vector3 direction)
+    {
+        this.direction = direction;
+    }
+
     void SearchForTarget()
     {
         // Implement your target searching logic here
         // For example, find the nearest enemy based on tags or other criteria
         // Set 'target' and 'hasTarget' appropriately
 
-        Collider2D[] detectionSphere = Physics2D.OverlapCircleAll(transform.position, missileProperties.detectionRadius);
+        Collider2D[] detectionSphere = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
 
         foreach (Collider2D enmity in detectionSphere)
         {
@@ -97,13 +138,13 @@ public class MissileController : MonoBehaviour
 
         Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-        Vector3 acceleration = directionToTarget * missileProperties.acceleration * Time.deltaTime;
+        Vector3 acceleration = directionToTarget * this.acceleration * Time.deltaTime;
         velocity += acceleration;
 
-        velocity = Vector3.ClampMagnitude(velocity, missileProperties.maxSpeed);
+        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
         Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, directionToTarget);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, missileProperties.rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         transform.position += velocity * Time.deltaTime;
 
@@ -111,6 +152,10 @@ public class MissileController : MonoBehaviour
         // Apply damage to the target and destroy the missile if necessary
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         

@@ -143,6 +143,23 @@ public static class GenericActions
         }
     }
 
+    public static void MissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection)
+    {
+        Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
+        Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
+
+
+        MissileController missileController = missileGO.GetComponent<MissileController>();
+        if (missileController != null)
+        {
+            missileController.Initialize("", obj, team, missileProperties);
+            missileController.SetDirection(missileDirection);
+
+            float angle = Mathf.Atan2(missileController.direction.y, missileController.direction.x) * Mathf.Rad2Deg;
+            missileGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
+
     public static void BeamAttack(float duration, LaserController controller)
     {
         if (controller == null) { return; }

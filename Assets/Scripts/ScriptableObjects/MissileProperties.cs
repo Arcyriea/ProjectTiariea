@@ -16,6 +16,7 @@ public class MissileProperties : ScriptableObject
     public float lifeTime;
     public bool boomerang;
     public bool penetrates;
+    public bool perpetualOscilliation;
     public int penetrationCount;
     public float penetrationStrength;
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShiariakyiaActions : CharacterProfiling
 {
     public BulletProperties bullet;
+    public MissileProperties ringBoomerang;
     public Transform[] meleeAttackPoints;
 
     public GameObject[] dartMinions;
@@ -153,7 +154,7 @@ public class ShiariakyiaActions : CharacterProfiling
             }
         }
 
-        
+        GenericActions.MissileAttack(ringBoomerang, team, character, Instantiate(ringBoomerang.prefab, transform.position, Quaternion.identity), Vector3.right);
         
         Invoke("ResetAnimation", character.fireRate / 10);
 

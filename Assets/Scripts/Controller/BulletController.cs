@@ -98,6 +98,7 @@ public class BulletController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         BulletController otherBullet = collision.gameObject.GetComponent<BulletController>();
+        MissileController missile = collision.gameObject.GetComponent<MissileController>();
         CharacterProfiling character = collision.gameObject.GetComponent<CharacterProfiling>();
         EnemyProfiling entity = collision.gameObject.GetComponent<EnemyProfiling>();
 
@@ -111,6 +112,17 @@ public class BulletController : MonoBehaviour
             {
                 // Handle the collision based on team affiliation
                 HandleBulletCollision(otherBullet);
+                UnityEngine.Debug.Log("otherBullet Triggered");
+            }
+        }
+
+        if (missile != null && interceptCollision == true)
+        {
+            // Check the team affiliation of the other bullet
+            if (missile.team != team)
+            {
+                // Handle the collision based on team affiliation
+                HandleMissileCollision(missile);
                 UnityEngine.Debug.Log("otherBullet Triggered");
             }
         }
@@ -264,6 +276,14 @@ public class BulletController : MonoBehaviour
         float selfDamage = damage;
         otherBullet.DecrementDamage(selfDamage);
         DecrementDamage(otherDamage);
+    }
+
+    private void HandleMissileCollision(MissileController missile)
+    {
+        float missileHealth = missile.health;
+        float selfDamage = damage;
+        missile.TakeDamage(selfDamage);
+        damage -= missileHealth;
     }
 
     // Add any other bullet behavior and collision handling here
