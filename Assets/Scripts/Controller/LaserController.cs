@@ -36,7 +36,7 @@ public class LaserController : MonoBehaviour
     void Update()
     {
         if (beamProperties == null) return;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right * (character.shootingRange / 2));
         hits = FilterHits(hits).ToArray();
         lineRenderer.SetPosition(0, laserPosition.position);
 

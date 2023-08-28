@@ -104,14 +104,14 @@ public static class GenericActions
         if (character != null && enemy == null)
         {
             Range = character.shootingRange;
-            Damage = character.rangedDamage;
+            Damage = bullet.damage == 0 ? character.rangedDamage : bullet.damage;
             Speed = character.accelerateSpeed + PartyController.partyTravelSpeed;
             Explosion = character.explodeRadius;
         }
         else if (enemy != null && character == null)
         {
             Range = enemy.attackRange;
-            Damage = enemy.attackDamage;
+            Damage = bullet.damage == 0 ? enemy.attackDamage : bullet.damage;
             Speed = enemy.projectileSpeed;
             Explosion = enemy.splashRadius;
         }
@@ -143,16 +143,12 @@ public static class GenericActions
         }
     }
 
-    public static void MissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection)
+    public static void MissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection, Transform parentTransform)
     {
-        Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
-        Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
-
-
         MissileController missileController = missileGO.GetComponent<MissileController>();
         if (missileController != null)
         {
-            missileController.Initialize("", obj, team, missileProperties);
+            missileController.Initialize("", obj, team, missileProperties, parentTransform);
             missileController.SetDirection(missileDirection);
 
             float angle = Mathf.Atan2(missileController.direction.y, missileController.direction.x) * Mathf.Rad2Deg;

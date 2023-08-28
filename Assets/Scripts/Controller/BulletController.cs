@@ -169,6 +169,7 @@ public class BulletController : MonoBehaviour
                     else
                     {
                         if (entity.punctured != true) entity.TakeDamage(damage);
+                        UnityEngine.Debug.Log("Entity Taken Damage, remaining Health:" + entity.Health);
                         entity.punctured = true;
                     }
                 }

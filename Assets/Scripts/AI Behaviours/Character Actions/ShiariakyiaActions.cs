@@ -11,7 +11,7 @@ public class ShiariakyiaActions : CharacterProfiling
 
     public GameObject[] dartMinions;
     private Transform[] dartMinionTransforms;
-    private float orbitRadius = 4f;
+    private float orbitRadius = 6f;
     private float dartRangedAttackTime;
     public override void CharacterAction(string action)
     {
@@ -21,6 +21,7 @@ public class ShiariakyiaActions : CharacterProfiling
     protected override void Start()
     {
         base.Start();
+        bullet.damage = character.rangedDamage / dartMinions.Length;
         InitializeDarts();
     }
 
@@ -75,6 +76,7 @@ public class ShiariakyiaActions : CharacterProfiling
         dartMinionTransforms = new Transform[dartMinions.Length];
         for (int i = 0; i < dartMinions.Length; i++)
         {
+            dartMinions[i] = Instantiate(dartMinions[i]);
             float angle = 2 * Mathf.PI * i / dartMinions.Length;
             Vector3 offset = new Vector3(Mathf.Cos(angle) * orbitRadius,
                                         Mathf.Sin(angle) * orbitRadius,
@@ -87,7 +89,7 @@ public class ShiariakyiaActions : CharacterProfiling
     private void DartOrbit()
     {
         // Update dartMinions' positions for formation
-        float orbitSpeed = 30f; // Adjust the speed of orbit
+        float orbitSpeed = 3f; // Adjust the speed of orbit
 
         for (int i = 0; i < dartMinions.Length; i++)
         {
@@ -101,7 +103,7 @@ public class ShiariakyiaActions : CharacterProfiling
 
     public void DartAttacks()
     {
-        if (Time.time - dartRangedAttackTime >= character.fireRate / (dartMinions.Length * 3))
+        if (Time.time - dartRangedAttackTime >= character.fireRate / (dartMinions.Length * 10))
         {
             foreach (Transform transCoord in dartMinionTransforms)
             {
@@ -154,7 +156,7 @@ public class ShiariakyiaActions : CharacterProfiling
             }
         }
 
-        GenericActions.MissileAttack(ringBoomerang, team, character, Instantiate(ringBoomerang.prefab, transform.position, Quaternion.identity), Vector3.right);
+        GenericActions.MissileAttack(ringBoomerang, team, character, Instantiate(ringBoomerang.prefab, transform.position, Quaternion.identity), Vector3.right, transform);
         
         Invoke("ResetAnimation", character.fireRate / 10);
 

@@ -33,7 +33,7 @@ MonoBehaviour:
   maximumGas: 0
   gasSynthesis: 0
   shootingRange: 240
-  accelerateSpeed: 2.5
+  accelerateSpeed: 45
   explodeRadius: 0
   rangedDamage: 367
   fireRate: 3.51

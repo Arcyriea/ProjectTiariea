@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 0
   growRate: 0
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 5789583312697930444, guid: e5390b4f4be1ee648a71e33744342f70, type: 3}
   intercept: 0
-  penetrate: 0
+  penetrate: 1

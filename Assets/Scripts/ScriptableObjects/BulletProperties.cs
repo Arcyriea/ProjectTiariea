@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Bullet")]
 public class BulletProperties : ScriptableObject
 {
+    public float damage;
     public float size;
     public float growRate;
     public GameObject bulletPrefab;

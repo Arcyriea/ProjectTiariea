@@ -17,7 +17,7 @@ public class PartyController : MonoBehaviour
     public GameObject[] characterStatSliders;
     public List<GameObject> spawnedPrefabs { get; private set; }
     private CustomFormation selectedFormation;
-    public float spacing = 2f;
+    public float spacing = 40f;
 
     public LayerMask prefabLayer;
 

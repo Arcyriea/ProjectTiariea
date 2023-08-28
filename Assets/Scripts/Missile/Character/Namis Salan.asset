@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b97871c20fb6a4da1446c5261cab79, type: 3}
   m_Name: Namis Salan
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 7355991907520145239, guid: 570c06064eefdd647b7234ead20033cb, type: 3}
   health: 0
   damage: 0
+  hullDamage: 0
   acceleration: 0
   maxSpeed: 0
   rotationSpeed: 0
   splashRadius: 0
   detectionRadius: 0
   lifeTime: 0
+  homing: 1
   boomerang: 1
+  intercept: 0
   penetrates: 1
+  perpetualOscilliation: 1
   penetrationCount: 0
   penetrationStrength: 0
