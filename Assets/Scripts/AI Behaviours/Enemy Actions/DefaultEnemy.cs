@@ -172,4 +172,6 @@ public class DefaultEnemy : EnemyProfiling
         // For example, deal massive damage or apply powerful effects
         UnityEngine.Debug.Log("" + " performs their ultimate ability!");
     }
+
+    
 }

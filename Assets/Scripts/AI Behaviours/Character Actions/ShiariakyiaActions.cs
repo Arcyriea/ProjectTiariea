@@ -112,9 +112,9 @@ public class ShiariakyiaActions : CharacterProfiling
             {
                 Vector3 offset = new Vector3(transCoord.position.x + 5f, transCoord.position.y, transCoord.position.z);
                 GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, offset, Quaternion.identity), Vector3.right);
-                audioSource.PlayOneShot(dartRangedAttackClip, 0.7f);
+                
             }
-
+            audioSource.PlayOneShot(dartRangedAttackClip, 0.7f);
             dartRangedAttackTime = Time.time;
         }
     }

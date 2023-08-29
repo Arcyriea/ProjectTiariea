@@ -141,17 +141,15 @@ public class CircleOrb : EnemyProfiling
         List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
         if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
 
-        GameObject bulletGO = Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity);
-
         // Get the BulletController component from the instantiated bullet
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, Vector3.right);
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, Vector3.left);
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, Vector3.up);
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, Vector3.down);
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, new Vector3(1, 1, 0));
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, new Vector3(-1, -1, 0));
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, new Vector3(-1, 1, 0));
-        GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, new Vector3(1, -1, 0));
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.left);
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.up);
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.down);
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), new Vector3(1, 1, 0));
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), new Vector3(-1, -1, 0));
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), new Vector3(-1, 1, 0));
+        GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), new Vector3(1, -1, 0));
 
         audioSource.PlayOneShot(bulletFire, 1f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");

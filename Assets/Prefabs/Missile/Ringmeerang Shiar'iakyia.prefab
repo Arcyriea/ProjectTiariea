@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7122378751782314156}
   - component: {fileID: 3246596631048186557}
   - component: {fileID: 8651480662121197303}
+  - component: {fileID: 8521083314082542003}
   m_Layer: 0
   m_Name: Ringmeerang Shiar'iakyia
   m_TagString: Untagged
@@ -135,3 +136,15 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &8521083314082542003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355991907520145239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ab107065fccc946a5a5a3b983e6ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -139,13 +139,11 @@ public class MissileLauncherSquare : EnemyProfiling
         List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
         if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
 
-        GameObject missileGO = Instantiate(missile.prefab, transform.position, Quaternion.identity);
-
         // Get the BulletController component from the instantiated bullet
-        GenericActions.MissileAttack(missile, team, enemyData, missileGO, Vector3.right, transform);
-        GenericActions.MissileAttack(missile, team, enemyData, missileGO, Vector3.left, transform);
-        GenericActions.MissileAttack(missile, team, enemyData, missileGO, Vector3.up, transform);
-        GenericActions.MissileAttack(missile, team, enemyData, missileGO, Vector3.down, transform);
+        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.right, transform);
+        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.left, transform);
+        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.up, transform);
+        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.down, transform);
 
         audioSource.PlayOneShot(missileLaunchClip, 0.6f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");

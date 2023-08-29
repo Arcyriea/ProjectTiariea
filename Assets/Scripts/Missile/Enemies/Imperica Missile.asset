@@ -16,12 +16,12 @@ MonoBehaviour:
   health: 0
   damage: 0
   hullDamage: 0
-  acceleration: 120
-  maxSpeed: 220
+  acceleration: 12
+  maxSpeed: 22
   rotationSpeed: 16
   splashRadius: 0
   detectionRadius: 2000
-  lifeTime: 0
+  lifeTime: 5
   homing: 1
   boomerang: 0
   intercept: 0

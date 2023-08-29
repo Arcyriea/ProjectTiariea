@@ -98,5 +98,9 @@ public class EnemyProfiling : MonoBehaviour
         Health -= Damage;
     }
 
+    protected virtual void OnDestroy()
+    {
+
+    }
 }
 

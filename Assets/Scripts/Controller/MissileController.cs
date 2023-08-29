@@ -40,7 +40,7 @@ public class MissileController : MonoBehaviour
                 
                 MoveTowardsTarget();
 
-                if (Vector3.Distance(transform.position, target.position) <= 0) Destroy(gameObject);
+                
                 UnityEngine.Debug.Log("Ran into LifeTime.Boomerang check of Update");
             }
             else
@@ -126,6 +126,7 @@ public class MissileController : MonoBehaviour
         // For example: health, damage, speed, etc.
 
         // Search for the nearest target
+        UnityEngine.Debug.Log("Missile lifetime: " +lifeTime);
         if (properties.homing) SearchForTarget();
     }
 
@@ -293,6 +294,10 @@ public class MissileController : MonoBehaviour
                     character.TakeDamage(damage);
                     if (!properties.boomerang) health -= remainingHealth;
                 }
+            } 
+            else
+            {
+                if (target == parentTransform && properties.boomerang && lifeTime <= 0) Destroy(gameObject);
             }
         }
 
@@ -321,6 +326,10 @@ public class MissileController : MonoBehaviour
                     entity.TakeDamage(damage);
                     if (!properties.boomerang) health -= remainingHealth;
                 }
+            }
+            else
+            {
+                if (target == parentTransform && properties.boomerang && lifeTime <= 0) Destroy(gameObject);
             }
         }
     }
