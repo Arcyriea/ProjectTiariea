@@ -8,6 +8,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     private SpriteRenderer spriteRenderer;
     protected Animator animator;
     protected CharacterAI commandAI;
+    protected AudioSource audioSource;
     public Character character { get; private set; }
     private int partyPositions;
 
@@ -81,6 +82,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         spriteRenderer = GetComponent<SpriteRenderer>();
         moveToMouse = GetComponent<MoveToMouse>();
         commandAI = GetComponent<CharacterAI>();
+        audioSource = GetComponent<AudioSource>(); 
         if (character == null) return;
         animator = GetComponent<Animator>();
         if (animator == null) UnityEngine.Debug.LogWarning("Animator failed to be retrieved for the CharacterProfiling");

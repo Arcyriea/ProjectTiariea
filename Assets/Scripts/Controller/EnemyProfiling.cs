@@ -8,6 +8,7 @@ public class EnemyProfiling : MonoBehaviour
 {
     public Enemy enemyData { get; private set; }
     private Animator animator;
+    protected AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private float despawnDistance = 150f;
     private HomeworldHearts homeworld;
@@ -43,7 +44,8 @@ public class EnemyProfiling : MonoBehaviour
     protected virtual void Start()
     {
         homeworld = GameObject.Find("Main Camera")?.GetComponent<HomeworldHearts>();
-        animator = enemyData == null ? null : enemyData.enemyPrefab.GetComponent<Animator>();
+        animator = enemyData == null ? null : gameObject.GetComponent<Animator>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

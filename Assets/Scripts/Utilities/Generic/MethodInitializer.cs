@@ -79,7 +79,6 @@ public static class GenericActions
                 if (entity.team != team)
                 {
                     entity.TakeDamage(Damage);
-                    UnityEngine.Debug.Log("Enemy got hit! HP: " + entity.Health);
                 }
             }
 
@@ -88,7 +87,6 @@ public static class GenericActions
                 if (chara.team != team)
                 {
                     chara.TakeDamage(Damage);
-                    UnityEngine.Debug.Log("Character got hit! HP: " + chara.Health);
                 }
             }
         }

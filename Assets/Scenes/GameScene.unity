@@ -1579,6 +1579,7 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 11400000, guid: 2c1b47070a5fde04fb02ca68ba3d42f5, type: 2}
   - {fileID: 11400000, guid: 1f05167b37a38e843910fb2621e52ae8, type: 2}
+  - {fileID: 11400000, guid: 1f05167b37a38e843910fb2621e52ae8, type: 2}
   spawnPoints:
   - {fileID: 519420032}
   - {fileID: 519420032}
