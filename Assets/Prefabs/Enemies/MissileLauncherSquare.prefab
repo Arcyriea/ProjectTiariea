@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8946771020051471708}
-  - component: {fileID: 1531131589661606002}
   - component: {fileID: 5493733631553957836}
+  - component: {fileID: -639966154733385926}
   - component: {fileID: 7404437844918271247}
   - component: {fileID: -8204225078754059928}
   - component: {fileID: -7066645834935078508}
@@ -36,20 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1531131589661606002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6367482206822494237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4204d969686750c428ce3d7eaa57caa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  punctured: 0
-  bullet: {fileID: 11400000, guid: ff5f833bcc4fbfc46b4261abb20f5f9f, type: 2}
 --- !u!95 &5493733631553957836
 Animator:
   serializedVersion: 5
@@ -71,6 +57,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-639966154733385926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367482206822494237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aba764fff96f5f40a1efc94c99c273f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punctured: 0
+  missile: {fileID: 11400000, guid: 88b95df1fe5963c46a6ffc84f8491bab, type: 2}
+  missileLaunchClip: {fileID: 8300000, guid: 78aa93d4e34fe1341b6326862832eabb, type: 3}
 --- !u!212 &7404437844918271247
 SpriteRenderer:
   m_ObjectHideFlags: 0

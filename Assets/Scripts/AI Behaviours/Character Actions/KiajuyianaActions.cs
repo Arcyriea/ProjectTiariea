@@ -8,7 +8,8 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 {
     public BulletProperties bullet;
     public Transform meleeAttackPoint;
-    
+
+    public AudioClip swordWhoosh;
 
     public override void CharacterAction(string action)
     {
@@ -82,6 +83,8 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         }
         
         GenericActions.MeleeAttack(meleeAttackPoint, team, character);
+
+        audioSource.PlayOneShot(swordWhoosh, 1f);
         Invoke("ResetAnimation", character.swingTime / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
@@ -104,6 +107,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         }
 
         GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
+        audioSource.PlayOneShot(swordWhoosh, 1f);
         Invoke("ResetAnimation", character.fireRate / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");

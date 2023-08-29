@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punctured: 0
   bullet: {fileID: 11400000, guid: ff5f833bcc4fbfc46b4261abb20f5f9f, type: 2}
+  bulletFire: {fileID: 8300000, guid: 4963ff3bddf2b234cb6b8b93b7394e96, type: 3}
 --- !u!95 &5493733631553957836
 Animator:
   serializedVersion: 5

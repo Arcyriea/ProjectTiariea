@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bac95266fc7f44c9c973f9134888d6, type: 3}
+  m_Name: MissileSquareDrone
+  m_EditorClassIdentifier: 
+  enemyId: 
+  enemyName: Imperica Missile Square Drone
+  enemyPrefab: {fileID: 6367482206822494237, guid: 783b0fc44f6ca874f850221a80d451ab, type: 3}
+  enemyClass: 0
+  team: 2
+  maximumHealth: 100
+  attackRange: 2000
+  attackDamage: 25
+  splashRadius: 0
+  projectileSpeed: 34
+  attackCooldown: 12

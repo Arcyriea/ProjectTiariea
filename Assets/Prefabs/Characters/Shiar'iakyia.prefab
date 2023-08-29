@@ -169,6 +169,8 @@ MonoBehaviour:
   - {fileID: 5394367546734319909, guid: 267069c7599f8f94f88eb589825b376c, type: 3}
   - {fileID: 5394367546734319909, guid: 267069c7599f8f94f88eb589825b376c, type: 3}
   - {fileID: 5394367546734319909, guid: 267069c7599f8f94f88eb589825b376c, type: 3}
+  dartRangedAttackClip: {fileID: 8300000, guid: 1d5318d3e959b904c9c84906b8f66b11, type: 3}
+  boomerangThrowClip: {fileID: 8300000, guid: 951fb663743a408439cc23887bbac3da, type: 3}
 --- !u!114 &-1673728156050828842
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -57,6 +57,7 @@ MonoBehaviour:
   punctured: 0
   bullet: {fileID: 11400000, guid: 22a686b84de5fd844bee1fc0f4ba7a7e, type: 2}
   meleeAttackPoint: {fileID: 9167279316472282414}
+  swordWhoosh: {fileID: 8300000, guid: 23ba2af8c01fb7747a729ef25f5390d1, type: 3}
 --- !u!114 &-1673728156050828842
 MonoBehaviour:
   m_ObjectHideFlags: 0

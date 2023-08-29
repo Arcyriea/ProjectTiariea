@@ -13,6 +13,9 @@ public class ShiariakyiaActions : CharacterProfiling
     private Transform[] dartMinionTransforms;
     private float orbitRadius = 6f;
     private float dartRangedAttackTime;
+
+    public AudioClip dartRangedAttackClip;
+    public AudioClip boomerangThrowClip;
     public override void CharacterAction(string action)
     {
         GenericActions.ExecuteAction(this, action);
@@ -109,6 +112,7 @@ public class ShiariakyiaActions : CharacterProfiling
             {
                 Vector3 offset = new Vector3(transCoord.position.x + 5f, transCoord.position.y, transCoord.position.z);
                 GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, offset, Quaternion.identity), Vector3.right);
+                audioSource.PlayOneShot(dartRangedAttackClip, 0.7f);
             }
 
             dartRangedAttackTime = Time.time;

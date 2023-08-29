@@ -67,7 +67,11 @@ public class MissileController : MonoBehaviour
             }
             else
             {
-                if (lifeTime > 0) SearchForTarget();
+                if (lifeTime > 0)
+                {
+                    MoveUntilOutOfLifeTime();
+                    SearchForTarget();
+                }  
             }
         } 
         else

@@ -8,7 +8,7 @@ using UnityEngine.TextCore.Text;
 public class MissileLauncherSquare : EnemyProfiling
 {
     public MissileProperties missile;
-
+    public AudioClip missileLaunchClip;
     public override void EnemyAction(string action)
     {
         switch (action)
@@ -147,6 +147,7 @@ public class MissileLauncherSquare : EnemyProfiling
         GenericActions.MissileAttack(missile, team, enemyData, missileGO, Vector3.up, transform);
         GenericActions.MissileAttack(missile, team, enemyData, missileGO, Vector3.down, transform);
 
+        audioSource.PlayOneShot(missileLaunchClip, 0.6f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 

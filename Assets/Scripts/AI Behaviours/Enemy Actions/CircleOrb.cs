@@ -9,6 +9,8 @@ public class CircleOrb : EnemyProfiling
 {
     public BulletProperties bullet;
 
+    public AudioClip bulletFire;
+
     public override void EnemyAction(string action)
     {
         switch (action)
@@ -150,6 +152,8 @@ public class CircleOrb : EnemyProfiling
         GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, new Vector3(-1, -1, 0));
         GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, new Vector3(-1, 1, 0));
         GenericActions.BulletAttack(bullet, team, enemyData, bulletGO, new Vector3(1, -1, 0));
+
+        audioSource.PlayOneShot(bulletFire, 1f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 

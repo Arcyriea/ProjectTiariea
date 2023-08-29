@@ -7,7 +7,7 @@ using UnityEngine;
 public class DefaultEnemy : EnemyProfiling
 {
     public BulletProperties bullet;
-
+    public AudioClip bulletFire;
     public override void EnemyAction(string action)
     {
         switch (action)
@@ -154,6 +154,8 @@ public class DefaultEnemy : EnemyProfiling
             float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
             bulletGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
+
+        audioSource.PlayOneShot(bulletFire, 0.7f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 
