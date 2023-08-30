@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PartyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float followSpeed = 2f;
     public static float partyTravelSpeed { get; private set; }
+    public static int score = 0;
+    public GameObject tmpScore;
+    private TextMeshProUGUI tmpScoreUGUI;
     public Character[] characters;
     private int memCap = 6;
     public List<CustomFormation> customFormations;
@@ -34,7 +39,7 @@ public class PartyController : MonoBehaviour
 
     private void Start()
     {
-        
+        tmpScoreUGUI = tmpScore.GetComponent<TextMeshProUGUI>();
         orthoCamera = GetComponent<Camera>();
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
         for (int i = 0; i < characters.Length; i++)
@@ -74,7 +79,7 @@ public class PartyController : MonoBehaviour
 
     void Update()
     {
-
+        tmpScoreUGUI.text = "Points: " + score;
         Vector3 newPos = new Vector3(Camera.main.transform.position.x + (partyTravelSpeed * Time.deltaTime), Camera.main.transform.position.y, -10f);
         Camera.main.transform.position = Vector3.Lerp(transform.position, newPos, followSpeed * Time.deltaTime);
 

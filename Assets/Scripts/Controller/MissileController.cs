@@ -5,9 +5,12 @@ using static Enums;
 
 public class MissileController : MonoBehaviour
 {
+    private GameObject parentGameObject;
     private Object parentEntity;
     private MissileProperties properties;
-    private Transform parentTransform;
+    private Rigidbody2D rb;
+
+
     private Transform target;
     private Vector3 velocity;
     private bool hasTarget;
@@ -27,6 +30,18 @@ public class MissileController : MonoBehaviour
     public Team team { get; private set; }
     private float shortestDistance = Mathf.Infinity;
     private bool isBoomerang = false;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            if (properties.coldLaunchSpeed > 0)
+            {
+                rb.AddForce(transform.up * properties.coldLaunchSpeed, ForceMode2D.Impulse);
+            }
+        }
+    }
 
     void Update()
     {
@@ -61,7 +76,7 @@ public class MissileController : MonoBehaviour
                 if (properties.boomerang && Vector3.Distance(transform.position, target.position) > maxRange)
                 {
                     isBoomerang = true;
-                    target = parentTransform; // Set target as the missile's origin
+                    target = parentGameObject.transform; // Set target as the missile's origin
                     velocity *= -1;     // Reverse the velocity
                 }
             }
@@ -82,14 +97,15 @@ public class MissileController : MonoBehaviour
         lifeTime -= Time.deltaTime;
     }
 
-    public void Initialize(string tag, Object obj, Team team, MissileProperties missileProperties, Transform parentTrans)
+    public void Initialize(string tag, Object obj, Team team, MissileProperties missileProperties, GameObject parentTrans)
     {
         parentEntity = obj;
-        gameObject.tag = tag;
+        parentGameObject = parentTrans;
+        //gameObject.tag = tag;
         this.team = team;
         this.properties = missileProperties;
         isBoomerang = properties.boomerang;
-        parentTransform = parentTrans;
+       
 
         float parentHealth = 0;
         float parentDamage = 0;
@@ -195,8 +211,8 @@ public class MissileController : MonoBehaviour
         {
             if (isBoomerang)
             {
-                target = parentTransform; // Set target as the missile's origin
-                velocity *= -1;     // Reverse the velocity
+                target = parentGameObject.transform; // Set target as the missile's origin
+                //velocity *= -1;     // Reverse the velocity
             }
             else
             {
@@ -206,7 +222,7 @@ public class MissileController : MonoBehaviour
         }
 
         Vector3 directionToTarget = (target.position - transform.position).normalized;
-
+        
         Vector3 acceleration = directionToTarget * this.acceleration * Time.deltaTime;
         velocity += acceleration;
 
@@ -215,6 +231,7 @@ public class MissileController : MonoBehaviour
         if (!properties.perpetualOscilliation)
         {
             Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, directionToTarget);
+            targetRotation *= Quaternion.Euler(0, 0, 90);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
@@ -232,6 +249,11 @@ public class MissileController : MonoBehaviour
         }
     }
 
+    public void SetTarget(GameObject gameObject)
+    {
+        target = gameObject.transform;
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -245,6 +267,8 @@ public class MissileController : MonoBehaviour
 
         //UnityEngine.Debug.Log("Bullet Collision Triggered");
 
+        if (collision.gameObject == parentGameObject && properties.boomerang && target == parentGameObject.transform) Destroy(gameObject);
+
         if (missile != null && properties.intercept == true)
         {
             float totalDamage = properties.hullDamage ? damage + health : damage;
@@ -256,9 +280,10 @@ public class MissileController : MonoBehaviour
                     if (!properties.boomerang) Destroy(gameObject);
                     else
                     {
-                        target = null;
+                        target = parentGameObject.transform;
                         MoveTowardsTarget();
                         //Destroy game object if returned to parent transform
+                       
                     }
                 }
                 else
@@ -280,12 +305,20 @@ public class MissileController : MonoBehaviour
                     if (properties.penetrates != true)
                     {
                         character.TakeDamage(damage);
-                        Destroy(gameObject);
+                        if (!properties.boomerang) Destroy(gameObject);
+                        else
+                        {
+                            target = parentGameObject.transform;
+                            MoveTowardsTarget();
+                        }
                     }
                     else
                     {
-                        if (character.punctured != true) character.TakeDamage(damage);
-                        character.punctured = true;
+                        if (character.punctured != true)
+                        {
+                            character.TakeDamage(damage);
+                            character.punctured = true;
+                        }
                     }
                 }
                 else
@@ -295,10 +328,7 @@ public class MissileController : MonoBehaviour
                     if (!properties.boomerang) health -= remainingHealth;
                 }
             } 
-            else
-            {
-                if (target == parentTransform && properties.boomerang && lifeTime <= 0) Destroy(gameObject);
-            }
+            
         }
 
         if (entity != null)
@@ -311,13 +341,20 @@ public class MissileController : MonoBehaviour
                     if (properties.penetrates != true)
                     {
                         entity.TakeDamage(damage);
-                        Destroy(gameObject);
+                        if (!properties.boomerang) Destroy(gameObject);
+                        else
+                        {
+                            target = parentGameObject.transform;
+                            MoveTowardsTarget();
+                        }
                     }
                     else
                     {
-                        if (entity.punctured != true) entity.TakeDamage(damage);
-                        //UnityEngine.Debug.Log("Entity Taken Damage, remaining Health:" + entity.Health);
-                        entity.punctured = true;
+                        if (entity.punctured != true)
+                        {
+                            entity.TakeDamage(damage);
+                            entity.punctured = true;
+                        }
                     }
                 }
                 else
@@ -326,10 +363,6 @@ public class MissileController : MonoBehaviour
                     entity.TakeDamage(damage);
                     if (!properties.boomerang) health -= remainingHealth;
                 }
-            }
-            else
-            {
-                if (target == parentTransform && properties.boomerang && lifeTime <= 0) Destroy(gameObject);
             }
         }
     }

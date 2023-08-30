@@ -25,6 +25,7 @@ public class ShiariakyiaActions : CharacterProfiling
     {
         base.Start();
         bullet.damage = character.rangedDamage / dartMinions.Length;
+        ringBoomerang.damage = character.rangedDamage * 2;
         InitializeDarts();
     }
 
@@ -35,7 +36,7 @@ public class ShiariakyiaActions : CharacterProfiling
         DartOrbit();
         if (base.moveToMouse.selected == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 SyncRangedAttacks();
             }
@@ -139,7 +140,7 @@ public class ShiariakyiaActions : CharacterProfiling
         {
             GenericActions.MeleeAttack(meleeAttackPoint, team, character);
         }
-        Invoke("ResetAnimation", character.swingTime / 10);
+        Invoke("ResetAnimation", character.swingTime / 10 < 1f ? 1f : character.swingTime / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
@@ -160,7 +161,7 @@ public class ShiariakyiaActions : CharacterProfiling
             }
         }
 
-        GenericActions.MissileAttack(ringBoomerang, team, character, Instantiate(ringBoomerang.prefab, transform.position, Quaternion.identity), Vector3.right, transform);
+        GenericActions.MissileAttack(ringBoomerang, team, character, Instantiate(ringBoomerang.prefab, transform.position, Quaternion.identity), Vector3.right, gameObject);
         
         Invoke("ResetAnimation", character.fireRate / 10);
 

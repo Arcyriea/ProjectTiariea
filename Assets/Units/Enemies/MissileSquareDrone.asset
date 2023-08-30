@@ -22,4 +22,4 @@ MonoBehaviour:
   attackDamage: 25
   splashRadius: 0
   projectileSpeed: 34
-  attackCooldown: 12
+  attackCooldown: 4

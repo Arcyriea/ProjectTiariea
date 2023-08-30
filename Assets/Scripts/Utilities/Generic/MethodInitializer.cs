@@ -141,7 +141,7 @@ public static class GenericActions
         }
     }
 
-    public static void MissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection, Transform parentTransform)
+    public static void MissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection, GameObject parentTransform)
     {
         MissileController missileController = missileGO.GetComponent<MissileController>();
         if (missileController != null)

@@ -11,6 +11,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
     public Transform meleeAttackPoint;
 
     public AudioClip swordWhoosh;
+    public AudioClip[] swordSwing;
 
     public override void CharacterAction(string action)
     {
@@ -28,7 +29,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         base.Update();
         if (base.moveToMouse.selected == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 CharacterAction("ranged");
             }
@@ -84,9 +85,9 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         }
         
         GenericActions.MeleeAttack(meleeAttackPoint, team, character);
-
-        audioSource.PlayOneShot(swordWhoosh, 1f);
-        Invoke("ResetAnimation", character.swingTime / 10);
+        int sound = UnityEngine.Random.Range(1, swordSwing.Length);
+        audioSource.PlayOneShot(swordSwing[sound], 1f);
+        Invoke("ResetAnimation", character.swingTime / 10 < 1f ? 1f : character.swingTime / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }

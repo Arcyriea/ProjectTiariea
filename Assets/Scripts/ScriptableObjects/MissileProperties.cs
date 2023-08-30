@@ -9,6 +9,7 @@ public class MissileProperties : ScriptableObject
     public float health;
     public float damage;
     public bool hullDamage;
+    public float coldLaunchSpeed;
     public float acceleration;
     public float maxSpeed;
     public float rotationSpeed;

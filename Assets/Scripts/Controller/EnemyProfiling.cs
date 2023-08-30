@@ -100,7 +100,7 @@ public class EnemyProfiling : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-
+        PartyController.score += 100;
     }
 }
 

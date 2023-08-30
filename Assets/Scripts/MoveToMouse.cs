@@ -14,7 +14,7 @@ public class MoveToMouse : MonoBehaviour
     private GameObject selectionBox;
     private SelectionBox selectScript;
     private Animator animator;
-
+    private bool DeactivateSelectionBox = true;
 
     void Awake()
     {
@@ -113,6 +113,7 @@ public class MoveToMouse : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (DeactivateSelectionBox) return;
         selected = true;
 
         foreach (MoveToMouse obj in movementObjects)
@@ -128,10 +129,12 @@ public class MoveToMouse : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the character enters the selection box trigger
-        if (collision.CompareTag("SelectionBox") && selectScript.isActive == true)
-        {
-            selected = true;
-            UnityEngine.Debug.Log("Inside Selection Box, selected: " + selected);
+        if (!DeactivateSelectionBox) { 
+            if (collision.CompareTag("SelectionBox") && selectScript.isActive == true)
+            {
+                selected = true;
+                UnityEngine.Debug.Log("Inside Selection Box, selected: " + selected);
+            }
         }
     }
 

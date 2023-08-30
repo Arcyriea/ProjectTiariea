@@ -139,11 +139,24 @@ public class MissileLauncherSquare : EnemyProfiling
         List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
         if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
 
+        GameObject[] missiles =
+        {
+            Instantiate(missile.prefab, transform.position, Quaternion.identity),
+            Instantiate(missile.prefab, transform.position, Quaternion.identity),
+            Instantiate(missile.prefab, transform.position, Quaternion.identity),
+            Instantiate(missile.prefab, transform.position, Quaternion.identity)
+        };
+
+        Vector3[] vectorDirections = { Vector3.right, Vector3.left, Vector3.up, Vector3.down };
         // Get the BulletController component from the instantiated bullet
-        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.right, transform);
-        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.left, transform);
-        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.up, transform);
-        GenericActions.MissileAttack(missile, team, enemyData, Instantiate(missile.prefab, transform.position, Quaternion.identity), Vector3.down, transform);
+        int count = 0;
+        foreach (GameObject spawn in missiles)
+        {
+            GenericActions.MissileAttack(missile, team, enemyData, spawn, vectorDirections[count], gameObject);
+            int random = UnityEngine.Random.Range(0, targets.Count);
+            spawn.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
+            count++;
+        }
 
         audioSource.PlayOneShot(missileLaunchClip, 0.6f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");

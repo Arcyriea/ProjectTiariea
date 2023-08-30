@@ -33,10 +33,10 @@ MonoBehaviour:
   maximumGas: 0
   gasSynthesis: 0
   shootingRange: 1000
-  accelerateSpeed: 30
+  accelerateSpeed: 90
   explodeRadius: 0
   rangedDamage: 152
-  fireRate: 24
+  fireRate: 12
   meleeRange: 5.5
   meleeDamage: 100
   swingTime: 1
