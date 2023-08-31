@@ -19,8 +19,8 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     public int Lives { get; private set; }
     public Enums.Team team { get; private set; }
 
-    public float UltimateMeter { get; private set; }
-
+    public float UltimateMeter { get; protected set; }
+    public float UltimateTimer { get; protected set; }
     public float meleeAttackTime { get; set; }
     public float rangedAttackTime { get; set; }
 
@@ -35,7 +35,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
 
 
-    private class StatusEffect
+    protected class StatusEffect
     {
         public Enums.StatusEffectType type;
         public int stackCount;
@@ -100,6 +100,12 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     protected virtual void Update()
     {
         Regeneration();
+
+        if (animator.GetBool("Ultimate"))
+        {
+            PerformUltimate();
+            UltimateTimer -= Time.deltaTime;
+        }
 
         if (punctured && punctureCooldown <= 0)
         {
@@ -232,6 +238,11 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     protected virtual void ControlAI()
     {
         throw new NotImplementedException();
+    }
+
+    public void IncreaseUltMeter(float time)
+    {
+        UltimateTimer += time;
     }
 }
 

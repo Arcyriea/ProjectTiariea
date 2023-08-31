@@ -183,6 +183,7 @@ MonoBehaviour:
   manaSlider: {fileID: 1248369925}
   energySlider: {fileID: 1938076944}
   charName: {fileID: 1833907753}
+  ultimateButton: {fileID: 214593157}
 --- !u!1 &25372743
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +244,7 @@ MonoBehaviour:
   manaSlider: {fileID: 1313992290}
   energySlider: {fileID: 1038999928}
   charName: {fileID: 119325933}
+  ultimateButton: {fileID: 808258353}
 --- !u!1 &46363998
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +305,7 @@ MonoBehaviour:
   manaSlider: {fileID: 2143797167}
   energySlider: {fileID: 1373059936}
   charName: {fileID: 238491928}
+  ultimateButton: {fileID: 1953710002}
 --- !u!1 &79550801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1828,7 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 11400000, guid: 2c1b47070a5fde04fb02ca68ba3d42f5, type: 2}
   - {fileID: 11400000, guid: 1f05167b37a38e843910fb2621e52ae8, type: 2}
-  - {fileID: 11400000, guid: 1f05167b37a38e843910fb2621e52ae8, type: 2}
+  - {fileID: 11400000, guid: 9abb691e447a19748b4113f0a0c67a3c, type: 2}
   - {fileID: 11400000, guid: 8c8bc014029aeed44a157a1a3fe60f18, type: 2}
   spawnPoints:
   - {fileID: 519420032}
@@ -2433,6 +2436,7 @@ MonoBehaviour:
   manaSlider: {fileID: 520644371}
   energySlider: {fileID: 1443688807}
   charName: {fileID: 687317327}
+  ultimateButton: {fileID: 399199377}
 --- !u!1 &687317325
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,6 +3580,7 @@ MonoBehaviour:
   manaSlider: {fileID: 724321232}
   energySlider: {fileID: 1763080031}
   charName: {fileID: 1603310970}
+  ultimateButton: {fileID: 1718642436}
 --- !u!1 &946740351
 GameObject:
   m_ObjectHideFlags: 0
@@ -4327,6 +4332,7 @@ MonoBehaviour:
   manaSlider: {fileID: 1033045839}
   energySlider: {fileID: 795427030}
   charName: {fileID: 764215335}
+  ultimateButton: {fileID: 731048397}
 --- !u!1 &1101629177
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class ShiariakyiaActions : CharacterProfiling
 {
     public BulletProperties bullet;
     public MissileProperties ringBoomerang;
+
+    public MissileProperties homingRays;
     public Transform[] meleeAttackPoints;
 
     public GameObject[] dartMinions;
@@ -26,7 +28,10 @@ public class ShiariakyiaActions : CharacterProfiling
         base.Start();
         bullet.damage = character.rangedDamage / dartMinions.Length;
         ringBoomerang.damage = character.rangedDamage * 2;
+        homingRays.damage = character.rangedDamage / dartMinions.Length * 1.5f;
         InitializeDarts();
+        UltimateMeter = character.fireRate * 10;
+
     }
 
     // Update is called once per frame
@@ -67,12 +72,12 @@ public class ShiariakyiaActions : CharacterProfiling
     public override void SyncRangedAttacks()
     {
         DartAttacks();
-        CharacterAction("ranged");
+        if (!animator.GetBool("Ultimate")) CharacterAction("ranged");
     }
 
     public override void SyncMeleeAttacks()
     {
-        CharacterAction("attack");
+        if (!animator.GetBool("Ultimate")) CharacterAction("attack");
     }
 
     private void InitializeDarts()
@@ -177,8 +182,46 @@ public class ShiariakyiaActions : CharacterProfiling
 
     public override void PerformUltimate()
     {
-        // Define your ultimate ability logic here
-        // For example, deal massive damage or apply powerful effects
+        EnemyProfiling[] enemies = FindObjectsOfType<EnemyProfiling>();
+        CharacterProfiling[] chars = FindObjectsOfType<CharacterProfiling>();
+
+        List<GameObject> targets = new List<GameObject>();
+
+        foreach (EnemyProfiling enemy in enemies) {
+            if (enemy.team != team)
+            {
+                targets.Add(enemy.gameObject);
+            }
+        }
+        foreach (CharacterProfiling character in chars) { 
+            if (character.team != team)
+            {
+                targets.Add(character.gameObject);
+            }
+        }
+
+        if (animator.gameObject.activeSelf)
+        {
+            if (!animator.GetBool("Ultimate") && UltimateTimer >= UltimateMeter) {
+                animator.SetBool("Ultimate", true);
+                UltimateTimer = UltimateMeter;
+            }
+           
+            if(UltimateTimer > 0)
+            {
+                float RandX = Random.Range(0f, 1.01f)
+                    , RandY = Random.Range(0f, 1.01f);
+
+                int selectedTarget = Random.Range(0, targets.Count);
+                GameObject rays = Instantiate(homingRays.prefab, transform.position, Quaternion.identity);
+                GenericActions.MissileAttack(homingRays, team, character, rays, new Vector3(RandX, RandY, 0), gameObject);
+                rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
+            } else
+            {
+                animator.SetBool("Ultimate", false);
+            }
+
+        }
         UnityEngine.Debug.Log(character.characterName + " performs their ultimate ability!");
     }
 }

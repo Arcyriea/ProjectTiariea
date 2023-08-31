@@ -101,6 +101,11 @@ public class EnemyProfiling : MonoBehaviour
     protected virtual void OnDestroy()
     {
         PartyController.score += 100;
+        PartyController controller = FindFirstObjectByType<PartyController>();
+        foreach (GameObject character in controller.spawnedPrefabs)
+        {
+            character.GetComponent<CharacterProfiling>().IncreaseUltMeter(1f);
+        }
     }
 }
 

@@ -10,9 +10,10 @@ public class BarFunctions : MonoBehaviour
     public Slider shieldSlider;
     public Slider manaSlider;
     public Slider energySlider;
+    public Slider ultimateSlider;
 
     public TextMeshProUGUI charName;
-
+    public Button ultimateButton;
     public CharacterProfiling characterProfiling { get; private set; }
 
     private void Awake()
@@ -30,7 +31,8 @@ public class BarFunctions : MonoBehaviour
                 characterProfiling.character.maximumHealth,
                 characterProfiling.character.maximumShield,
                 characterProfiling.character.maximumMana,
-                characterProfiling.character.maximumEnergy
+                characterProfiling.character.maximumEnergy,
+                characterProfiling.UltimateMeter
             );
         }
     }
@@ -49,6 +51,7 @@ public class BarFunctions : MonoBehaviour
         if (shieldSlider.value != characterProfiling.Shield) shieldSlider.value = characterProfiling.Shield;
         if (manaSlider.value != characterProfiling.Mana) manaSlider.value = characterProfiling.Mana;
         if (energySlider.value != characterProfiling.Energy) energySlider.value = characterProfiling.Energy;
+        if (ultimateSlider.value != characterProfiling.UltimateTimer) ultimateSlider.value = characterProfiling.UltimateTimer;
     }
 
     public void SetCharProfile(CharacterProfiling characterProfiling)
@@ -62,9 +65,11 @@ public class BarFunctions : MonoBehaviour
                 characterProfiling.character.maximumHealth,
                 characterProfiling.character.maximumShield,
                 characterProfiling.character.maximumMana,
-                characterProfiling.character.maximumEnergy
+                characterProfiling.character.maximumEnergy,
+                characterProfiling.UltimateMeter
             );
             charName.SetText(characterProfiling.character.characterName);
+            ultimateButton.onClick.AddListener(() => characterProfiling.CharacterAction("ultimate"));
         }
     }
 
@@ -72,16 +77,17 @@ public class BarFunctions : MonoBehaviour
     {
         characterProfiling = null;
         charName.SetText("");
-        InitializeSliders(0, 0, 0, 0);
+        InitializeSliders(0, 0, 0, 0, 0);
         gameObject.SetActive(false);
     }
 
-    private void InitializeSliders(float maxHealth, float maxShield, float maxMana, float maxEnergy)
+    private void InitializeSliders(float maxHealth, float maxShield, float maxMana, float maxEnergy, float ultimateMeter)
     {
         gameObject.SetActive(true);
         healthSlider.maxValue = maxHealth;
         shieldSlider.maxValue = maxShield;
         manaSlider.maxValue = maxMana;
         energySlider.maxValue = maxEnergy;
+        ultimateSlider.maxValue = ultimateMeter;
     }
 }

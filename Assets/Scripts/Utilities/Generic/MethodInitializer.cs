@@ -34,7 +34,10 @@ public static class GenericActions
                 }
                 break;
             case "ultimate":
-                profiling.PerformUltimate();
+                if (profiling.UltimateTimer >= profiling.UltimateMeter)
+                {
+                    profiling.PerformUltimate();
+                }
                 break;
             default:
                 UnityEngine.Debug.LogError("Invalid action: " + action);
