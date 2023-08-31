@@ -16,6 +16,8 @@ public class ShiariakyiaActions : CharacterProfiling
     private float orbitRadius = 6f;
     private float dartRangedAttackTime;
 
+    private float homingRaysDelay;
+
     public AudioClip dartRangedAttackClip;
     public AudioClip boomerangThrowClip;
     public override void CharacterAction(string action)
@@ -208,14 +210,19 @@ public class ShiariakyiaActions : CharacterProfiling
             }
            
             if(UltimateTimer > 0)
-            {
-                float RandX = Random.Range(0f, 1.01f)
-                    , RandY = Random.Range(0f, 1.01f);
+            { 
+                if (Time.time - homingRaysDelay >= character.fireRate / (dartMinions.Length * 20))
+                {
+                    float RandX = Random.Range(0f, 1.01f)
+                        , RandY = Random.Range(0f, 1.01f);
 
-                int selectedTarget = Random.Range(0, targets.Count);
-                GameObject rays = Instantiate(homingRays.prefab, transform.position, Quaternion.identity);
-                GenericActions.MissileAttack(homingRays, team, character, rays, new Vector3(RandX, RandY, 0), gameObject);
-                rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
+                    int selectedTarget = Random.Range(0, targets.Count);
+                    GameObject rays = Instantiate(homingRays.prefab, transform.position, Quaternion.identity);
+                    GenericActions.MissileAttack(homingRays, team, character, rays, new Vector3(RandX, RandY, 0), gameObject);
+                    rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
+                    homingRaysDelay = Time.time;
+                }
+                       
             } else
             {
                 animator.SetBool("Ultimate", false);
