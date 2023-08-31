@@ -65,6 +65,8 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     void Awake()
     {
         isDead = false;
+        UltimateMeter = 100f;
+        UltimateTimer = 0;
     }
 
     public virtual void SyncRangedAttacks()
@@ -148,6 +150,8 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         if (Shield < character.maximumShield && character.shieldRegen != 0) Shield += character.shieldRegen;
         if (Energy < character.maximumEnergy && character.energyRegen != 0) Energy += character.energyRegen;
         if (Mana < character.maximumMana && character.manaRegen != 0) Mana += character.manaRegen;
+
+        if (UltimateTimer < UltimateMeter) UltimateTimer += Time.deltaTime;
 
     }
 
