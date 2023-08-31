@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b97871c20fb6a4da1446c5261cab79, type: 3}
   m_Name: ShiarRays
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 615376307376780944, guid: e6c2b76e7e7ff884690b24862cdc57ad, type: 3}
   health: 0
   damage: 0
   hullDamage: 0
   coldLaunchSpeed: 0
-  acceleration: 0
-  maxSpeed: 0
-  rotationSpeed: 0
+  acceleration: 40
+  maxSpeed: 120
+  rotationSpeed: 35
   splashRadius: 0
   detectionRadius: 0
-  lifeTime: 0
-  homing: 0
+  lifeTime: 8
+  homing: 1
   boomerang: 0
   intercept: 0
   penetrates: 0
