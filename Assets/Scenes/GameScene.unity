@@ -1545,8 +1545,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410988788}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0.3002, y: 0.0543, z: 10}
-  m_LocalScale: {x: 49.77488, y: 1, z: 22.466963}
+  m_LocalPosition: {x: 0.3002, y: 0.0544, z: 10}
+  m_LocalScale: {x: 38.92548, y: 1, z: 22.466894}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 519420032}
@@ -1776,6 +1776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420037}
   - component: {fileID: 519420035}
   - component: {fileID: 519420036}
   - component: {fileID: 519420031}
@@ -1929,6 +1930,9 @@ MonoBehaviour:
   - {fileID: 519420032}
   - {fileID: 519420032}
   - {fileID: 519420032}
+  wavesEnemyCount: 
+  alliesTypes: []
+  supportPoints: []
   spawnInterval: 3
   prefabLayer:
     serializedVersion: 2
@@ -1961,6 +1965,27 @@ MonoBehaviour:
   - {fileID: 2034738707}
   fullHeart: {fileID: 494073539, guid: af2dee7ecfcea4142a77eb5a0137bbba, type: 3}
   emptyHeart: {fileID: -144826027, guid: af2dee7ecfcea4142a77eb5a0137bbba, type: 3}
+--- !u!114 &519420037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7c763f231e8b94bafad33350a21601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - enemyTypes:
+    - {fileID: 11400000, guid: 1f05167b37a38e843910fb2621e52ae8, type: 2}
+    spawnPoints:
+    - {x: 100, y: 25, z: 0}
+    - {x: 100, y: -25, z: 0}
+    enemyCount: 100
+    isBossWave: 0
+  bossCharacter: {fileID: 0}
 --- !u!1 &520644369
 GameObject:
   m_ObjectHideFlags: 0

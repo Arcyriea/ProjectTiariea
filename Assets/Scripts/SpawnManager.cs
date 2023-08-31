@@ -3,13 +3,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Enums;
 
 public class SpawnManager : MonoBehaviour
 {
+    private bool activated = true;
     public Enemy[] enemyTypes; // List of different enemy types to spawn
     public Transform[] spawnPoints; // Array of spawn points for enemies
 
-    public float spawnInterval = 3f; // Time interval between enemy spawns
+    public int[] wavesEnemyCount;
+
+    public Enemy[] alliesTypes;
+    public Transform[] supportPoints;
+
+    public float spawnInterval = 1f; // Time interval between enemy spawns
     private float nextSpawnTime;
     public LayerMask prefabLayer;
 
@@ -20,11 +27,16 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time >= nextSpawnTime)
+        if (Time.time >= nextSpawnTime && activated)
         {
             SpawnRandomEnemy();
             nextSpawnTime = Time.time + spawnInterval;
         }
+    }
+
+    public void SetActive(bool active)
+    {
+        activated = active;
     }
 
     private void SpawnRandomEnemy()
@@ -51,6 +63,29 @@ public class SpawnManager : MonoBehaviour
         newEnemy.layer = prefabLayer;
     }
 
-    
+    private void SpawnDefinedEnemy(Enemy enemy)
+    {
+
+    }
+
+    private void SpawnRandomAllies()
+    {
+
+    }
+
+    private void SpawnDefinedAlly(Enemy ally)
+    {
+
+    }
+
+    private void SpawnEnemyCharacter(Character enemyChar, Team team)
+    {
+
+    }
+
+    private void SpawnAllyCharacter(Character allyChar, Team team)
+    {
+
+    }
 }
 

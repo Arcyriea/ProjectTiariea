@@ -100,13 +100,15 @@ public class EnemyProfiling : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        if (team != Enums.Team.ALLIES)
+        if (gameObject != null && team != Enums.Team.ALLIES)
         {
             PartyController.score += 100;
             PartyController controller = FindFirstObjectByType<PartyController>();
             foreach (GameObject character in controller.spawnedPrefabs)
             {
-                character.GetComponent<CharacterProfiling>().IncreaseUltMeter(1f);
+                CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
+                profiling.IncreaseUltMeter(10f);
+                UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
             }
         }
     }

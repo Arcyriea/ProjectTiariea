@@ -131,7 +131,6 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     void OnDrawGizmosSelected()
     {
-        if (meleeAttackPoint == null) return;
-        Gizmos.DrawWireSphere(meleeAttackPoint.position, 4.5f);
+       
     }
 }

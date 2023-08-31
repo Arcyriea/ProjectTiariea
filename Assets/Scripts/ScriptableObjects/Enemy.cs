@@ -10,6 +10,7 @@ public class Enemy : ScriptableObject
     public string enemyName;
     public GameObject enemyPrefab;
     public Enums.ClassType enemyClass;
+    [SerializeField]
     public Enums.Team team;
 
     // Enemy stats and behavior attributes
@@ -40,21 +41,3 @@ public class Enemy : ScriptableObject
         attackCooldown = cooldown;
     }
 }
-
-//public static class Enemies
-//{
-//    public static List<Enemy> enemies = new List<Enemy>();
-
-
-//    private static Sprite LoadSpriteByGUID(string spriteGUID)
-//    {
-//        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(spriteGUID);
-//        return UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(path);
-//    }
-
-//    private static Animator LoadAnimatorByGUID(string animGUID)
-//    {
-//        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(animGUID);
-//        return UnityEditor.AssetDatabase.LoadAssetAtPath<Animator>(path);
-//    }
-//}

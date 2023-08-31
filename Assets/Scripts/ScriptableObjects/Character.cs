@@ -11,6 +11,7 @@ public class Character : ScriptableObject
     public GameObject characterPrefab;
     public GameObject mountPrefab;
     public Enums.ClassType characterClass;
+    [SerializeField]
     public Enums.Team team; // can be changed programatically and through game character selection, reserved for storyline.
 
     // stat controls

@@ -18,9 +18,9 @@ MonoBehaviour:
   mountPrefab: {fileID: 0}
   characterClass: 0
   team: 0
-  maximumHealth: 2481
+  maximumHealth: 248
   healthRegen: 0
-  maximumShield: 1232
+  maximumShield: 123
   shieldRegen: 0
   ShieldIdentity: 2
   defense: 232
