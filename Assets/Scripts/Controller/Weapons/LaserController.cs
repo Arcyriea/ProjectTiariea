@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using static Enums;
 
 public class LaserController : MonoBehaviour
 {
@@ -90,11 +91,21 @@ public class LaserController : MonoBehaviour
         {
             // Apply damage to the character
             characterProfiling.TakeDamage(damage * Time.deltaTime);
+
+            if (characterProfiling.Health <= 0 && team == Team.ALLIES) { 
+                PartyController.score += 1000;
+                Destroy(characterProfiling.gameObject);
+            }
         }
         else if (enemyProfiling != null)
         {
             // Apply damage to the enemy
             enemyProfiling.TakeDamage(damage * Time.deltaTime);
+            if (enemyProfiling.Health <= 0 && team == Team.ALLIES)
+            {
+                PartyController.score += 100;
+                Destroy(enemyProfiling.gameObject);
+            }
         }
         else if (bullets != null)
         {

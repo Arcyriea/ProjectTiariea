@@ -151,6 +151,7 @@ public class BulletController : MonoBehaviour
                     character.TakeDamage(damage);
                     damage -= remainingHealth;
                 }
+                if (character.Health <= 0 && team == Enums.Team.ALLIES) PartyController.score += 1000;
             }
         }
 
@@ -179,6 +180,7 @@ public class BulletController : MonoBehaviour
                     entity.TakeDamage(damage);
                     damage -= remainingHealth;
                 }
+                if (entity.Health <= 0 && team == Enums.Team.ALLIES) PartyController.score += 100;
             }
         }
     }

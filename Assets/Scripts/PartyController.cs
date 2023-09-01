@@ -21,8 +21,11 @@ public class PartyController : MonoBehaviour
 
     public GameObject[] characterStatSliders;
     public List<GameObject> spawnedPrefabs { get; private set; }
+    private float[] respawnTimer;
+    private bool[] isRespawning;
+
     private CustomFormation selectedFormation;
-    public float spacing = 40f;
+    public float spacing = 0.02f;
 
     public LayerMask prefabLayer;
 
@@ -42,17 +45,27 @@ public class PartyController : MonoBehaviour
         tmpScoreUGUI = tmpScore.GetComponent<TextMeshProUGUI>();
         orthoCamera = GetComponent<Camera>();
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
+        respawnTimer = new float[characters.Length];
+        isRespawning = new bool[characters.Length];
+
         for (int i = 0; i < characters.Length; i++)
         {
-            Vector3 offset = new Vector3(
-                (i - (memCap - 1) / 2f) * spacing, //(i - (memCap - 1) / 2f) * spacing, 
-                0f,
-                0f);
+            float circleRadius = 12f;
+            float angle = 2 * Mathf.PI * i / characters.Length;
+            Vector3 offset = new Vector3(Mathf.Cos(angle) * circleRadius,
+                                        Mathf.Sin(angle) * circleRadius,
+                                        0f);
+
+            //Vector3 offset = new Vector3(
+            //    (i - (memCap - 1) / 2f) * spacing, //(i - (memCap - 1) / 2f) * spacing, 
+            //    0f,
+            //    0f);
 
             GameObject prefabInstance = Instantiate(characters[i].characterPrefab, spawnPosition + offset, Quaternion.identity);
             prefabInstance.layer = prefabLayer;
             CharacterProfiling prefabCharProfile = prefabInstance.GetComponent<CharacterProfiling>();
-
+            respawnTimer[i] = 0;
+            isRespawning[i] = false;
             prefabCharProfile.GetCharacterFromScriptableObject(characters[i]);
             prefabCharProfile.SetTeam(Enums.Team.ALLIES);
             prefabInstance.SetActive(true);
@@ -93,6 +106,8 @@ public class PartyController : MonoBehaviour
             //Vector3 offset = member.transform.position - transform.position;
             member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime);// + offset;
         }
+
+        CheckPartyStatus();
     }
 
     private void SelectPartyMember()
@@ -243,5 +258,45 @@ public class PartyController : MonoBehaviour
     public void SetSelectedFormation(CustomFormation formation)
     {
 
+    }
+
+    private void CheckPartyStatus()
+    {
+        int index = 0;
+        foreach (GameObject partyMember in spawnedPrefabs)
+        {
+            CharacterProfiling profiling = partyMember.GetComponent<CharacterProfiling>();
+            if (profiling.isDead)
+            {
+                if (!isRespawning[index])
+                    SetRespawn(profiling, index);
+                else
+                    CountToRespawn(profiling, index);
+            }
+
+            index++;
+        }
+    }
+    private void SetRespawn(CharacterProfiling profiling, int index)
+    {
+        if (profiling.Lives > 0)
+        {
+            respawnTimer[index] = 5;
+            isRespawning[index] = true;
+            profiling.setLives(-1);
+        }
+        profiling.gameObject.SetActive(false);
+    }
+
+    private void CountToRespawn(CharacterProfiling profiling, int index)
+    {
+        respawnTimer[index] -= Time.fixedDeltaTime;
+        if (respawnTimer[index] <= 0)
+        {
+            profiling.gameObject.SetActive(true);
+            profiling.ResetStats();
+            isRespawning[index] = false;
+            respawnTimer[index] = 0;
+        }
     }
 }

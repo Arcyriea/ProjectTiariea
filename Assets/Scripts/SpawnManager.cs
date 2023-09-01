@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
 {
     private bool activated = true;
     public Enemy[] enemyTypes; // List of different enemy types to spawn
-    public Transform[] spawnPoints; // Array of spawn points for enemies
+    public Vector3[] spawnPoints; // Array of spawn points for enemies
 
     public int[] wavesEnemyCount;
 
@@ -55,7 +55,7 @@ public class SpawnManager : MonoBehaviour
 
         // Calculate the spawn position by adding the offset to the camera position and using the spawn point's position
         Vector3 randomDeviation = new Vector3(UnityEngine.Random.Range(20f, 40f), UnityEngine.Random.Range(-10f, 10f), 0f); // Adjust the ranges for the desired deviation
-        Vector3 spawnPosition = cameraPosition + spawnOffset + spawnPoints[randomSpawnPointIndex].position + randomDeviation;
+        Vector3 spawnPosition = cameraPosition + spawnOffset + spawnPoints[randomSpawnPointIndex] + randomDeviation;
         spawnPosition.z = 0f;
 
         GameObject newEnemy = Instantiate(enemyData.enemyPrefab, spawnPosition, Quaternion.identity);

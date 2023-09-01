@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character")]
+[Serializable]
 public class Character : ScriptableObject
 {
     // character identification

@@ -327,6 +327,7 @@ public class MissileController : MonoBehaviour
                     character.TakeDamage(damage);
                     if (!properties.boomerang) health -= remainingHealth;
                 }
+                if (character.Health <= 0 && team == Team.ALLIES) PartyController.score += 100;
             } 
             
         }
@@ -363,6 +364,7 @@ public class MissileController : MonoBehaviour
                     entity.TakeDamage(damage);
                     if (!properties.boomerang) health -= remainingHealth;
                 }
+                if (entity.Health <= 0 && team == Team.ALLIES) PartyController.score += 100;
             }
         }
     }

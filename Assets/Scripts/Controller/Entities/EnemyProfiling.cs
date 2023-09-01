@@ -102,10 +102,10 @@ public class EnemyProfiling : MonoBehaviour
     {
         if (gameObject != null && team != Enums.Team.ALLIES)
         {
-            PartyController.score += 100;
             PartyController controller = FindFirstObjectByType<PartyController>();
             foreach (GameObject character in controller.spawnedPrefabs)
             {
+                if (!character.activeSelf) return;
                 CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
                 profiling.IncreaseUltMeter(10f);
                 UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);

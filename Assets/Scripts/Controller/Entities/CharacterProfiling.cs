@@ -29,7 +29,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
     // status control
     public bool isDead { get; private set; }
-    private int RespawnTimer = 0;
+    //private int RespawnTimer = 0;
     public bool punctured = false;
     private int punctureCooldown;
 
@@ -121,28 +121,12 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         if (Health <= 0)
         {
             isDead = true;
-            RespawnTimer = 5;
+            //RespawnTimer = 5;
         }
-        if (Lives > 0) CheckRespawn();
+        
     }
 
-    private void CheckRespawn()
-    {
-        if (isDead)
-        {
-            character.characterPrefab.SetActive(false);
-            RespawnTimer -= (int)Time.fixedDeltaTime;
-            Lives -= 1;
-            if (RespawnTimer <= 0)
-            {
-                character.characterPrefab.SetActive(true);
-                ResetStats();
-                RespawnTimer = 0;
-                isDead = false;
-
-            }
-        }
-    }
+    
 
     protected virtual void Regeneration()
     {
@@ -155,12 +139,14 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
     }
 
-    void ResetStats()
+    public void ResetStats()
     {
         Health = character.maximumHealth;
         Shield = character.maximumShield;
         Mana = character.maximumMana;
         Energy = character.maximumEnergy;
+        isDead = false;
+        punctured = false;
     }
 
     public void TakeDamage(float Damage)
@@ -189,7 +175,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         Shield += Healing;
         if (Shield > character.maximumShield) Shield = character.maximumShield;
     }
-    public void grantExtraLives(int Lives)
+    public void setLives(int Lives)
     {
         this.Lives += Lives;
     }
@@ -247,6 +233,21 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     public void IncreaseUltMeter(float time)
     {
         UltimateTimer += time;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (gameObject != null && team != Enums.Team.ALLIES)
+        {
+            PartyController controller = FindFirstObjectByType<PartyController>();
+            foreach (GameObject character in controller.spawnedPrefabs)
+            {
+                if (!character.activeSelf) return;
+                CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
+                profiling.IncreaseUltMeter(50f);
+                UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+            }
+        }
     }
 }
 
