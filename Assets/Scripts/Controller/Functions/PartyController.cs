@@ -88,6 +88,8 @@ public class PartyController : MonoBehaviour
             selectedFormation = customFormations[0];
             UpdateFormation();
         }//Sap xep theo doi hinh
+
+        StartCoroutine(CheckPartyStatusCoroutine());
     }
 
     void Update()
@@ -107,7 +109,6 @@ public class PartyController : MonoBehaviour
             member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime);// + offset;
         }
 
-        CheckPartyStatus();
     }
 
     private void SelectPartyMember()
@@ -260,21 +261,26 @@ public class PartyController : MonoBehaviour
 
     }
 
-    private void CheckPartyStatus()
+    private IEnumerator CheckPartyStatusCoroutine()
     {
-        int index = 0;
-        foreach (GameObject partyMember in spawnedPrefabs)
+        while (true)
         {
-            CharacterProfiling profiling = partyMember.GetComponent<CharacterProfiling>();
-            if (profiling.isDead)
+            for (int index = 0; index < spawnedPrefabs.Count; index++)
             {
-                if (!isRespawning[index])
-                    SetRespawn(profiling, index);
-                else
-                    CountToRespawn(profiling, index);
+                GameObject partyMember = spawnedPrefabs[index];
+                CharacterProfiling profiling = partyMember.GetComponent<CharacterProfiling>();
+
+                if (profiling.isDead)
+                {
+                    if (!isRespawning[index])
+                        SetRespawn(profiling, index);
+                    else
+                        CountToRespawn(profiling, index);
+                }
             }
 
-            index++;
+            // Wait for the next frame
+            yield return null;
         }
     }
     private void SetRespawn(CharacterProfiling profiling, int index)
@@ -290,7 +296,7 @@ public class PartyController : MonoBehaviour
 
     private void CountToRespawn(CharacterProfiling profiling, int index)
     {
-        respawnTimer[index] -= Time.fixedDeltaTime;
+        respawnTimer[index] -= Time.deltaTime;
         if (respawnTimer[index] <= 0)
         {
             profiling.gameObject.SetActive(true);

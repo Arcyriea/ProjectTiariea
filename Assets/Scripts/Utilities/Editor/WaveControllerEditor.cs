@@ -2,8 +2,17 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(WaveController))]
-public class CharacterEnemyFilter : Editor
+public class WaveControllerEditor : Editor
 {
+    private SerializedProperty enemyTypes;
+    private SerializedProperty enemyCounts;
+
+    private void OnEnable()
+    {
+        enemyTypes = serializedObject.FindProperty("enemyTypes");
+        enemyCounts = serializedObject.FindProperty("enemyCounts");
+    }
+
     public override void OnInspectorGUI()
     {
         WaveController targetScript = (WaveController)target;
@@ -15,8 +24,12 @@ public class CharacterEnemyFilter : Editor
         FilterObjectArray("criticalEntity", serializedObject);
         FilterObjectArray("bossEntity", serializedObject);
 
+        
+
         serializedObject.ApplyModifiedProperties();
     }
+
+    
 
     [CustomPropertyDrawer(typeof(Enemy))]
     [CustomPropertyDrawer(typeof(Character))]
