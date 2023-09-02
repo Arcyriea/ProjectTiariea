@@ -145,6 +145,7 @@ public class WaveController : MonoBehaviour
             yield return new WaitForSeconds(currentWave.supportSpawnInterval);
             // e.g., yield return new WaitForSeconds(enemySpawnDelay);
         }
+        yield break;
     }
 
 
@@ -175,6 +176,8 @@ public class WaveController : MonoBehaviour
             yield return new WaitForSeconds(currentWave.enemySpawnInterval);
             // e.g., yield return new WaitForSeconds(enemySpawnDelay);
         }
+
+        yield break;
     }
     private void SpawnEnemy(Enemy enemyType, Vector3 spawnPoint)
     {

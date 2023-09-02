@@ -143,6 +143,8 @@ public class MissileBoss : EnemyProfiling
     private void PerformRanged()
     {
         StartCoroutine(PerformRangedWithDelay());
+
+        UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 
     private void PerformHeal()
@@ -181,7 +183,8 @@ public class MissileBoss : EnemyProfiling
             }
         }
 
-        UnityEngine.Debug.Log("" + " performs ranged attack!");
+        yield break;
+        
     }
 
 }
