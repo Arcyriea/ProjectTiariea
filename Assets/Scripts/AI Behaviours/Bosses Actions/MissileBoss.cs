@@ -176,7 +176,7 @@ public class MissileBoss : EnemyProfiling
                 GenericActions.MissileAttack(missile, team, enemyData, missilee, Vector3.down, gameObject);
                 int random = UnityEngine.Random.Range(0, targets.Count);
                 missilee.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
-                audioSource.PlayOneShot(missileLaunchClip, 0.6f);
+                GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(missileLaunchClip, 0.6f);
 
                 // Wait for the specified launch interval before the next iteration.
                 yield return new WaitForSeconds(launchInterval);

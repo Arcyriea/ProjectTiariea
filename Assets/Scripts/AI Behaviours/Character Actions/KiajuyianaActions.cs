@@ -86,7 +86,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         
         GenericActions.MeleeAttack(meleeAttackPoint, team, character);
         int sound = UnityEngine.Random.Range(1, swordSwing.Length);
-        audioSource.PlayOneShot(swordSwing[sound], 1f);
+        GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(swordSwing[sound], 1f);
         Invoke("ResetAnimation", character.swingTime / 10 < 1f ? 1f : character.swingTime / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs an attack!");
@@ -109,7 +109,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         }
 
         GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);
-        audioSource.PlayOneShot(swordWhoosh, 1f);
+        GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(swordWhoosh, 1f);
         Invoke("ResetAnimation", character.fireRate / 10);
 
         UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");

@@ -151,7 +151,7 @@ public class CircleOrb : EnemyProfiling
         GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), new Vector3(-1, 1, 0));
         GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), new Vector3(1, -1, 0));
 
-        audioSource.PlayOneShot(bulletFire, 1f);
+        GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(bulletFire, 1f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 

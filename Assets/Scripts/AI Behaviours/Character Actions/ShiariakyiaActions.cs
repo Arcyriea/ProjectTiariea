@@ -122,7 +122,7 @@ public class ShiariakyiaActions : CharacterProfiling
                 GenericActions.BulletAttack(bullet, team, character, Instantiate(bullet.bulletPrefab, offset, Quaternion.identity), Vector3.right);
                 
             }
-            audioSource.PlayOneShot(dartRangedAttackClip, 0.7f);
+            GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(dartRangedAttackClip, 0.7f);
             dartRangedAttackTime = Time.time;
         }
     }

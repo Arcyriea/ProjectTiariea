@@ -155,7 +155,7 @@ public class DefaultEnemy : EnemyProfiling
             bulletGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        audioSource.PlayOneShot(bulletFire, 0.7f);
+        GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(bulletFire, 0.7f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 
