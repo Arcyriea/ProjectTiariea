@@ -24,24 +24,27 @@ public class WaveController : MonoBehaviour
         public float supportSpawnInterval;
 
         private int enemyCountAll = 0;
+        public int enemyCasualties { get; private set; }
         private bool initializedEnemyCount = true;
         public int EnemyCountAll { 
             get {
                 if (initializedEnemyCount)
                 {
                     int totalEnemyCount = 0;
-                    foreach (int count in allyCounts)
+                    foreach (int count in enemyCounts)
                     {
                         totalEnemyCount += count;
                     }
                     enemyCountAll = totalEnemyCount;
                     initializedEnemyCount = false;
+                    UnityEngine.Debug.Log("Set total Enemy Count for this wave successfully: " + enemyCountAll);
                 }
                 return enemyCountAll;
             } 
             protected set { } 
         }
         private int allyCountAll = 0;
+        public int allyCasualties { get; private set; }
         private bool initializedAllyCount = true;
         public int AllyCountAll {
             get
@@ -54,6 +57,7 @@ public class WaveController : MonoBehaviour
                     }
                     allyCountAll = totalAllyCount;
                     initializedAllyCount = false;
+                    UnityEngine.Debug.Log("Set total Ally Count for this wave successfully: " + allyCountAll);
                 }
                 return allyCountAll;
             }
@@ -74,15 +78,16 @@ public class WaveController : MonoBehaviour
         {
             initializedAllyCount = true;
             initializedEnemyCount = true;
+            UnityEngine.Debug.Log("Resynchronize Counts initialized");
         }
         public void SetAllyCasualty()
         {
-            AllyCountAll -= 1;
+            allyCasualties += 1;
         }
 
         public void SetEnemyCasualty()
         {
-            EnemyCountAll -= 1;
+            enemyCasualties += 1;
         }
     }
 
@@ -100,6 +105,7 @@ public class WaveController : MonoBehaviour
     private int currentEnemyIndex = 0;
     private int currentAllyIndex = 0;
     private float nextWaveCountdown = 0;
+    public bool bossPresent { get; private set; }
 
     private void Start()
     {
@@ -110,7 +116,7 @@ public class WaveController : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time >= nextWaveCountdown)
+        if (Time.time >= nextWaveCountdown && !bossPresent)
         {
             StartWave(currentWaveIndex);
         }
@@ -122,8 +128,9 @@ public class WaveController : MonoBehaviour
         {
             
             Wave currentWave = waves[waveIndex];
-            if (SynchronizeEnemyCounts(currentWave) || SynchronizeAllyCounts(currentWave))
-            currentWave.ResynchronizeTotalCounts();
+            bool syncEnemy = SynchronizeEnemyCounts(currentWave);
+            bool syncAlly = SynchronizeAllyCounts(currentWave);
+            if (syncAlly || syncEnemy) currentWave.ResynchronizeTotalCounts();
             nextWaveCountdown = Time.time + currentWave.waveInterval;
 
             passiveSpawnManager.SetActive(currentWave.allowPassiveSpawns);
@@ -135,6 +142,7 @@ public class WaveController : MonoBehaviour
             {
                 if (bossEntity.Length > 0) SpawnBoss(bossEntity[bossIndex], null);
                 BossInterfaceHud.SetActive(true);
+                bossPresent = true;
             }
 
             if (currentWave.isThereCritical)
@@ -231,6 +239,7 @@ public class WaveController : MonoBehaviour
     }
     private IEnumerator SpawnEnemiesCoroutine(Wave currentWave, int currentWaveIndex)
     {
+        UnityEngine.Debug.Log("Wave "+ currentWaveIndex + " enemy spawn coroutine is active");
         int spawnPointIndex = 0;
         Vector3 offset = Vector3.zero;
         for (int i = 0; i < currentWave.EnemyCountAll; i++)
@@ -358,5 +367,10 @@ public class WaveController : MonoBehaviour
     public void RecordEnemyCasualties(int WaveIndex)
     {
         waves[WaveIndex].SetEnemyCasualty();
+    }
+
+    public void InformBossDead()
+    {
+        bossPresent = false;
     }
 }

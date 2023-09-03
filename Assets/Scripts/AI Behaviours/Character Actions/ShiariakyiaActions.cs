@@ -148,8 +148,6 @@ public class ShiariakyiaActions : CharacterProfiling
             GenericActions.MeleeAttack(meleeAttackPoint, team, character);
         }
         Invoke("ResetAnimation", character.swingTime / 10 < 1f ? 1f : character.swingTime / 10);
-
-        UnityEngine.Debug.Log(character.characterName + " performs an attack!");
     }
 
     public override void PerformRanged()
@@ -171,8 +169,6 @@ public class ShiariakyiaActions : CharacterProfiling
         GenericActions.MissileAttack(ringBoomerang, team, character, Instantiate(ringBoomerang.prefab, transform.position, Quaternion.identity), Vector3.right, gameObject);
         
         Invoke("ResetAnimation", character.fireRate / 10);
-
-        UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
 
     public override void PerformHeal()

@@ -18,11 +18,11 @@ MonoBehaviour:
   hullDamage: 0
   coldLaunchSpeed: 10
   acceleration: 12
-  maxSpeed: 22
+  maxSpeed: 42
   rotationSpeed: 160
   splashRadius: 0
   detectionRadius: 200
-  lifeTime: 5
+  lifeTime: 8
   homing: 1
   boomerang: 0
   intercept: 0

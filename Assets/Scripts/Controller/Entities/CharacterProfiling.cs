@@ -120,7 +120,8 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
         if (Health <= 0)
         {
-            isDead = true;
+            if (tag == "Player") isDead = true;
+            else Destroy(gameObject);
             //RespawnTimer = 5;
         }
         

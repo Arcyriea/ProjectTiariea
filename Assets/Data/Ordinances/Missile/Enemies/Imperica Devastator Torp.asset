@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b97871c20fb6a4da1446c5261cab79, type: 3}
   m_Name: Imperica Devastator Torp
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 7355991907520145239, guid: 5d04833a3c9d57841bbb3de9b58342c1, type: 3}
   health: 0
   damage: 0
   hullDamage: 0
   coldLaunchSpeed: 0
-  acceleration: 0
-  maxSpeed: 0
+  acceleration: 33
+  maxSpeed: 62
   rotationSpeed: 0
   splashRadius: 0
   detectionRadius: 0
-  lifeTime: 0
+  lifeTime: 5
   homing: 0
   boomerang: 0
   intercept: 0

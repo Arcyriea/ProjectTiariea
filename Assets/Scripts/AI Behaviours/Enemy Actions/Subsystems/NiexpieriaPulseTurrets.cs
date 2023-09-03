@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NiexpieriaBeamfarer : SubsystemProfiling
+public class NiexpieriaPulseTurrets : SubsystemProfiling
 {
     // Start is called before the first frame update
     protected override void Start()

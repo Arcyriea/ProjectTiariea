@@ -113,21 +113,32 @@ public class EnemyProfiling : MonoBehaviour
     protected virtual void OnDestroy()
     {
         WaveController waveController = null;
-        if (tag == "Boss" || tag == "MainWavesForce") waveController = FindFirstObjectByType<WaveController>();
+        if ((tag == "Boss" || tag == "MainWavesForce") && FindFirstObjectByType<WaveController>() != null) 
+            waveController = FindFirstObjectByType<WaveController>();
 
             if (team != Enums.Team.ALLIES) {
-                PartyController controller = FindFirstObjectByType<PartyController>();
-                foreach (GameObject character in controller.spawnedPrefabs)
+                if (FindFirstObjectByType<PartyController>() != null)
                 {
-                    if (!character.activeSelf) return;
-                    CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
-                    profiling.IncreaseUltMeter(10f);
-                    UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+                    PartyController controller = FindFirstObjectByType<PartyController>();
+                    foreach (GameObject character in controller.spawnedPrefabs)
+                    {
+                        if (!character.activeSelf) return;
+                        CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
+                        profiling.IncreaseUltMeter(10f);
+                        UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+                    }
                 }
+                
 
                 if (waveController != null && tag == "MainWavesForce")
                 {
                     if (WaveIndex != null) waveController.RecordEnemyCasualties((int) WaveIndex);
+                }
+
+                if (waveController != null && tag == "Boss") 
+                {
+                    waveController.BossInterfaceHud.GetComponent<BossBarFunction>().RemoveBoss();
+                    waveController.InformBossDead();
                 }
             }
             else if (team == Enums.Team.ALLIES)
