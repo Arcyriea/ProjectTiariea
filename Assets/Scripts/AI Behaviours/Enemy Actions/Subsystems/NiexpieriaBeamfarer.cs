@@ -15,4 +15,24 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
     {
         base.Update();
     }
+
+    protected override void PerformAttack()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void PerformRanged()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void PerformHeal()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void PerformUltimate()
+    {
+        throw new System.NotImplementedException();
+    }
 }
