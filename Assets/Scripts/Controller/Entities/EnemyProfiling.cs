@@ -21,9 +21,9 @@ public class EnemyProfiling : MonoBehaviour
     public bool punctured = false;
     private int punctureCooldown;
     //
-
+    public int? WaveIndex = null;
     public float Health { get; private set; }
-
+    public float Shield { get; private set; }
     private class StatusEffect
     {
         public Enums.StatusEffectType type;
@@ -46,6 +46,7 @@ public class EnemyProfiling : MonoBehaviour
         homeworld = GameObject.Find("Main Camera")?.GetComponent<HomeworldHearts>();
         animator = enemyData == null ? null : gameObject.GetComponent<Animator>();
         audioSource = gameObject.GetComponent<AudioSource>();
+        if (team == Enums.Team.ALLIES) transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); 
     }
 
     // Update is called once per frame
@@ -53,14 +54,23 @@ public class EnemyProfiling : MonoBehaviour
     {
         CheckDespawn();
 
+        if (punctured && punctureCooldown <= 0)
+        {
+            punctureCooldown = 3;
+        }
+
+        punctureCooldown -= (int)Time.fixedDeltaTime;
+        if (punctureCooldown <= 0) punctured = false;
+
         if (Health > enemyData.maximumHealth) Health = enemyData.maximumHealth;
-        //if (team != enemyData.team) team = enemyData.team;
+        if (Shield > enemyData.maximumShield) Shield = enemyData.maximumShield;
     }
 
     public void SetEnemyData(Enemy enemy)
     {
         enemyData = enemy;
         Health = enemy.maximumHealth;
+        Shield = enemy.maximumShield;
         team = enemy.team;
     }
 
@@ -95,22 +105,38 @@ public class EnemyProfiling : MonoBehaviour
 
     public void TakeDamage(float Damage)
     {
-        Health -= Damage;
+        if (Shield > 0) Shield -= Damage;
+        
+        Health -= Shield < 0 ? (Shield + Damage) : Damage;
     }
 
     protected virtual void OnDestroy()
     {
-        if (gameObject != null && team != Enums.Team.ALLIES)
-        {
-            PartyController controller = FindFirstObjectByType<PartyController>();
-            foreach (GameObject character in controller.spawnedPrefabs)
-            {
-                if (!character.activeSelf) return;
-                CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
-                profiling.IncreaseUltMeter(10f);
-                UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+        WaveController waveController = null;
+        if (tag == "Boss" || tag == "MainWavesForce") waveController = FindFirstObjectByType<WaveController>();
+
+            if (team != Enums.Team.ALLIES) {
+                PartyController controller = FindFirstObjectByType<PartyController>();
+                foreach (GameObject character in controller.spawnedPrefabs)
+                {
+                    if (!character.activeSelf) return;
+                    CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
+                    profiling.IncreaseUltMeter(10f);
+                    UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+                }
+
+                if (waveController != null && tag == "MainWavesForce")
+                {
+                    if (WaveIndex != null) waveController.RecordEnemyCasualties((int) WaveIndex);
+                }
             }
-        }
+            else if (team == Enums.Team.ALLIES)
+            {
+                if (waveController != null && tag == "MainWavesForce")
+                {
+                    if (WaveIndex != null) waveController.RecordAllyCasualties((int)WaveIndex);
+                }
+            }
     }
 }
 

@@ -34,13 +34,14 @@ public class DefaultEnemy : EnemyProfiling
     {
         base.Start(); // Call the base class's Start method first
         // Additional behavior specific to the derived class's Start method
+
     }
 
     protected override void Update()
     {
         base.Update(); // Call the base class's Update method first
         // Additional behavior specific to the derived class's Update method
-        MoveToTheLeft();
+        MoveToTheGoal();
         MeleeDetection();
         if (CanAttack())
         {
@@ -50,9 +51,10 @@ public class DefaultEnemy : EnemyProfiling
 
     }
 
-    private void MoveToTheLeft()
+    private void MoveToTheGoal()
     {
-        transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y, transform.position.z);
+        float directionSpeed = team == Enums.Team.ALLIES ? 0.01f : -0.01f; 
+        transform.position = new Vector3(transform.position.x + directionSpeed, transform.position.y, transform.position.z);
     }
 
     private bool CanAttack()
@@ -147,7 +149,7 @@ public class DefaultEnemy : EnemyProfiling
         {
             bulletController.Initialize(gameObject.tag, enemyData.team, enemyData.attackDamage, enemyData.attackRange / enemyData.projectileSpeed, enemyData.projectileSpeed, enemyData.splashRadius, bullet.intercept, bullet.penetrate);
 
-            Vector3 bulletDirection = Vector3.left;
+            Vector3 bulletDirection = team == Enums.Team.ALLIES ? Vector3.right : Vector3.left;
             bulletController.SetDirection(bulletDirection);
 
             // Rotate the bullet sprite to match the initial direction
@@ -155,7 +157,7 @@ public class DefaultEnemy : EnemyProfiling
             bulletGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(bulletFire, 0.7f);
+        if (GlobalSoundManager.IsWithinRange(gameObject)) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(bulletFire, 0.7f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 

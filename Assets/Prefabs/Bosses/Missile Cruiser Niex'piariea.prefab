@@ -849,7 +849,12 @@ MonoBehaviour:
   missile: {fileID: 11400000, guid: 88b95df1fe5963c46a6ffc84f8491bab, type: 2}
   missileLaunchClip: {fileID: 8300000, guid: 78aa93d4e34fe1341b6326862832eabb, type: 3}
   mainTurret: {fileID: 2721638413199854852}
-  turrets: []
+  turrets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   turretPositions:
   - {fileID: 1715650453031466588}
   - {fileID: 1120270393943476031}

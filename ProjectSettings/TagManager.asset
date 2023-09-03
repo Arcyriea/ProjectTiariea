@@ -8,6 +8,9 @@ TagManager:
   - SelectionBox
   - Bullet
   - Beam
+  - MainWavesForce
+  - Boss
+  - Critical
   layers:
   - Default
   - TransparentFX

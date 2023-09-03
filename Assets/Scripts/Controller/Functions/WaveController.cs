@@ -23,29 +23,44 @@ public class WaveController : MonoBehaviour
         public List<Vector3> supportPoints;
         public float supportSpawnInterval;
 
-        public int enemyCountAll { 
+        private int enemyCountAll = 0;
+        private bool initializedEnemyCount = true;
+        public int EnemyCountAll { 
             get {
-                int totalEnemyCount = 0;
-                foreach (int count in enemyCounts)
+                if (initializedEnemyCount)
                 {
-                    totalEnemyCount += count;
+                    int totalEnemyCount = 0;
+                    foreach (int count in allyCounts)
+                    {
+                        totalEnemyCount += count;
+                    }
+                    enemyCountAll = totalEnemyCount;
+                    initializedEnemyCount = false;
                 }
-                return totalEnemyCount;
+                return enemyCountAll;
             } 
-            private set { } 
+            protected set { } 
         }
-        public int allyCountAll {
+        private int allyCountAll = 0;
+        private bool initializedAllyCount = true;
+        public int AllyCountAll {
             get
             {
-                int totalAllyCount = 0;
-                foreach (int count in allyCounts)
-                {
-                    totalAllyCount += count;
+                if (initializedAllyCount) {
+                    int totalAllyCount = 0;
+                    foreach (int count in allyCounts)
+                    {
+                        totalAllyCount += count;
+                    }
+                    allyCountAll = totalAllyCount;
+                    initializedAllyCount = false;
                 }
-                return totalAllyCount;
+                return allyCountAll;
             }
-            private set { }
+            protected set { }
         }
+        
+
         public bool isBossWave;
         public bool isThereCritical;
         public bool allowPassiveSpawns;
@@ -54,6 +69,21 @@ public class WaveController : MonoBehaviour
         public SpawnBehaviour spawnBehaviour;
         public enum ReinforcementBehaviour { RANDOM, SATURATED, CONCURRENT }
         public ReinforcementBehaviour reinBehavior;
+
+        public void ResynchronizeTotalCounts()
+        {
+            initializedAllyCount = true;
+            initializedEnemyCount = true;
+        }
+        public void SetAllyCasualty()
+        {
+            AllyCountAll -= 1;
+        }
+
+        public void SetEnemyCasualty()
+        {
+            EnemyCountAll -= 1;
+        }
     }
 
     public GameObject BossInterfaceHud;
@@ -92,12 +122,14 @@ public class WaveController : MonoBehaviour
         {
             
             Wave currentWave = waves[waveIndex];
+            if (SynchronizeEnemyCounts(currentWave) || SynchronizeAllyCounts(currentWave))
+            currentWave.ResynchronizeTotalCounts();
             nextWaveCountdown = Time.time + currentWave.waveInterval;
 
             passiveSpawnManager.SetActive(currentWave.allowPassiveSpawns);
                 
-            if (currentWave.enemyCountAll > 0) StartCoroutine(SpawnEnemiesCoroutine(currentWave));
-            if (currentWave.allyCountAll > 0) StartCoroutine(SpawnAlliesCoroutine(currentWave));
+            if (currentWave.EnemyCountAll > 0) StartCoroutine(SpawnEnemiesCoroutine(currentWave, waveIndex));
+            if (currentWave.AllyCountAll > 0) StartCoroutine(SpawnAlliesCoroutine(currentWave, waveIndex));
 
             if (currentWave.isBossWave)
             {
@@ -118,29 +150,71 @@ public class WaveController : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnAlliesCoroutine(Wave currentWave)
+    public bool SynchronizeEnemyCounts(Wave wave)
+    {
+        bool needToRecalibrate = false;
+        int targetCount = wave.enemyTypes.Count;
+
+        while (wave.enemyCounts.Count < targetCount)
+        {
+            wave.enemyCounts.Add(10);
+            if (!needToRecalibrate) needToRecalibrate = true;
+        }
+
+        while (wave.enemyCounts.Count > targetCount)
+        {
+            int lastIndex = wave.enemyCounts.Count - 1;
+            wave.enemyCounts.RemoveAt(lastIndex);
+            if (!needToRecalibrate) needToRecalibrate = true;
+        }
+        return needToRecalibrate;
+    }
+
+    public bool SynchronizeAllyCounts(Wave wave)
+    {
+        bool needToRecalibrate = false;
+        int targetCount = wave.allyTypes.Count;
+
+        while (wave.allyCounts.Count < targetCount)
+        {
+            wave.allyCounts.Add(10);
+            if (!needToRecalibrate) needToRecalibrate = true;
+        }
+
+        while (wave.allyCounts.Count > targetCount)
+        {
+            int lastIndex = wave.allyCounts.Count - 1;
+            wave.allyCounts.RemoveAt(lastIndex);
+            if (!needToRecalibrate) needToRecalibrate = true;
+        }
+        return needToRecalibrate;
+    }
+
+    private IEnumerator SpawnAlliesCoroutine(Wave currentWave, int currentWaveIndex)
     {
         int spawnPointIndex = 0;
-
-        for (int i = 0; i < currentWave.allyCountAll; i++)
+        Vector3 offset = Vector3.zero;
+        for (int i = 0; i < currentWave.AllyCountAll; i++)
         {
             switch (currentWave.reinBehavior)
             {
                 case Wave.ReinforcementBehaviour.RANDOM:
                     spawnPointIndex = Random.Range(0, currentWave.supportPoints.Count);
+                    offset.x = Random.Range(-25, 25);
+                    offset.y = Random.Range(-25, 25);
+                    HandleAllySpawns(currentWave, spawnPointIndex, currentWaveIndex, offset);
                     break;
                 case Wave.ReinforcementBehaviour.CONCURRENT:
-
+                    for (int j = 0; j < currentWave.supportPoints.Count - 1; j++)
+                    {
+                        HandleAllySpawns(currentWave, j, currentWaveIndex, offset);
+                    }
                     break;
                 case Wave.ReinforcementBehaviour.SATURATED:
                     spawnPointIndex = (spawnPointIndex + 1) % (currentWave.supportPoints.Count - 1);
+                    HandleAllySpawns(currentWave, spawnPointIndex, currentWaveIndex, offset);
                     break;
             }
-
-            SpawnEnemy(currentWave.allyTypes[currentAllyIndex], currentWave.supportPoints.ToArray()[spawnPointIndex]);
-            currentWave.allyCounts[currentAllyIndex] -= 1;
-            if (currentWave.allyCounts[currentAllyIndex] <= 0) currentAllyIndex = (currentAllyIndex + 1) % currentWave.allyTypes.Count;
-
             // You can introduce a delay here if needed
             yield return new WaitForSeconds(currentWave.supportSpawnInterval);
             // e.g., yield return new WaitForSeconds(enemySpawnDelay);
@@ -148,44 +222,58 @@ public class WaveController : MonoBehaviour
         yield break;
     }
 
-
-    private IEnumerator SpawnEnemiesCoroutine(Wave currentWave)
+    private void HandleAllySpawns(Wave currentWave, int spawnPointIndex, int currentWaveIndex, Vector3 offset)
+    {
+        EnemyProfiling allyEntity = SpawnEnemy(currentWave.allyTypes[currentAllyIndex], currentWave.supportPoints.ToArray()[spawnPointIndex] + offset);
+        allyEntity.WaveIndex = currentWaveIndex;
+        currentWave.allyCounts[currentAllyIndex] -= 1;
+        if (currentWave.allyCounts[currentAllyIndex] <= 0) currentAllyIndex = (currentAllyIndex + 1) % currentWave.allyTypes.Count;
+    }
+    private IEnumerator SpawnEnemiesCoroutine(Wave currentWave, int currentWaveIndex)
     {
         int spawnPointIndex = 0;
-
-        for (int i = 0; i < currentWave.enemyCountAll; i++)
+        Vector3 offset = Vector3.zero;
+        for (int i = 0; i < currentWave.EnemyCountAll; i++)
         {
             switch (currentWave.spawnBehaviour)
             {
                 case Wave.SpawnBehaviour.RANDOM:
                     spawnPointIndex = Random.Range(0, currentWave.spawnPoints.Count);
+                    offset.x = Random.Range(-25, 25);
+                    offset.y = Random.Range(-25, 25);
+                    HandleEnemySpawns(currentWave, spawnPointIndex, currentWaveIndex, offset);
                     break;
                 case Wave.SpawnBehaviour.CONCURRENT:
-
+                    for (int j = 0; j < currentWave.spawnPoints.Count - 1; j++)
+                    {
+                        HandleEnemySpawns(currentWave, j, currentWaveIndex, offset);
+                    }
                     break;
                 case Wave.SpawnBehaviour.SATURATED:
                     spawnPointIndex = (spawnPointIndex + 1) % (currentWave.spawnPoints.Count - 1);
+                    HandleEnemySpawns(currentWave, spawnPointIndex, currentWaveIndex, offset);
                     break;
             }
-
-            SpawnEnemy(currentWave.enemyTypes[currentEnemyIndex], currentWave.spawnPoints.ToArray()[spawnPointIndex]);
-            currentWave.enemyCounts[currentEnemyIndex] -= 1;
-            if (currentWave.enemyCounts[currentEnemyIndex] <= 0) currentEnemyIndex = (currentEnemyIndex + 1) % currentWave.enemyTypes.Count;
-
-            // You can introduce a delay here if needed
             yield return new WaitForSeconds(currentWave.enemySpawnInterval);
-            // e.g., yield return new WaitForSeconds(enemySpawnDelay);
         }
-
         yield break;
     }
-    private void SpawnEnemy(Enemy enemyType, Vector3 spawnPoint)
+
+    private void HandleEnemySpawns(Wave currentWave, int spawnPointIndex, int currentWaveIndex, Vector3 offset)
     {
-        // Logic to spawn an enemy of the given type
+        EnemyProfiling enemyEntity = SpawnEnemy(currentWave.enemyTypes[currentEnemyIndex], currentWave.spawnPoints.ToArray()[spawnPointIndex] + offset);
+        enemyEntity.WaveIndex = currentWaveIndex;
+        currentWave.enemyCounts[currentEnemyIndex] -= 1;
+        if (currentWave.enemyCounts[currentEnemyIndex] <= 0) currentEnemyIndex = (currentEnemyIndex + 1) % currentWave.enemyTypes.Count;
+    }
+    private EnemyProfiling SpawnEnemy(Enemy enemyType, Vector3 spawnPoint)
+    {
         GameObject newEnemy = Instantiate(enemyType.enemyPrefab, spawnPoint, Quaternion.identity);
         newEnemy.GetComponent<EnemyProfiling>().SetEnemyData(enemyType);
         newEnemy.layer = prefabLayer;
         newEnemy.tag = "MainWavesForce";
+
+        return newEnemy.GetComponent<EnemyProfiling>();
     }
 
     private void SpawnBoss(Object boss, Vector3? spawnCoord)
@@ -262,8 +350,13 @@ public class WaveController : MonoBehaviour
     }
     // Other methods for wave completion, handling enemies, etc.
 
-    public void RecordAllyCasualties()
+    public void RecordAllyCasualties(int WaveIndex)
     {
-        
+        waves[WaveIndex].SetAllyCasualty();
+    }
+
+    public void RecordEnemyCasualties(int WaveIndex)
+    {
+        waves[WaveIndex].SetEnemyCasualty();
     }
 }

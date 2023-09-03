@@ -17,6 +17,7 @@ public class Enemy : ScriptableObject
 
     // Enemy stats and behavior attributes
     public float maximumHealth;
+    public float maximumShield;
     public float attackRange;
     public float attackDamage;
     public float splashRadius;

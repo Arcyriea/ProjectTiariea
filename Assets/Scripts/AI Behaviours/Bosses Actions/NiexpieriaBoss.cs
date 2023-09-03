@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class MissileBoss : EnemyProfiling
+public class NiexpieriaBoss : EnemyProfiling
 {
     public MissileProperties missile;
     public AudioClip missileLaunchClip;
@@ -176,7 +176,7 @@ public class MissileBoss : EnemyProfiling
                 GenericActions.MissileAttack(missile, team, enemyData, missilee, Vector3.down, gameObject);
                 int random = UnityEngine.Random.Range(0, targets.Count);
                 missilee.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
-                GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(missileLaunchClip, 0.6f);
+                if (GlobalSoundManager.IsWithinRange(gameObject)) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(missileLaunchClip, 0.6f);
 
                 // Wait for the specified launch interval before the next iteration.
                 yield return new WaitForSeconds(launchInterval);

@@ -158,7 +158,7 @@ public class MissileLauncherSquare : EnemyProfiling
             count++;
         }
 
-        GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(missileLaunchClip, 0.6f);
+        if (GlobalSoundManager.IsWithinRange(gameObject)) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(missileLaunchClip, 0.6f);
         UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 
