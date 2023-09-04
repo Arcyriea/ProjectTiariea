@@ -40,7 +40,7 @@ MonoBehaviour:
   meleeRange: 4.5
   meleeDamage: 51
   swingTime: 2.25
-  movementSpeed: 10
+  movementSpeed: 35.14
   LivesModifier: 2
   innateSkill: {fileID: 0}
   activeSkill: {fileID: 0}

@@ -142,7 +142,7 @@ public class MissileController : MonoBehaviour
         // For example: health, damage, speed, etc.
 
         // Search for the nearest target
-        UnityEngine.Debug.Log("Missile lifetime: " +lifeTime);
+        //UnityEngine.Debug.Log("Missile lifetime: " +lifeTime);
         if (properties.homing) SearchForTarget();
     }
 

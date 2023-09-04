@@ -86,8 +86,6 @@ public class DefaultEnemy : EnemyProfiling
         {
             inMeleeRange = false;
         }
-
-        UnityEngine.Debug.Log("Melee Detection Script is Active, Status of Melee: " + inMeleeRange);
     }
 
     private void AttackMode(string attackType)
@@ -159,7 +157,6 @@ public class DefaultEnemy : EnemyProfiling
         }
 
         if (GlobalSoundManager.IsWithinRange(gameObject)) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(bulletFire, 0.7f);
-        UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 
     private void PerformHeal()

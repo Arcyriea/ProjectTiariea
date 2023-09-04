@@ -5,7 +5,13 @@ using UnityEngine;
 public class NiexpieriaBeamfarer : SubsystemProfiling
 {
     public float turnSpeed;
+    public float attackTime;
+    public float bulletStreamInterval;
     public Transform target { get; private set; }
+    public BulletProperties bulletStream;
+    public AudioClip BeamAudio;
+    private StreamInitializer streamInitializer = null;
+    private float nextAttackCooldown = 0;
 
     private Quaternion originalRotation;
     // Start is called before the first frame update
@@ -13,6 +19,12 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
     {
         base.Start();
         originalRotation = transform.rotation;
+        nextAttackCooldown = Time.time + attackTime;
+        if (streamInitializer == null)
+        {
+            streamInitializer = new StreamInitializer();
+            streamInitializer.SetOriginTransform(transform);
+        }
     }
 
     // Update is called once per frame
@@ -38,9 +50,18 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
         }
     }
 
-    public void FireUponTarget()
+    public void FireUponLoad()
     {
-        if (target != null) PerformRanged();
+        if (Time.time >= nextAttackCooldown)
+        {
+            PerformRanged();
+            nextAttackCooldown = Time.time + attackTime;
+        }
+    }
+
+    protected override void PerformRanged()
+    {
+        StartCoroutine(streamInitializer.StreamBulletAttack(bulletStream, team, enemyData, bulletStream.bulletPrefab, Vector3.right, bulletStreamInterval, BeamAudio.length, BeamAudio));
     }
 
     public void SetTarget(Transform target) { 

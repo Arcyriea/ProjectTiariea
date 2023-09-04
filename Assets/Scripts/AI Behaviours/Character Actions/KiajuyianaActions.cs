@@ -112,7 +112,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
         if (GlobalSoundManager.IsWithinRange(gameObject)) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(swordWhoosh, 1f);
         Invoke("ResetAnimation", character.fireRate / 10);
 
-        UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
+        //UnityEngine.Debug.Log(character.characterName + " performs ranged attack!");
     }
 
     public override void PerformHeal()

@@ -68,6 +68,11 @@ public class SubsystemProfiling : MonoBehaviour
         if (Shield > 0) Shield -= damage;
         Health -= Shield <= 0 ? (damage + Shield) : damage;
     }
+
+    public void SetTeam(Enums.Team team)
+    {
+        this.team = team;
+    }
     protected virtual void PerformAttack()
     {
         throw new System.NotImplementedException();

@@ -21,8 +21,6 @@ public class PartyController : MonoBehaviour
 
     public GameObject[] characterStatSliders;
     public List<GameObject> spawnedPrefabs { get; private set; }
-    private float[] respawnTimer;
-    private bool[] isRespawning;
 
     private CustomFormation selectedFormation;
     public float spacing = 0.02f;
@@ -45,8 +43,6 @@ public class PartyController : MonoBehaviour
         tmpScoreUGUI = tmpScore.GetComponent<TextMeshProUGUI>();
         orthoCamera = GetComponent<Camera>();
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);
-        respawnTimer = new float[characters.Length];
-        isRespawning = new bool[characters.Length];
 
         for (int i = 0; i < characters.Length; i++)
         {
@@ -64,8 +60,7 @@ public class PartyController : MonoBehaviour
             GameObject prefabInstance = Instantiate(characters[i].characterPrefab, spawnPosition + offset, Quaternion.identity);
             prefabInstance.layer = prefabLayer;
             CharacterProfiling prefabCharProfile = prefabInstance.GetComponent<CharacterProfiling>();
-            respawnTimer[i] = 0;
-            isRespawning[i] = false;
+            
             prefabCharProfile.GetCharacterFromScriptableObject(characters[i]);
             prefabCharProfile.SetTeam(Enums.Team.ALLIES);
             prefabInstance.SetActive(true);
@@ -88,8 +83,6 @@ public class PartyController : MonoBehaviour
             selectedFormation = customFormations[0];
             UpdateFormation();
         }//Sap xep theo doi hinh
-
-        StartCoroutine(CheckPartyStatusCoroutine());
     }
 
     void Update()
@@ -261,54 +254,5 @@ public class PartyController : MonoBehaviour
 
     }
 
-    private IEnumerator CheckPartyStatusCoroutine()
-    {
-        UnityEngine.Debug.Log("Party Status Check Online");
-        while (true)
-        {
-
-            for (int index = 0; index < spawnedPrefabs.Count; index++)
-            {
-                GameObject partyMember = spawnedPrefabs[index];
-                CharacterProfiling profiling = partyMember.GetComponent<CharacterProfiling>();
-
-                if (profiling.isDead)
-                {
-                    if (!isRespawning[index])
-                        SetRespawn(profiling, index);
-                    else if (isRespawning[index])
-                        CountToRespawn(profiling, index);
-                }
-                UnityEngine.Debug.Log("Checking is active");
-            }
-
-            // Pause the coroutine for a specified duration before the next check
-            yield return new WaitForSeconds(1.0f); // Adjust the duration as needed
-        }
-    }
-    private void SetRespawn(CharacterProfiling profiling, int index)
-    {
-        if (profiling.Lives > 0)
-        {
-            respawnTimer[index] = 5;
-            isRespawning[index] = true;
-            profiling.setLives(-1);
-            UnityEngine.Debug.Log("Initiate Respawn");
-        }
-        if (profiling.gameObject.activeSelf) profiling.gameObject.SetActive(false);
-    }
-
-    private void CountToRespawn(CharacterProfiling profiling, int index)
-    {
-        respawnTimer[index] -= Time.time;
-        UnityEngine.Debug.Log("Respawning in " + respawnTimer[index]);
-        if (respawnTimer[index] <= 0)
-        {
-            profiling.gameObject.SetActive(true);
-            profiling.ResetStats();
-            isRespawning[index] = false;
-            respawnTimer[index] = 0;
-            UnityEngine.Debug.Log("Respawn Complete");
-        }
-    }
+    
 }

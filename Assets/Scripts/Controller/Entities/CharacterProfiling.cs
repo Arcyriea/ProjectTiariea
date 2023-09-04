@@ -29,11 +29,13 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
     // status control
     public bool isDead { get; private set; }
+    private float respawnTimer = 0;
+    private bool isRespawning = false;
     //private int RespawnTimer = 0;
     public bool punctured = false;
     private int punctureCooldown;
-
-
+    private PartyController partyController;
+    private bool inParty = false;
 
     protected class StatusEffect
     {
@@ -81,6 +83,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        partyController = FindFirstObjectByType<PartyController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         moveToMouse = GetComponent<MoveToMouse>();
         commandAI = GetComponent<CharacterAI>();
@@ -95,36 +98,48 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         Energy = character.maximumEnergy;
         Lives = 3 + character.LivesModifier;
         //GenerateEnemyLayerMask(team);
-
+        if (partyController.spawnedPrefabs.Contains(gameObject))
+        {
+            inParty = true;
+            StartCoroutine(CheckDeadStatusCoroutine());
+            UnityEngine.Debug.Log("Character Already added in party");
+        }
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        Regeneration();
-
-        if (animator.GetBool("Ultimate"))
+        if (!isDead)
         {
-            PerformUltimate();
-            UltimateTimer -= Time.deltaTime;
-        }
+            Regeneration();
 
-        if (punctured && punctureCooldown <= 0)
-        {
-            punctureCooldown = 3;
-        }
+            if (animator.GetBool("Ultimate"))
+            {
+                PerformUltimate();
+                UltimateTimer -= Time.deltaTime;
+            }
 
-        punctureCooldown -= (int)Time.fixedDeltaTime;
-        if (punctureCooldown <= 0) punctured = false;
+            if (punctured && punctureCooldown <= 0)
+            {
+                punctureCooldown = 3;
+            }
 
-
-        if (Health <= 0)
-        {
-            UnityEngine.Debug.Log(character.characterName + " tag is : " + tag);
-            if (tag == "Player") isDead = true;
-            else Destroy(gameObject);
+            punctureCooldown -= (int)Time.fixedDeltaTime;
+            if (punctureCooldown <= 0) punctured = false;
         }
         
+        if (Health <= 0)
+        {
+            
+            //UnityEngine.Debug.Log(character.characterName + " tag is : " + tag);
+            if (inParty)
+            {
+                isDead = true;
+            }
+            else Destroy(gameObject);
+        }
+
+        //Debug.Log(character.characterName + " Lives is " + Lives);
     }
 
     
@@ -249,6 +264,79 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
                 UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
             }
         }
+    }
+
+    private void SetRespawn()
+    {
+        
+        if (Lives >= 0)
+        {
+            setLives(-1);
+            if (Lives > -1)
+            {
+                respawnTimer = 5;
+                isRespawning = true;
+                UnityEngine.Debug.Log("Initiate Respawn");
+            }
+        }
+        Collider2D[] colliders = gameObject.GetComponents<Collider2D>();
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+
+        foreach (Collider2D collider in colliders) { collider.enabled = false; }
+        renderer.enabled = false;
+    }
+
+    private void CountToRespawn()
+    {
+        respawnTimer -= Time.deltaTime;
+        if (respawnTimer <= 0)
+        {
+            Collider2D[] colliders = gameObject.GetComponents<Collider2D>();
+            SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+            ResetStats();
+
+            foreach (Collider2D collider in colliders) { collider.enabled = true; }
+            renderer.enabled = true;
+
+            isRespawning = false;
+            respawnTimer = 0;
+        }
+    }
+
+    private void CheckDeadStatus()
+    {
+        if (isDead)
+        {
+            if (!isRespawning)
+                SetRespawn();
+
+            if (isRespawning)
+                CountToRespawn();
+        }    
+
+            UnityEngine.Debug.Log("Respawning status: " + isRespawning);
+            UnityEngine.Debug.Log("Respawning in " + respawnTimer);
+    }
+
+    private IEnumerator CheckDeadStatusCoroutine()
+    {
+        UnityEngine.Debug.Log("Character Status Check Online");
+        while (gameObject.activeSelf)
+        {
+            if (Lives < 0) yield break;
+            if (isDead)
+            {
+                if (!isRespawning)
+                    SetRespawn();
+
+                if (isRespawning)
+                    CountToRespawn();
+            }
+            // Pause the coroutine for a specified duration before the next check
+            UnityEngine.Debug.Log(character.characterName + " Status Coroutine still active");
+            yield return null; // Adjust the duration as needed
+        }
+        yield break;
     }
 }
 

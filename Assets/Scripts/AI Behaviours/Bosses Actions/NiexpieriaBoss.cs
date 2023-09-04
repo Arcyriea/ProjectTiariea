@@ -92,7 +92,7 @@ public class NiexpieriaBoss : EnemyProfiling
             inMeleeRange = false;
         }
 
-        UnityEngine.Debug.Log("Melee Detection Script is Active, Status of Melee: " + inMeleeRange);
+        //UnityEngine.Debug.Log("Melee Detection Script is Active, Status of Melee: " + inMeleeRange);
     }
 
     private void AttackMode(string attackType)
@@ -145,7 +145,7 @@ public class NiexpieriaBoss : EnemyProfiling
     {
         StartCoroutine(PerformRangedWithDelay());
 
-        UnityEngine.Debug.Log("" + " performs ranged attack!");
+        //UnityEngine.Debug.Log("" + " performs ranged attack!");
     }
 
     private void PerformHeal()

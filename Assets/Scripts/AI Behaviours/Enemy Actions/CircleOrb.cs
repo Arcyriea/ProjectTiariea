@@ -87,7 +87,7 @@ public class CircleOrb : EnemyProfiling
             inMeleeRange = false;
         }
 
-        UnityEngine.Debug.Log("Melee Detection Script is Active, Status of Melee: " + inMeleeRange);
+        //UnityEngine.Debug.Log("Melee Detection Script is Active, Status of Melee: " + inMeleeRange);
     }
 
     private void AttackMode(string attackType)

@@ -12,6 +12,10 @@ public class BarFunctions : MonoBehaviour
     public Slider energySlider;
     public Slider ultimateSlider;
 
+    public Sprite emptyCell;
+    public Sprite dormantCell;
+    public Image respawnIndicator;
+    public TextMeshProUGUI respawnCounter;
     public TextMeshProUGUI charName;
     public Button ultimateButton;
     public CharacterProfiling characterProfiling { get; private set; }
@@ -27,6 +31,7 @@ public class BarFunctions : MonoBehaviour
         if (characterProfiling != null)
         {
             charName.SetText(characterProfiling.character.characterName);
+            respawnCounter.SetText(characterProfiling.Lives.ToString());
             InitializeSliders(
                 characterProfiling.character.maximumHealth,
                 characterProfiling.character.maximumShield,
@@ -42,6 +47,8 @@ public class BarFunctions : MonoBehaviour
         if (characterProfiling != null)
         {
             UpdateSliders(characterProfiling);
+            if (characterProfiling.Lives <= 0) respawnIndicator.sprite = emptyCell;
+            else respawnIndicator.sprite = dormantCell;
         }
     }
 
@@ -52,6 +59,7 @@ public class BarFunctions : MonoBehaviour
         if (manaSlider.value != characterProfiling.Mana) manaSlider.value = characterProfiling.Mana;
         if (energySlider.value != characterProfiling.Energy) energySlider.value = characterProfiling.Energy;
         if (ultimateSlider.value != characterProfiling.UltimateTimer) ultimateSlider.value = characterProfiling.UltimateTimer;
+        respawnCounter.SetText(characterProfiling.Lives.ToString());
     }
 
     public void SetCharProfile(CharacterProfiling characterProfiling)
@@ -69,6 +77,7 @@ public class BarFunctions : MonoBehaviour
                 characterProfiling.UltimateMeter
             );
             charName.SetText(characterProfiling.character.characterName);
+            respawnCounter.SetText(characterProfiling.Lives.ToString());
             ultimateButton.onClick.AddListener(() => characterProfiling.CharacterAction("ultimate"));
         }
     }

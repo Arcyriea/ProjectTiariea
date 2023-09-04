@@ -42,6 +42,7 @@ public class MoveToMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<CharacterProfiling>().isDead) return;
         float x = transform.position.x;
         float y = transform.position.y;
 

@@ -146,16 +146,7 @@ public static class GenericActions
         }
     }
 
-    public static IEnumerator StreamBulletAttack(BulletProperties bullet, Team team, UnityEngine.Object obj, GameObject bulletGO, Vector3 bulletDirection, float streamInterval, float duration, AudioClip audioClip)
-    {
-        float attackEndTime = Time.time + duration;
-        while (Time.time <= attackEndTime) {
-            BulletAttack(bullet, team, obj, bulletGO, bulletDirection);
-            if (audioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(audioClip);
-            yield return new WaitForSeconds(streamInterval);
-        }
-        yield break;
-    }
+    
 
     public static void MissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection, GameObject parentTransform)
     {
@@ -168,19 +159,6 @@ public static class GenericActions
             float angle = Mathf.Atan2(missileController.direction.y, missileController.direction.x) * Mathf.Rad2Deg;
             missileGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-    }
-
-    public static IEnumerator StreamMissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection, GameObject parentTransform, float streamInterval, float duration, AudioClip audioClip)
-    {
-        
-        float attackEndTime = Time.time + duration;
-        while (Time.time <= attackEndTime)
-        {
-            MissileAttack(missileProperties, team, obj, missileGO, missileDirection, parentTransform);
-            if (audioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(audioClip);
-            yield return new WaitForSeconds(streamInterval);
-        }
-        yield break;
     }
 
     public static void BeamAttack(float duration, LaserController controller)
