@@ -5,15 +5,15 @@ using UnityEngine;
 public class SubsystemProfiling : MonoBehaviour
 {
     public GameObject parent { get; private set; }
-    public Enemy enemyData { get; private set; }
+    public Enemy enemyData { get; protected set; }
     protected Animator animator;
     protected AudioSource audioSource;
     protected SpriteRenderer spriteRenderer;
     private Transform anchoredTransform;
-    public Enums.Team team { get; private set; }
+    public Enums.Team team { get; protected set; }
 
-    public float Health { get; private set; }
-    public float Shield { get; private set; }
+    public float Health { get; protected set; }
+    public float Shield { get; protected set; }
     private class StatusEffect
     {
         public Enums.StatusEffectType type;
@@ -41,7 +41,7 @@ public class SubsystemProfiling : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        
+        if (Health <= 0) Destroy(gameObject);
     }
 
     public void SetParent(GameObject parent)
@@ -61,6 +61,12 @@ public class SubsystemProfiling : MonoBehaviour
             if (anchoredTransform != null) transform.position = anchoredTransform.position;
             yield return null;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (Shield > 0) Shield -= damage;
+        Health -= Shield <= 0 ? (damage + Shield) : damage;
     }
     protected virtual void PerformAttack()
     {

@@ -234,6 +234,7 @@ public class WaveController : MonoBehaviour
     {
         EnemyProfiling allyEntity = SpawnEnemy(currentWave.allyTypes[currentAllyIndex], currentWave.supportPoints.ToArray()[spawnPointIndex] + offset);
         allyEntity.WaveIndex = currentWaveIndex;
+        if (allyEntity.team != Team.ALLIES) allyEntity.SetTeam(Team.ALLIES);
         currentWave.allyCounts[currentAllyIndex] -= 1;
         if (currentWave.allyCounts[currentAllyIndex] <= 0) currentAllyIndex = (currentAllyIndex + 1) % currentWave.allyTypes.Count;
     }
@@ -287,13 +288,14 @@ public class WaveController : MonoBehaviour
 
     private void SpawnBoss(Object boss, Vector3? spawnCoord)
     {
+        Vector3 camera = Camera.main.transform.position + new Vector3(100f, 0f, 10f);
         if (boss is Enemy entityBoss)
         {
-            HandleBossSpawn(entityBoss, entityBoss.enemyPrefab, spawnCoord == null ? new Vector3() : (Vector3) spawnCoord);
+            HandleBossSpawn(entityBoss, entityBoss.enemyPrefab, spawnCoord == null ? camera : (Vector3) spawnCoord);
         } 
         else if (boss is Character characterBoss)
         {
-            HandleBossSpawn(characterBoss, characterBoss.characterPrefab, spawnCoord == null ? new Vector3() : (Vector3)spawnCoord);
+            HandleBossSpawn(characterBoss, characterBoss.characterPrefab, spawnCoord == null ? camera : (Vector3)spawnCoord);
         } 
         else
         {
@@ -311,9 +313,16 @@ public class WaveController : MonoBehaviour
         EnemyProfiling enemyProfiling = boss.GetComponent<EnemyProfiling>();
         CharacterProfiling characterProfiling = boss.GetComponent<CharacterProfiling>();
 
-        if (enemyProfiling != null) enemyProfiling.SetEnemyData((Enemy)obj);
-        if (characterProfiling != null) characterProfiling.GetCharacterFromScriptableObject((Character)obj);
-
+        if (enemyProfiling != null)
+        {
+            enemyProfiling.SetEnemyData((Enemy)obj);
+            BossInterfaceHud.GetComponent<BossBarFunction>().SetBossProfile(enemyProfiling);
+        }
+        if (characterProfiling != null)
+        {
+            characterProfiling.GetCharacterFromScriptableObject((Character)obj);
+            BossInterfaceHud.GetComponent<BossBarFunction>().SetBossProfile(characterProfiling);
+        }
         boss.layer = prefabLayer;
         boss.tag = "Boss";
     }

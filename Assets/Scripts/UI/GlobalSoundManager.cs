@@ -22,6 +22,7 @@ public class GlobalSoundManager : MonoBehaviour
     public static bool IsWithinRange(GameObject gameObject)
     {
         foreach (Collider2D collider in colliders) {
+            if (collider != null)
             if (collider.gameObject == gameObject) return true;
         }
         return false;

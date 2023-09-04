@@ -120,9 +120,9 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
         if (Health <= 0)
         {
+            UnityEngine.Debug.Log(character.characterName + " tag is : " + tag);
             if (tag == "Player") isDead = true;
             else Destroy(gameObject);
-            //RespawnTimer = 5;
         }
         
     }

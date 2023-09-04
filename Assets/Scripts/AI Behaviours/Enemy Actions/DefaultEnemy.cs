@@ -33,6 +33,7 @@ public class DefaultEnemy : EnemyProfiling
     protected override void Start()
     {
         base.Start(); // Call the base class's Start method first
+        if (team == Enums.Team.ALLIES) transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         // Additional behavior specific to the derived class's Start method
 
     }
@@ -147,7 +148,7 @@ public class DefaultEnemy : EnemyProfiling
 
         if (bulletController != null)
         {
-            bulletController.Initialize(gameObject.tag, enemyData.team, enemyData.attackDamage, enemyData.attackRange / enemyData.projectileSpeed, enemyData.projectileSpeed, enemyData.splashRadius, bullet.intercept, bullet.penetrate);
+            bulletController.Initialize(gameObject.tag, team, enemyData.attackDamage, enemyData.attackRange / enemyData.projectileSpeed, enemyData.projectileSpeed, enemyData.splashRadius, bullet.intercept, bullet.penetrate);
 
             Vector3 bulletDirection = team == Enums.Team.ALLIES ? Vector3.right : Vector3.left;
             bulletController.SetDirection(bulletDirection);

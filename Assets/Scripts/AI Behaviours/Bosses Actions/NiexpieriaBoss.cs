@@ -40,6 +40,7 @@ public class NiexpieriaBoss : EnemyProfiling
     protected override void Start()
     {
         base.Start(); // Call the base class's Start method first
+        if (team != Enums.Team.ALLIES) transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         // Additional behavior specific to the derived class's Start method
     }
 
@@ -163,8 +164,22 @@ public class NiexpieriaBoss : EnemyProfiling
 
     private IEnumerator PerformRangedWithDelay()
     {
-        List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
-        if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+        List<GameObject> targets = team != Enums.Team.ALLIES ? GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs : new List<GameObject>();
+        if (targets != null && targets.Count > 0)
+        {
+            targets.RemoveAll(target => !target.activeSelf);
+            targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+        }
+
+        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, enemyData.attackRange);
+        foreach (Collider2D hitCollider in detected)
+        {
+            if (targets.Contains(hitCollider.gameObject)) continue;
+            if (IsEnemy(hitCollider.gameObject))
+            {
+                targets.Add(hitCollider.gameObject);
+            }
+        }
 
         float launchInterval = 0.3f;
 
@@ -173,9 +188,12 @@ public class NiexpieriaBoss : EnemyProfiling
             if (missileLaunch != null)
             {
                 GameObject missilee = Instantiate(missile.prefab, missileLaunch.position, Quaternion.identity);
-                GenericActions.MissileAttack(missile, team, enemyData, missilee, Vector3.down, gameObject);
-                int random = UnityEngine.Random.Range(0, targets.Count);
-                missilee.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
+                GenericActions.MissileAttack(missile, team, enemyData, missilee, Vector3.left, gameObject);
+                if (targets.Count > 0)
+                {
+                    int random = UnityEngine.Random.Range(0, targets.Count);
+                    missilee.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
+                }
                 if (GlobalSoundManager.IsWithinRange(gameObject)) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(missileLaunchClip, 0.6f);
 
                 // Wait for the specified launch interval before the next iteration.

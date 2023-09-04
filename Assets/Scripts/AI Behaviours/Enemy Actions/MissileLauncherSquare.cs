@@ -63,7 +63,15 @@ public class MissileLauncherSquare : EnemyProfiling
 
     private bool IsEnemy(GameObject other)
     {
-        return other.CompareTag("Player");
+        EnemyProfiling entity = other.GetComponent<EnemyProfiling>();
+        CharacterProfiling character = other.GetComponent<CharacterProfiling>();
+        SubsystemProfiling subsystem = other.GetComponent <SubsystemProfiling>();
+
+        if (entity != null) { if (entity.team != team) return true; }
+        if (character != null) { if (character.team != team) return true; }
+        if (subsystem != null) { if (subsystem.team != team) return true; }
+
+        return false;
     }
 
     private void MeleeDetection()
@@ -136,8 +144,23 @@ public class MissileLauncherSquare : EnemyProfiling
 
     private void PerformRanged()
     {
-        List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
-        if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+        List<GameObject> targets = team != Enums.Team.ALLIES ? GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs : new List<GameObject>();
+        if (targets != null && targets.Count > 0)
+        {
+            targets.RemoveAll(target => !target.activeSelf);
+            targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+        }
+
+        Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, enemyData.attackRange);
+        foreach (Collider2D hitCollider in detected)
+        {
+            if (targets.Contains(hitCollider.gameObject)) continue;
+            if (IsEnemy(hitCollider.gameObject))
+            {
+                targets.Add(hitCollider.gameObject);
+            }
+        }
+
 
         GameObject[] missiles =
         {
@@ -153,8 +176,11 @@ public class MissileLauncherSquare : EnemyProfiling
         foreach (GameObject spawn in missiles)
         {
             GenericActions.MissileAttack(missile, team, enemyData, spawn, vectorDirections[count], gameObject);
-            int random = UnityEngine.Random.Range(0, targets.Count);
-            spawn.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
+            if (targets.Count > 0)
+            {
+                int random = UnityEngine.Random.Range(0, targets.Count);
+                spawn.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
+            }
             count++;
         }
 

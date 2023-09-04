@@ -266,10 +266,9 @@ public class PartyController : MonoBehaviour
         UnityEngine.Debug.Log("Party Status Check Online");
         while (true)
         {
-            
+
             for (int index = 0; index < spawnedPrefabs.Count; index++)
             {
-                
                 GameObject partyMember = spawnedPrefabs[index];
                 CharacterProfiling profiling = partyMember.GetComponent<CharacterProfiling>();
 
@@ -277,13 +276,14 @@ public class PartyController : MonoBehaviour
                 {
                     if (!isRespawning[index])
                         SetRespawn(profiling, index);
-                    else
+                    else if (isRespawning[index])
                         CountToRespawn(profiling, index);
                 }
+                UnityEngine.Debug.Log("Checking is active");
             }
 
-            // Wait for the next frame
-            yield return null;
+            // Pause the coroutine for a specified duration before the next check
+            yield return new WaitForSeconds(1.0f); // Adjust the duration as needed
         }
     }
     private void SetRespawn(CharacterProfiling profiling, int index)
@@ -295,12 +295,12 @@ public class PartyController : MonoBehaviour
             profiling.setLives(-1);
             UnityEngine.Debug.Log("Initiate Respawn");
         }
-        profiling.gameObject.SetActive(false);
+        if (profiling.gameObject.activeSelf) profiling.gameObject.SetActive(false);
     }
 
     private void CountToRespawn(CharacterProfiling profiling, int index)
     {
-        respawnTimer[index] -= Time.deltaTime;
+        respawnTimer[index] -= Time.time;
         UnityEngine.Debug.Log("Respawning in " + respawnTimer[index]);
         if (respawnTimer[index] <= 0)
         {

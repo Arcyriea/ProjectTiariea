@@ -101,7 +101,7 @@ public class BulletController : MonoBehaviour
         MissileController missile = collision.gameObject.GetComponent<MissileController>();
         CharacterProfiling character = collision.gameObject.GetComponent<CharacterProfiling>();
         EnemyProfiling entity = collision.gameObject.GetComponent<EnemyProfiling>();
-
+        SubsystemProfiling subsystem = collision.gameObject.GetComponent<SubsystemProfiling>();
 
         if (otherBullet != null && interceptCollision == true)
         {
@@ -179,6 +179,31 @@ public class BulletController : MonoBehaviour
                     damage -= remainingHealth;
                 }
                 if (entity.Health <= 0 && team == Enums.Team.ALLIES) PartyController.score += 100;
+            }
+        }
+
+        if (subsystem != null)
+        {
+            if (subsystem.team != team)
+            {
+                if (subsystem.Health > damage)
+                {
+                    if (penetrates != true)
+                    {
+                        subsystem.TakeDamage(damage);
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        subsystem.TakeDamage(damage);
+                    }
+                }
+                else
+                {
+                    float remainingHealth = subsystem.Health;
+                    subsystem.TakeDamage(damage);
+                    damage -= remainingHealth;
+                }
             }
         }
     }

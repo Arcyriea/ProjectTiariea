@@ -79,10 +79,11 @@ public class EnemyProfiling : MonoBehaviour
         if (Health <= 0) Destroy(gameObject);
 
         float distanceToDespawn = transform.position.x - Camera.main.transform.position.x;
+        if (team == Enums.Team.ALLIES) distanceToDespawn = -distanceToDespawn;
         if (distanceToDespawn < -despawnDistance)
         {
             Destroy(gameObject);
-            if (homeworld != null)
+            if (homeworld != null && team != Enums.Team.ALLIES)
             {
                 homeworld.heart -= 1;
             }
@@ -122,10 +123,13 @@ public class EnemyProfiling : MonoBehaviour
                     PartyController controller = FindFirstObjectByType<PartyController>();
                     foreach (GameObject character in controller.spawnedPrefabs)
                     {
-                        if (!character.activeSelf) return;
-                        CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
-                        profiling.IncreaseUltMeter(10f);
-                        UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+                        if (character != null)
+                        {
+                            if (!character.activeSelf) return;
+                            CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
+                            profiling.IncreaseUltMeter(10f);
+                            UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+                        }
                     }
                 }
                 

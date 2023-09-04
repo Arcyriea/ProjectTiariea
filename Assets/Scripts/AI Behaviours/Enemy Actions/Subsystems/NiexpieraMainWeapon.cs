@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class NiexpieraMainWeapon : SubsystemProfiling
 {
-    // Start is called before the first frame update
+    public Enemy overrideData;
+
+    public Vector3 target { get; private set; }
     protected override void Start()
     {
         base.Start();
+        enemyData = overrideData;
+        Health = enemyData.maximumHealth;
+        Shield = enemyData.maximumShield;
     }
 
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
