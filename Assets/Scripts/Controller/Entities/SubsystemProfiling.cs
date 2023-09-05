@@ -5,7 +5,7 @@ using UnityEngine;
 public class SubsystemProfiling : MonoBehaviour
 {
     public GameObject parent { get; private set; }
-    public Enemy enemyData { get; protected set; }
+    public Subsystem subsystemData;
     protected Animator animator;
     protected AudioSource audioSource;
     protected SpriteRenderer spriteRenderer;
@@ -32,10 +32,12 @@ public class SubsystemProfiling : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        animator = enemyData == null ? null : gameObject.GetComponent<Animator>();
+        animator = subsystemData == null ? null : gameObject.GetComponent<Animator>();
         audioSource = gameObject.GetComponent<AudioSource>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        StartCoroutine(TrackAnchorPoint());
+        if (anchoredTransform != null) StartCoroutine(TrackAnchorPoint());
+        Health = subsystemData.maximumHealth;
+        Shield = subsystemData.maximumShield;
     }
 
     // Update is called once per frame

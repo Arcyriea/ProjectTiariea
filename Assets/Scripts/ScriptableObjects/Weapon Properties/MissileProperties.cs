@@ -21,6 +21,7 @@ public class MissileProperties : ScriptableObject
     public bool intercept;
     public bool penetrates;
     public bool perpetualOscilliation;
+    public bool destroySubsystems;
     public int penetrationCount;
     public float penetrationStrength;
 }

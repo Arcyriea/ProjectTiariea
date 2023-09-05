@@ -101,22 +101,30 @@ public static class GenericActions
     {
         Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
         Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
+        Subsystem subsystem = obj.GetType() == typeof(Subsystem) ? (Subsystem)obj : null;
 
         float Range, Damage, Speed, Explosion;
 
-        if (character != null && enemy == null)
+        if (character != null)
         {
             Range = character.shootingRange;
             Damage = bullet.damage == 0 ? character.rangedDamage : bullet.damage;
-            Speed = character.accelerateSpeed + PartyController.partyTravelSpeed;
+            Speed = bullet.speed == 0 ? character.accelerateSpeed + PartyController.partyTravelSpeed : bullet.speed + PartyController.partyTravelSpeed;
             Explosion = character.explodeRadius;
         }
-        else if (enemy != null && character == null)
+        else if (enemy != null)
         {
             Range = enemy.attackRange;
             Damage = bullet.damage == 0 ? enemy.attackDamage : bullet.damage;
-            Speed = enemy.projectileSpeed;
+            Speed = bullet.speed == 0 ? enemy.projectileSpeed : bullet.speed;
             Explosion = enemy.splashRadius;
+        }
+        else if (subsystem != null)
+        {
+            Range = subsystem.attackRange;
+            Damage = bullet.damage == 0 ? subsystem.attackDamage : bullet.damage;
+            Speed = bullet.speed == 0 ? subsystem.projectileSpeed : bullet.speed;
+            Explosion = subsystem.splashRadius;
         }
         else
         {

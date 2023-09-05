@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CharacterProfiling : MonoBehaviour, IDefaultActions
 {
@@ -11,7 +12,6 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     protected AudioSource audioSource;
     public Character character { get; private set; }
     private int partyPositions;
-
     public float Health { get; private set; }
     public float Shield { get; private set; }
     public float Mana { get; private set; }
@@ -134,7 +134,13 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
             //UnityEngine.Debug.Log(character.characterName + " tag is : " + tag);
             if (inParty)
             {
-                isDead = true;
+                if (!isDead)
+                {
+                    GameObject warpOut = Instantiate(PrefabManager.warpOut, transform.position, Quaternion.identity);
+                    warpOut.transform.localScale = new Vector3(transform.localScale.x * 2, transform.localScale.y * 2, transform.localScale.z);
+                    Destroy(warpOut, warpOut.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                    isDead = true;
+                }
             }
             else Destroy(gameObject);
         }
@@ -301,21 +307,6 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
             isRespawning = false;
             respawnTimer = 0;
         }
-    }
-
-    private void CheckDeadStatus()
-    {
-        if (isDead)
-        {
-            if (!isRespawning)
-                SetRespawn();
-
-            if (isRespawning)
-                CountToRespawn();
-        }    
-
-            UnityEngine.Debug.Log("Respawning status: " + isRespawning);
-            UnityEngine.Debug.Log("Respawning in " + respawnTimer);
     }
 
     private IEnumerator CheckDeadStatusCoroutine()

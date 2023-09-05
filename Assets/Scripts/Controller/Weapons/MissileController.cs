@@ -54,15 +54,17 @@ public class MissileController : MonoBehaviour
                 target = null;
                 
                 MoveTowardsTarget();
-
-                
-                UnityEngine.Debug.Log("Ran into LifeTime.Boomerang check of Update");
             }
             else
             {
                 Destroy(gameObject);
             }
-            UnityEngine.Debug.Log("Ran into LifeTime check of Update");
+        }
+
+        if (target.gameObject.GetComponent<CharacterProfiling>())
+        {
+            CharacterProfiling targetedCharacter = target.gameObject.GetComponent<CharacterProfiling>();
+            if (targetedCharacter.isDead) target = null;
         }
 
         RotatePerpetually();
@@ -163,6 +165,7 @@ public class MissileController : MonoBehaviour
         {
             EnemyProfiling entity = enmity.GetComponent<EnemyProfiling>();
             CharacterProfiling chara = enmity.GetComponent<CharacterProfiling>();
+            SubsystemProfiling subsystem = enmity.GetComponent<SubsystemProfiling>();
 
             if (entity != null)
             {
@@ -174,7 +177,15 @@ public class MissileController : MonoBehaviour
 
             else if (chara != null)
             {
-                if (chara.team != team)
+                if (chara.team != team && !chara.isDead)
+                {
+                    FindNearestTarget(enmity);
+                }
+            }
+
+            else if (subsystem != null && properties.destroySubsystems)
+            {
+                if (subsystem.team != team)
                 {
                     FindNearestTarget(enmity);
                 }
@@ -264,6 +275,7 @@ public class MissileController : MonoBehaviour
         MissileController missile = collision.gameObject.GetComponent<MissileController>();
         CharacterProfiling character = collision.gameObject.GetComponent<CharacterProfiling>();
         EnemyProfiling entity = collision.gameObject.GetComponent<EnemyProfiling>();
+        SubsystemProfiling subsystem = collision.gameObject.GetComponent<SubsystemProfiling>();
 
         //UnityEngine.Debug.Log("Bullet Collision Triggered");
 
@@ -292,6 +304,37 @@ public class MissileController : MonoBehaviour
                     if (!properties.boomerang) health -= missile.damage;
                 }
                 
+            }
+        }
+
+        if (subsystem != null && properties.destroySubsystems)
+        {
+            if (subsystem.team != team)
+            {
+                //UnityEngine.Debug.Log("entityBulletCollision Triggered");
+                if (subsystem.Health > damage)
+                {
+                    if (properties.penetrates != true)
+                    {
+                        subsystem.TakeDamage(damage);
+                        if (!properties.boomerang) Destroy(gameObject);
+                        else
+                        {
+                            target = parentGameObject.transform;
+                            MoveTowardsTarget();
+                        }
+                    }
+                    else
+                    {
+                        subsystem.TakeDamage(damage);
+                    }
+                }
+                else
+                {
+                    float remainingHealth = subsystem.Health;
+                    subsystem.TakeDamage(damage);
+                    if (!properties.boomerang) health -= remainingHealth;
+                }
             }
         }
 

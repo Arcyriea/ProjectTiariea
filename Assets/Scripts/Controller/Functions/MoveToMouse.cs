@@ -14,7 +14,7 @@ public class MoveToMouse : MonoBehaviour
     private GameObject selectionBox;
     private SelectionBox selectScript;
     private Animator animator;
-    private bool DeactivateSelectionBox = true;
+    private bool DeactivateSelectionBox = false;
 
     void Awake()
     {

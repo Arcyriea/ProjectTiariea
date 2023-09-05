@@ -12,9 +12,14 @@ public class NiexpieriaBoss : EnemyProfiling
     public AudioClip missileLaunchClip;
 
     public GameObject mainTurret;
-    public Enemy[] turrets;
-    public Transform[] turretPositions;
+    public GameObject[] pulseTurrets;
+    public GameObject[] beamfarerTurrets;
     public Transform[] launchPorts;
+    public Transform[] torpedoPorts;
+
+
+
+    private List<GameObject> calibratingSubsystems = new List<GameObject>();
     public override void EnemyAction(string action)
     {
         switch (action)
@@ -41,6 +46,7 @@ public class NiexpieriaBoss : EnemyProfiling
     {
         base.Start(); // Call the base class's Start method first
         if (team != Enums.Team.ALLIES) transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        InitializeSubsystems();
         // Additional behavior specific to the derived class's Start method
     }
 
@@ -56,6 +62,20 @@ public class NiexpieriaBoss : EnemyProfiling
             else AttackMode("ranged");
         }
 
+    }
+
+    private void InitializeSubsystems()
+    {
+        calibratingSubsystems.Add(mainTurret);
+        foreach (GameObject pulseTurret in pulseTurrets) calibratingSubsystems.Add(pulseTurret);
+        foreach (GameObject beamfarerTurret in beamfarerTurrets) calibratingSubsystems.Add(beamfarerTurret);
+
+        foreach (GameObject subsystem in calibratingSubsystems)
+        {
+            SubsystemProfiling module = subsystem.GetComponent<SubsystemProfiling>();
+            module.SetTeam(team);
+            module.SetParent(gameObject);
+        }
     }
 
     private void MoveToTheLeft()

@@ -36,10 +36,12 @@ public class PartyController : MonoBehaviour
     {
         partyTravelSpeed = 0f;
         spawnedPrefabs = new List<GameObject>();
+        
     }
 
     private void Start()
     {
+        PrefabManager.Initialize();
         tmpScoreUGUI = tmpScore.GetComponent<TextMeshProUGUI>();
         orthoCamera = GetComponent<Camera>();
         Vector3 spawnPosition = Camera.main.transform.position + new Vector3(0f, 0f, 10f);

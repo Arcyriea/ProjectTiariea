@@ -5,11 +5,11 @@ using UnityEngine;
 public class NiexpieriaBeamfarer : SubsystemProfiling
 {
     public float turnSpeed;
-    public float attackTime;
     public float bulletStreamInterval;
     public Transform target { get; private set; }
     public BulletProperties bulletStream;
     public AudioClip BeamAudio;
+    public AudioClip chargeAudio;
     private StreamInitializer streamInitializer = null;
     private float nextAttackCooldown = 0;
 
@@ -19,7 +19,7 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
     {
         base.Start();
         originalRotation = transform.rotation;
-        nextAttackCooldown = Time.time + attackTime;
+        nextAttackCooldown = Time.time + subsystemData.attackCooldown;
         if (streamInitializer == null)
         {
             streamInitializer = new StreamInitializer();
@@ -32,6 +32,11 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
     {
         base.Update();
         PointToTarget();
+    }
+
+    private void CalibrateBeamVelocity()
+    {
+        
     }
 
     private void PointToTarget()
@@ -55,13 +60,16 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
         if (Time.time >= nextAttackCooldown)
         {
             PerformRanged();
-            nextAttackCooldown = Time.time + attackTime;
+            nextAttackCooldown = Time.time + subsystemData.attackCooldown;
         }
     }
 
     protected override void PerformRanged()
     {
-        StartCoroutine(streamInitializer.StreamBulletAttack(bulletStream, team, enemyData, bulletStream.bulletPrefab, Vector3.right, bulletStreamInterval, BeamAudio.length, BeamAudio));
+        StartCoroutine(GenericActions.ChargingUp(
+            streamInitializer.StreamBulletAttack(bulletStream, team, subsystemData, bulletStream.bulletPrefab, Vector3.right, bulletStreamInterval, BeamAudio.length, null),
+            chargeAudio.length, chargeAudio, BeamAudio)
+            );
     }
 
     public void SetTarget(Transform target) { 
