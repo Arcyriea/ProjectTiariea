@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Niex'pieria Missile Battery
   m_EditorClassIdentifier: 
   subsystemId: 
-  subsystemName: 
+  subsystemName: Niex'pieria Missile Battery
   enemyClass: 0
-  team: 0
-  maximumHealth: 0
+  team: 2
+  maximumHealth: 4000
   maximumShield: 0
-  attackRange: 0
-  attackDamage: 0
+  attackRange: 200
+  attackDamage: 12
   splashRadius: 0
-  projectileSpeed: 0
+  projectileSpeed: 64
   attackCooldown: 0

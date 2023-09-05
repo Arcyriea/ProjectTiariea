@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Enums;
 
 public class MissileController : MonoBehaviour
 {
-    private GameObject parentGameObject;
-    private Object parentEntity;
-    private MissileProperties properties;
+    public GameObject parentGameObject { get; private set; }
+    public Object parentEntity { get; private set; }
+    public MissileProperties properties { get; private set; }
     private Rigidbody2D rb;
 
 
-    private Transform target;
+    public Transform target { get; private set; }
     private Vector3 velocity;
     private bool hasTarget;
     //stat
@@ -41,31 +42,12 @@ public class MissileController : MonoBehaviour
                 rb.AddForce(transform.up * properties.coldLaunchSpeed, ForceMode2D.Impulse);
             }
         }
+        StartCoroutine(HandlingOutOfLifetime());
     }
 
     void Update()
     {
         if (health <= 0) Destroy(gameObject);
-
-        if (lifeTime <= 0)
-        {
-            if (properties.boomerang)
-            {
-                target = null;
-                
-                MoveTowardsTarget();
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        if (target.gameObject.GetComponent<CharacterProfiling>())
-        {
-            CharacterProfiling targetedCharacter = target.gameObject.GetComponent<CharacterProfiling>();
-            if (targetedCharacter.isDead) target = null;
-        }
 
         RotatePerpetually();
 
@@ -96,7 +78,48 @@ public class MissileController : MonoBehaviour
             if (lifeTime > 0) MoveUntilOutOfLifeTime();
         }
 
+        if (lifeTime <= 0)
+        {
+            if (properties.boomerang)
+            {
+                target = parentGameObject.transform;
+                MoveTowardsTarget();
+            }
+        }
+
         lifeTime -= Time.deltaTime;
+    }
+
+    private IEnumerator HandlingOutOfLifetime()
+    {
+        while (true)
+        {
+            if (target != null)
+            {
+                CharacterProfiling targetedCharacter = target.gameObject.GetComponent<CharacterProfiling>();
+                if (targetedCharacter != null)
+                {
+                    if (targetedCharacter.isDead) {
+                        target = null;
+                        MoveTowardsTarget();
+                    }
+                }
+            }
+
+            if (lifeTime <= 0)
+            {
+                if (properties.boomerang)
+                {
+                    Destroy(gameObject, 10f);
+                    yield break;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+            }
+            yield return null;
+        }
     }
 
     public void Initialize(string tag, Object obj, Team team, MissileProperties missileProperties, GameObject parentTrans)
@@ -281,6 +304,7 @@ public class MissileController : MonoBehaviour
 
         if (collision.gameObject == parentGameObject && properties.boomerang && target == parentGameObject.transform) Destroy(gameObject);
 
+        
         if (missile != null && properties.intercept == true)
         {
             float totalDamage = properties.hullDamage ? damage + health : damage;
@@ -340,6 +364,8 @@ public class MissileController : MonoBehaviour
 
         if (character != null)
         {
+           
+
             if (character.team != team)
             {
                 //UnityEngine.Debug.Log("characterBulletCollision Triggered");
@@ -371,6 +397,20 @@ public class MissileController : MonoBehaviour
                     if (!properties.boomerang) health -= remainingHealth;
                 }
                 if (character.Health <= 0 && team == Team.ALLIES) PartyController.score += 100;
+                if (character.isDead)
+                {
+                    if (!properties.boomerang)
+                    {
+                        target = null;
+                        MoveUntilOutOfLifeTime();
+                        SearchForTarget();
+                    }
+                    else
+                    {
+                        target = parentGameObject.transform;
+                        MoveTowardsTarget();
+                    }
+                }
             } 
             
         }

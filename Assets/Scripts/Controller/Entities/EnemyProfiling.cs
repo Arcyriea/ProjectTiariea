@@ -143,6 +143,7 @@ public class EnemyProfiling : MonoBehaviour
                 {
                     waveController.BossInterfaceHud.GetComponent<BossBarFunction>().RemoveBoss();
                     waveController.InformBossDead();
+                    UnityEngine.Debug.Log("Boss Declared Dead");
                 }
             }
             else if (team == Enums.Team.ALLIES)

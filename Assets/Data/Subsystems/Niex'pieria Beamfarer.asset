@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Niex'pieria Beamfarer
   m_EditorClassIdentifier: 
   subsystemId: 
-  subsystemName: 
+  subsystemName: Niex'pieria Beamfarer
   enemyClass: 0
-  team: 0
-  maximumHealth: 0
+  team: 2
+  maximumHealth: 2000
   maximumShield: 0
-  attackRange: 0
-  attackDamage: 0
+  attackRange: 100
+  attackDamage: 10
   splashRadius: 0
-  projectileSpeed: 0
-  attackCooldown: 0
+  projectileSpeed: 300
+  attackCooldown: 5

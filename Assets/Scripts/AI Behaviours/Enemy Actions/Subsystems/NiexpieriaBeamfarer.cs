@@ -22,36 +22,36 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
         nextAttackCooldown = Time.time + subsystemData.attackCooldown;
         if (streamInitializer == null)
         {
-            streamInitializer = new StreamInitializer();
+            streamInitializer = gameObject.AddComponent<StreamInitializer>();
             streamInitializer.SetOriginTransform(transform);
         }
+        StartCoroutine(PointToTarget());
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        PointToTarget();
-    }
-
-    private void CalibrateBeamVelocity()
-    {
         
     }
 
-    private void PointToTarget()
+    private IEnumerator PointToTarget()
     {
-        if (target != null)
+        while (true)
         {
-            Vector3 targetDirection = target.position - transform.position;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            if (target != null)
+            {
+                Vector3 targetDirection = target.position - transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
 
-            // Smoothly rotate the turret towards the target
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-        } 
-        else
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, originalRotation, turnSpeed * Time.deltaTime);
+                // Smoothly rotate the turret towards the target
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, originalRotation, turnSpeed * Time.deltaTime);
+            }
+            yield return null;
         }
     }
 

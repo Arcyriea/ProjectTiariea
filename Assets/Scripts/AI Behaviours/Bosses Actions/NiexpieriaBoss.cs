@@ -225,4 +225,12 @@ public class NiexpieriaBoss : EnemyProfiling
         
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        foreach (GameObject subsystem in calibratingSubsystems)
+        {
+            Destroy(subsystem);
+        }
+    }
 }

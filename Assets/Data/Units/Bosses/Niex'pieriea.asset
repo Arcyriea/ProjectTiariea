@@ -17,7 +17,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5490970537441599503, guid: 4de68616ca4f12847a5f542d568eb3f9, type: 3}
   enemyClass: 0
   team: 2
-  maximumHealth: 100000
+  maximumHealth: 10000
   maximumShield: 10000
   attackRange: 2000
   attackDamage: 50

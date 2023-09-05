@@ -227,4 +227,16 @@ public class ShiariakyiaActions : CharacterProfiling
         }
         UnityEngine.Debug.Log(character.characterName + " performs their ultimate ability!");
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<MissileController>() != null)
+        {
+            MissileController retrievedBoomerang = collision.gameObject.GetComponent<MissileController>();
+            if (retrievedBoomerang.target == gameObject.transform)
+            {
+                rangedAttackTime -= character.fireRate;
+            }
+        }
+    }
 }

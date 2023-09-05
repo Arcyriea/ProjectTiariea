@@ -25,6 +25,7 @@ public class CharacterAI : MonoBehaviour
 
     private void Update()
     {
+        if (characterProfiling != null) if (characterProfiling.isDead) return;
         if (!moveToMouse.selected) // Check if the character is unselected
         {
             if (inMeleeRange)
