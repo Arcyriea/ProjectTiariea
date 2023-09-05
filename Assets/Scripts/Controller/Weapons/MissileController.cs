@@ -285,6 +285,7 @@ public class MissileController : MonoBehaviour
 
     public void SetTarget(GameObject gameObject)
     {
+        if (gameObject == null)
         target = gameObject.transform;
     }
 

@@ -125,10 +125,13 @@ public class EnemyProfiling : MonoBehaviour
                     {
                         if (character != null)
                         {
-                            if (!character.activeSelf) return;
                             CharacterProfiling profiling = character.GetComponent<CharacterProfiling>();
-                            profiling.IncreaseUltMeter(10f);
-                            UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+                            if (profiling != null) {
+                                if (profiling.isDead) continue;
+                                profiling.IncreaseUltMeter(10f);
+                                UnityEngine.Debug.Log("Increased Ultimate Meter for " + profiling.character.characterName);
+                            }
+                            
                         }
                     }
                 }

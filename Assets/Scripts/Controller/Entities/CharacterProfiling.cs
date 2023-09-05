@@ -324,7 +324,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
                     CountToRespawn();
             }
             // Pause the coroutine for a specified duration before the next check
-            UnityEngine.Debug.Log(character.characterName + " Status Coroutine still active");
+            //UnityEngine.Debug.Log(character.characterName + " Status Coroutine still active");
             yield return null; // Adjust the duration as needed
         }
         yield break;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.TextCore.Text;
 
 public class NiexpieriaBoss : EnemyProfiling
@@ -72,9 +73,12 @@ public class NiexpieriaBoss : EnemyProfiling
 
         foreach (GameObject subsystem in calibratingSubsystems)
         {
-            SubsystemProfiling module = subsystem.GetComponent<SubsystemProfiling>();
-            module.SetTeam(team);
-            module.SetParent(gameObject);
+            if (subsystem != null) {
+                SubsystemProfiling module = subsystem.GetComponent<SubsystemProfiling>();
+                if (module == null) continue;
+                module.SetTeam(team);
+                module.SetParent(gameObject);
+            }
         }
     }
 
@@ -187,8 +191,8 @@ public class NiexpieriaBoss : EnemyProfiling
         List<GameObject> targets = team != Enums.Team.ALLIES ? GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs : new List<GameObject>();
         if (targets != null && targets.Count > 0)
         {
-            targets.RemoveAll(target => !target.activeSelf);
-            targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+            targets.RemoveAll(target => target == null);
+            targets.RemoveAll(target => target != null && target.GetComponent<CharacterProfiling>() != null && target.GetComponent<CharacterProfiling>().isDead);
         }
 
         Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, enemyData.attackRange);
@@ -212,7 +216,7 @@ public class NiexpieriaBoss : EnemyProfiling
                 if (targets.Count > 0)
                 {
                     int random = UnityEngine.Random.Range(0, targets.Count);
-                    missilee.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
+                    if (targets.ToArray()[random] != null) missilee.GetComponent<MissileController>().SetTarget(targets.ToArray()[random]);
                 }
                 if (GlobalSoundManager.IsWithinRange(gameObject)) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(missileLaunchClip, 0.6f);
 

@@ -99,9 +99,12 @@ public class PartyController : MonoBehaviour
 
         foreach (GameObject member in spawnedPrefabs)
         {
-            Vector3 memMove = new Vector3(member.transform.position.x + (partyTravelSpeed * Time.deltaTime), member.transform.position.y, 0f);
-            //Vector3 offset = member.transform.position - transform.position;
-            member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime);// + offset;
+            if (member != null)
+            {
+                Vector3 memMove = new Vector3(member.transform.position.x + (partyTravelSpeed * Time.deltaTime), member.transform.position.y, 0f);
+                //Vector3 offset = member.transform.position - transform.position;
+                member.transform.position = Vector3.Lerp(member.transform.position, memMove, followSpeed * Time.deltaTime);// + offset;
+            }
         }
 
     }
@@ -125,13 +128,20 @@ public class PartyController : MonoBehaviour
             {
                 for (int i = 0; i < spawnedPrefabs.Count; i++)
                 {
-                    if (i + 1 == num)
+                    if (spawnedPrefabs[i] != null)
                     {
-                        spawnedPrefabs[i].GetComponent<MoveToMouse>().SetSelected(true);
-                    } else
-                    {
-                        spawnedPrefabs[i].GetComponent<MoveToMouse>().SetSelected(false);
+                        if (i + 1 == num)
+                        {
+                            if (spawnedPrefabs[i].GetComponent<MoveToMouse>() != null)
+                                spawnedPrefabs[i].GetComponent<MoveToMouse>().SetSelected(true);
+                        }
+                        else
+                        {
+                            if (spawnedPrefabs[i].GetComponent<MoveToMouse>() != null)
+                                spawnedPrefabs[i].GetComponent<MoveToMouse>().SetSelected(false);
+                        }
                     }
+                        
                 }
             }
         }

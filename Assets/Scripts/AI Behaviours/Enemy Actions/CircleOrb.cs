@@ -138,8 +138,8 @@ public class CircleOrb : EnemyProfiling
 
     private void PerformRanged()
     {
-        List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
-        if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+        //List<GameObject> targets = GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs;
+        //if (targets != null && targets.Count > 0) targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
 
         // Get the BulletController component from the instantiated bullet
         GenericActions.BulletAttack(bullet, team, enemyData, Instantiate(bullet.bulletPrefab, transform.position, Quaternion.identity), Vector3.right);

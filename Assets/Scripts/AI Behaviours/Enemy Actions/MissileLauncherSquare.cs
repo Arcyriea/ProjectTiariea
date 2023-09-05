@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using static UnityEngine.GraphicsBuffer;
 
 public class MissileLauncherSquare : EnemyProfiling
 {
@@ -147,8 +148,8 @@ public class MissileLauncherSquare : EnemyProfiling
         List<GameObject> targets = team != Enums.Team.ALLIES ? GameObject.Find("Main Camera")?.GetComponent<PartyController>().spawnedPrefabs : new List<GameObject>();
         if (targets != null && targets.Count > 0)
         {
-            targets.RemoveAll(target => !target.activeSelf);
-            targets.RemoveAll(target => target.GetComponent<CharacterProfiling>().isDead);
+            targets.RemoveAll(target => target == null);
+            targets.RemoveAll(target => target != null && target.GetComponent<CharacterProfiling>() != null && target.GetComponent<CharacterProfiling>().isDead);
         }
 
         Collider2D[] detected = Physics2D.OverlapCircleAll(transform.position, enemyData.attackRange);

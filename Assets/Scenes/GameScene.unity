@@ -1802,7 +1802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.0025024414, y: 13.016}
+  m_AnchoredPosition: {x: 0.0024414062, y: 13.016}
   m_SizeDelta: {x: -0.0050049, y: 12.863}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &419947438
@@ -2362,7 +2362,7 @@ MonoBehaviour:
   - enemyTypes:
     - {fileID: 11400000, guid: 9abb691e447a19748b4113f0a0c67a3c, type: 2}
     - {fileID: 11400000, guid: 2c1b47070a5fde04fb02ca68ba3d42f5, type: 2}
-    enemyCounts: 0a0000000a000000
+    enemyCounts: 0200000003000000
     enemyCharacters: []
     spawnPoints:
     - {x: 100, y: 25, z: 0}
@@ -2375,10 +2375,10 @@ MonoBehaviour:
     supportPoints:
     - {x: -100, y: 0, z: 0}
     supportSpawnInterval: 2.78
-    isBossWave: 1
+    isBossWave: 0
     isThereCritical: 0
-    allowPassiveSpawns: 0
-    waveInterval: 200
+    allowPassiveSpawns: 1
+    waveInterval: 20
     spawnBehaviour: 0
     reinBehavior: 0
   - enemyTypes:
@@ -2396,7 +2396,7 @@ MonoBehaviour:
     supportSpawnInterval: 0
     isBossWave: 1
     isThereCritical: 0
-    allowPassiveSpawns: 1
+    allowPassiveSpawns: 0
     waveInterval: 0
     spawnBehaviour: 0
     reinBehavior: 0
@@ -8485,7 +8485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.0025024414, y: -2}
+  m_AnchoredPosition: {x: 0.0024414062, y: -2}
   m_SizeDelta: {x: -240.2247, y: 11.009}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649898835
