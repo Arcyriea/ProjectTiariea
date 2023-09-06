@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class NiexpieraMainWeapon : SubsystemProfiling
 {
+    public Transform BarrageDirection;
 
+    public Transform[] LaunchTubes;
     public Vector3 target { get; private set; }
     protected override void Start()
     {

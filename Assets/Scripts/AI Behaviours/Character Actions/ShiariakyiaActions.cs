@@ -114,7 +114,7 @@ public class ShiariakyiaActions : CharacterProfiling
 
     public void DartAttacks()
     {
-        if (Time.time - dartRangedAttackTime >= character.fireRate / (dartMinions.Length * 10))
+        if (Time.time - dartRangedAttackTime >= character.fireRate / (dartMinions.Length * 5))
         {
             foreach (Transform transCoord in dartMinionTransforms)
             {

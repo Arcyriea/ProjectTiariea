@@ -12,7 +12,8 @@ public class BulletController : MonoBehaviour
     public Vector3 direction { get; private set; }
     private bool interceptCollision;
     private bool penetrates;
-
+    private int penetrationCounts = 2;
+    private bool penetrated = false;
     public float growRate { get; private set; }
 
     public Enums.Team team { get; private set; }
@@ -49,12 +50,20 @@ public class BulletController : MonoBehaviour
     {
         gameObject.tag = "Bullet";
         RetrieveColliders();
-
-        if (growRate > 0) ScaleBullet();
     }
 
+    bool resettingPenetrated = false;
     private void Update()
     {
+        currentlyInsides.RemoveAll(inside => inside == null);
+        if (penetrates)
+        {
+            if (penetrated && !resettingPenetrated)
+            {
+                resettingPenetrated = true;
+                StartCoroutine(ResetPenetration());
+            }
+        }
         //UpdateGrowRate();
         // Move the bullet based on the direction and speed
         transform.position += direction * speed * Time.deltaTime;
@@ -68,35 +77,26 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    private void ScaleBullet()
+    IEnumerator ResetPenetration()
     {
-        currentBullet = Instantiate(gameObject, transform.position, Quaternion.identity);
-        StartCoroutine(GrowBullet());
+        yield return new WaitForSeconds(1f); 
+        penetrated = false;
+        resettingPenetrated = false;
+        yield break;
     }
 
-    private IEnumerator GrowBullet()
-    {
-        Vector3 initialScale = currentBullet.transform.localScale;
-        float startTime = Time.time;
+    List<GameObject> currentlyInsides = new List<GameObject>();
 
-        while (Time.time - startTime < lifetime)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision != null)
         {
-            float progress = (Time.time - startTime) / lifetime;
-            float currentGrowRate = growRate * progress; // Calculate the current grow rate
-            Vector3 newScale = initialScale * (1 + currentGrowRate); // Calculate the new scale over time
-            currentBullet.transform.localScale = newScale; // Update the local scale
-
-            UpdateGrowRate(currentBullet); // Update collider sizes and damage based on growRate
-
-            yield return null;
+            if (currentlyInsides.Contains(collision.gameObject)) currentlyInsides.Remove(collision.gameObject);
         }
-
-        // Bullet's lifetime has ended
-        Destroy(currentBullet);
     }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
+        
         BulletController otherBullet = collision.gameObject.GetComponent<BulletController>();
         MissileController missile = collision.gameObject.GetComponent<MissileController>();
         CharacterProfiling character = collision.gameObject.GetComponent<CharacterProfiling>();
@@ -139,8 +139,14 @@ public class BulletController : MonoBehaviour
                     }
                     else
                     {
-                        if (character.punctured != true) character.TakeDamage(damage);
-                        character.punctured = true;
+                        if (!penetrated && !currentlyInsides.Contains(collision.gameObject))
+                        {
+                            character.TakeDamage(damage);
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            penetrated = true;
+                            currentlyInsides.Add(collision.gameObject);
+                        }
                     }
                 }
                 else
@@ -167,9 +173,15 @@ public class BulletController : MonoBehaviour
                     }
                     else
                     {
-                        if (entity.punctured != true) entity.TakeDamage(damage);
+                        if (!penetrated && !currentlyInsides.Contains(collision.gameObject))
+                        {
+                            entity.TakeDamage(damage);
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            penetrated = true;
+                            currentlyInsides.Add(collision.gameObject);
+                        }
                         
-                        entity.punctured = true;
                     }
                 }
                 else
@@ -195,7 +207,14 @@ public class BulletController : MonoBehaviour
                     }
                     else
                     {
-                        subsystem.TakeDamage(damage);
+                        if (!penetrated && !currentlyInsides.Contains(collision.gameObject))
+                        {
+                            subsystem.TakeDamage(damage);
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            penetrated = true;
+                            currentlyInsides.Add(collision.gameObject);
+                        }
                     }
                 }
                 else
@@ -204,87 +223,6 @@ public class BulletController : MonoBehaviour
                     subsystem.TakeDamage(damage);
                     damage -= remainingHealth;
                 }
-            }
-        }
-    }
-
-    private void UpdateGrowRate(GameObject bullet)
-    {
-        Collider2D[] colliders = bullet.GetComponents<Collider2D>();
-
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider is PolygonCollider2D polygonCollider)
-            {
-                Vector2[] newVertices = polygonCollider.points;
-
-                float wideningFactor = growRate * Time.deltaTime;
-
-                for (int i = 0; i < newVertices.Length; i++)
-                {
-                    newVertices[i].x *= wideningFactor;
-                    newVertices[i].y *= wideningFactor;
-                }
-
-                polygonCollider.SetPath(0, newVertices);
-            }
-            else if (collider is CapsuleCollider2D capsuleCollider)
-            {
-                Vector2 newSize = capsuleCollider.size;
-                newSize.x *= growRate * Time.deltaTime;
-                newSize.y *= growRate * Time.deltaTime;
-                capsuleCollider.size = newSize;
-            }
-            else if (collider is BoxCollider2D boxCollider)
-            {
-                Vector2 newSize = boxCollider.size;
-                newSize.x *= growRate * Time.deltaTime;
-                newSize.y *= growRate * Time.deltaTime;
-                boxCollider.size = newSize;
-            }
-        }
-    }
-
-    void UpdateGrowRate()
-    {
-        if (growRate > 0)
-        {
-            // Update object's scale
-            transform.localScale *= growRate;
-
-            // Update damage
-            damage *= 1f + (growRate * 0.5f);
-
-            // Update colliders
-            if (polygonCollider != null)
-            {
-                Vector2[] newVertices = polygonCollider.points;
-
-                float wideningFactor = growRate;
-
-                for (int i = 0; i < newVertices.Length; i++)
-                {
-                    newVertices[i].x *= wideningFactor;
-                    newVertices[i].y *= wideningFactor;
-                }
-
-                polygonCollider.SetPath(0, newVertices);
-            }
-
-            if (capsuleCollider != null)
-            {
-                Vector2 newSize = capsuleCollider.size;
-                newSize.x *= growRate;
-                newSize.y *= growRate;
-                capsuleCollider.size = newSize;
-            }
-
-            if (boxCollider != null)
-            {
-                Vector2 newSize = boxCollider.size;
-                newSize.x *= growRate;
-                newSize.y *= growRate;
-                boxCollider.size = newSize;
             }
         }
     }

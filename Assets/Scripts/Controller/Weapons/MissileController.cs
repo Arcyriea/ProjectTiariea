@@ -31,9 +31,11 @@ public class MissileController : MonoBehaviour
     public Team team { get; private set; }
     private float shortestDistance = Mathf.Infinity;
     private bool isBoomerang = false;
+    private int penetrationCounts;
 
     private void Start()
     {
+        penetrationCounts = properties.penetrationCount == 0 ? 2 : properties.penetrationCount;
         rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -48,6 +50,7 @@ public class MissileController : MonoBehaviour
     void Update()
     {
         if (health <= 0) Destroy(gameObject);
+        currentlyInsides.RemoveAll(inside => inside == null);
 
         RotatePerpetually();
 
@@ -293,6 +296,15 @@ public class MissileController : MonoBehaviour
     {
         health -= damage;
     }
+
+    List<GameObject> currentlyInsides = new List<GameObject>();
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision != null)
+        {
+            if (currentlyInsides.Contains(collision.gameObject)) currentlyInsides.Remove(collision.gameObject);
+        }
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         BulletController otherBullet = collision.gameObject.GetComponent<BulletController>();
@@ -326,7 +338,12 @@ public class MissileController : MonoBehaviour
                 else
                 {
                     missile.TakeDamage(totalDamage);
-                    if (!properties.boomerang) health -= missile.damage;
+                    if (!properties.boomerang)
+                    {
+                        penetrationCounts -= 1;
+                        if (penetrationCounts <= 0) Destroy(gameObject);
+                    }
+                    else health -= missile.damage;
                 }
                 
             }
@@ -351,7 +368,13 @@ public class MissileController : MonoBehaviour
                     }
                     else
                     {
-                        subsystem.TakeDamage(damage);
+                        if (!currentlyInsides.Contains(collision.gameObject))
+                        {
+                            subsystem.TakeDamage(damage);
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            currentlyInsides.Add(collision.gameObject);
+                        }
                     }
                 }
                 else
@@ -384,10 +407,12 @@ public class MissileController : MonoBehaviour
                     }
                     else
                     {
-                        if (character.punctured != true)
+                        if (!currentlyInsides.Contains(collision.gameObject))
                         {
                             character.TakeDamage(damage);
-                            character.punctured = true;
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            currentlyInsides.Add(collision.gameObject);
                         }
                     }
                 }
@@ -395,6 +420,7 @@ public class MissileController : MonoBehaviour
                 {
                     float remainingHealth = character.Health;
                     character.TakeDamage(damage);
+
                     if (!properties.boomerang) health -= remainingHealth;
                 }
                 if (character.Health <= 0 && team == Team.ALLIES) PartyController.score += 100;
@@ -435,10 +461,12 @@ public class MissileController : MonoBehaviour
                     }
                     else
                     {
-                        if (entity.punctured != true)
+                        if (!currentlyInsides.Contains(collision.gameObject))
                         {
                             entity.TakeDamage(damage);
-                            entity.punctured = true;
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            currentlyInsides.Add(collision.gameObject);
                         }
                     }
                 }

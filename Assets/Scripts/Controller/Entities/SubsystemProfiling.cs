@@ -68,7 +68,7 @@ public class SubsystemProfiling : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (Shield > 0) Shield -= damage;
-        Health -= Shield <= 0 ? (damage + Shield) : damage;
+        else Health -= Shield <= 0 ? (damage + Shield) : damage;
     }
 
     public void SetTeam(Enums.Team team)

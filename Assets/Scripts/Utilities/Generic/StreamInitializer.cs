@@ -6,7 +6,7 @@ using static Enums;
 public class StreamInitializer : MonoBehaviour
 {
     public Transform attachedParent { get; private set; }
-    public IEnumerator StreamBulletAttack(BulletProperties bullet, Team team, UnityEngine.Object obj, GameObject bulletGO, Vector3 bulletDirection, float streamInterval, float duration, AudioClip audioClip)
+    public IEnumerator StreamBulletAttack(BulletProperties bullet, Team team, UnityEngine.Object obj, GameObject bulletGO, Vector3 offset, float streamInterval, float duration, AudioClip audioClip)
     {
         if (attachedParent == null)
         {
@@ -16,8 +16,11 @@ public class StreamInitializer : MonoBehaviour
         float attackEndTime = Time.time + duration;
         while (Time.time <= attackEndTime)
         {
-            GenericActions.BulletAttack(bullet, team, obj, Instantiate(bulletGO, attachedParent.position, Quaternion.identity), bulletDirection);
+            Vector3 worldOffset = attachedParent.rotation * offset;
+
+            GenericActions.BulletAttack(bullet, team, obj, Instantiate(bulletGO, attachedParent.position + worldOffset, attachedParent.rotation), -attachedParent.transform.right);
             if (audioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(audioClip);
+            UnityEngine.Debug.Log("On the coroutine's firing loop");
             yield return new WaitForSeconds(streamInterval);
         }
         yield break;

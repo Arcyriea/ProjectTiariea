@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossProfiling : MonoBehaviour
+public class BattleshipProfiling : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     protected Animator animator;

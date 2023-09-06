@@ -197,9 +197,17 @@ public static class GenericActions
 
     public static IEnumerator ChargingUp(IEnumerator coroutine, float chargeDuration, AudioClip chargeAudioClip, AudioClip firingAudioClip)
     {
-        if (chargeAudioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(chargeAudioClip);
+        if (chargeAudioClip != null)
+        {
+            GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(chargeAudioClip, 0.5f);
+            UnityEngine.Debug.Log("Playing Charge Sound");
+        }
         yield return new WaitForSeconds(chargeDuration);
-        if (firingAudioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(firingAudioClip);
+        if (firingAudioClip != null)
+        {
+            GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(firingAudioClip, 0.5f);
+            UnityEngine.Debug.Log("Playing Stream Sound");
+        } 
         yield return coroutine;
         yield break;
     }

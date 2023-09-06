@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.Analytics;
-using UnityEngine.TextCore.Text;
+using static UnityEngine.GraphicsBuffer;
+
 
 public class NiexpieriaBoss : EnemyProfiling
 {
@@ -18,6 +15,8 @@ public class NiexpieriaBoss : EnemyProfiling
     public Transform[] launchPorts;
     public Transform[] torpedoPorts;
 
+    private GameObject mainTarget = null;
+    public GameObject MainTarget { get { return mainTarget; } private set { mainTarget = MainTarget; } }
 
 
     private List<GameObject> calibratingSubsystems = new List<GameObject>();
@@ -56,13 +55,77 @@ public class NiexpieriaBoss : EnemyProfiling
         base.Update(); // Call the base class's Update method first
         // Additional behavior specific to the derived class's Update method
         //MoveToTheLeft();
+        FindTargets();
         MeleeDetection();
         if (CanAttack())
         {
             if (inMeleeRange == true) AttackMode("melee");
             else AttackMode("ranged");
         }
+        if (mainTarget != null) FireAtMainTarget();
 
+    }
+
+    private void FindTargets()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, enemyData.attackRange);
+
+        foreach(Collider2D collider in colliders)
+        {
+            if (collider != null)
+            {
+                EnemyProfiling enemyProfiling = collider.gameObject.GetComponent<EnemyProfiling>();
+                CharacterProfiling characterProfiling = collider.gameObject.GetComponent<CharacterProfiling>();
+
+                if (enemyProfiling != null && enemyProfiling.team != team) {
+                    if (mainTarget == null)
+                    {
+                        mainTarget = collider.gameObject;
+                        SetMainWeaponTargets(mainTarget);
+                    }
+                }
+                if (characterProfiling != null && characterProfiling.team != team) {
+                    if (mainTarget == null)
+                    {
+                        mainTarget = collider.gameObject;
+                        SetMainWeaponTargets(mainTarget);
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void SetMainWeaponTargets(GameObject target)
+    {
+        foreach(GameObject beamfarer in beamfarerTurrets)
+        {
+            if (beamfarer != null)
+            {
+                NiexpieriaBeamfarer subsystemManager = beamfarer.GetComponent<NiexpieriaBeamfarer>();
+                if (subsystemManager != null)
+                {
+                    subsystemManager.SetTarget(target);
+                    UnityEngine.Debug.Log("Set main target");
+                }
+            }
+        }
+    }
+
+    private void FireAtMainTarget()
+    {
+        foreach (GameObject beamfarer in beamfarerTurrets)
+        {
+            if (beamfarer != null)
+            {
+                NiexpieriaBeamfarer subsystemManager = beamfarer.GetComponent<NiexpieriaBeamfarer>();
+                if (subsystemManager != null)
+                {
+                    subsystemManager.FireUponLoad();
+                    UnityEngine.Debug.Log("Set main target");
+                }
+            }
+        }
     }
 
     private void InitializeSubsystems()
@@ -76,15 +139,11 @@ public class NiexpieriaBoss : EnemyProfiling
             if (subsystem != null) {
                 SubsystemProfiling module = subsystem.GetComponent<SubsystemProfiling>();
                 if (module == null) continue;
+
                 module.SetTeam(team);
                 module.SetParent(gameObject);
             }
         }
-    }
-
-    private void MoveToTheLeft()
-    {
-        transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y, transform.position.z);
     }
 
     private bool CanAttack()
@@ -234,6 +293,7 @@ public class NiexpieriaBoss : EnemyProfiling
         base.OnDestroy();
         foreach (GameObject subsystem in calibratingSubsystems)
         {
+            if (subsystem != null)
             Destroy(subsystem);
         }
     }

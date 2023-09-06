@@ -6,7 +6,7 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
 {
     public float turnSpeed;
     public float bulletStreamInterval;
-    public Transform target { get; private set; }
+    public GameObject target { get; private set; }
     public BulletProperties bulletStream;
     public AudioClip BeamAudio;
     public AudioClip chargeAudio;
@@ -14,7 +14,13 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
     private float nextAttackCooldown = 0;
 
     private Quaternion originalRotation;
+    private Vector3 firingPoint = new Vector3(-5f, 0, 0);
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        target = null;
+    }
     protected override void Start()
     {
         base.Start();
@@ -41,10 +47,12 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
         {
             if (target != null)
             {
-                Vector3 targetDirection = target.position - transform.position;
-                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                Vector3 targetDirection = target.transform.position - transform.position;
+                float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+                targetAngle += 180f;
 
-                // Smoothly rotate the turret towards the target
+                // Smoothly rotate the turret towards the target only on the Z-axis
+                Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
             }
             else
@@ -61,23 +69,20 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
         {
             PerformRanged();
             nextAttackCooldown = Time.time + subsystemData.attackCooldown;
+            UnityEngine.Debug.Log("Firing at target");
         }
     }
 
     protected override void PerformRanged()
     {
         StartCoroutine(GenericActions.ChargingUp(
-            streamInitializer.StreamBulletAttack(bulletStream, team, subsystemData, bulletStream.bulletPrefab, Vector3.right, bulletStreamInterval, BeamAudio.length, null),
+            streamInitializer.StreamBulletAttack(bulletStream, team, subsystemData, bulletStream.bulletPrefab, firingPoint, bulletStreamInterval, BeamAudio.length, null),
             chargeAudio.length, chargeAudio, BeamAudio)
             );
+        UnityEngine.Debug.Log("Starting Coroutine for Charging up");
     }
 
-    public void SetTarget(Transform target) { 
+    public void SetTarget(GameObject target) { 
         this.target = target;
-    }
-
-    public void ResetTarget()
-    {
-        target = null;
     }
 }

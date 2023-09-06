@@ -108,7 +108,7 @@ public class EnemyProfiling : MonoBehaviour
     {
         if (Shield > 0) Shield -= Damage;
         
-        Health -= Shield < 0 ? (Shield + Damage) : Damage;
+        else Health -= Shield < 0 ? (Shield + Damage) : Damage;
     }
 
     protected virtual void OnDestroy()
