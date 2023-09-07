@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ShiariakyiaActions : CharacterProfiling
 {
@@ -33,7 +34,7 @@ public class ShiariakyiaActions : CharacterProfiling
         homingRays.damage = character.rangedDamage / dartMinions.Length * 1.5f;
         InitializeDarts();
         UltimateMeter = character.fireRate * 10;
-
+        UltimateTimer = UltimateMeter;
     }
 
     // Update is called once per frame
@@ -180,52 +181,68 @@ public class ShiariakyiaActions : CharacterProfiling
 
     public override void PerformUltimate()
     {
-        EnemyProfiling[] enemies = FindObjectsOfType<EnemyProfiling>();
-        CharacterProfiling[] chars = FindObjectsOfType<CharacterProfiling>();
+        StartCoroutine(UltimateCoroutine());
+        UnityEngine.Debug.Log(character.characterName + " performs their ultimate ability!");
+    }
 
+    private IEnumerator UltimateCoroutine()
+    {
         List<GameObject> targets = new List<GameObject>();
 
-        foreach (EnemyProfiling enemy in enemies) {
-            if (enemy.team != team)
-            {
-                targets.Add(enemy.gameObject);
-            }
-        }
-        foreach (CharacterProfiling character in chars) { 
-            if (character.team != team)
-            {
-                targets.Add(character.gameObject);
-            }
-        }
-
-        if (animator.gameObject.activeSelf)
+        if (UltimateTimer >= UltimateMeter)
         {
-            if (!animator.GetBool("Ultimate") && UltimateTimer >= UltimateMeter) {
-                animator.SetBool("Ultimate", true);
-                UltimateTimer = UltimateMeter;
-            }
-           
-            if(UltimateTimer > 0)
-            { 
+            animator.SetBool("Ultimate", true);
+            while (UltimateTimer > 0)
+            {
+                TrackAndAddTarget(targets);
+
                 if (Time.time - homingRaysDelay >= character.fireRate / (dartMinions.Length * 20))
                 {
                     float RandX = Random.Range(0f, 1.01f)
-                        , RandY = Random.Range(0f, 1.01f);
-
-                    int selectedTarget = Random.Range(0, targets.Count);
+                       , RandY = Random.Range(0f, 1.01f);
                     GameObject rays = Instantiate(homingRays.prefab, transform.position, Quaternion.identity);
                     GenericActions.MissileAttack(homingRays, team, character, rays, new Vector3(RandX, RandY, 0), gameObject);
-                    rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
+                    targets.RemoveAll(target => target == null);
+                    if (targets.Count > 0)
+                    {
+                        int selectedTarget = Random.Range(0, targets.Count);
+                        rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
+                    }
                     homingRaysDelay = Time.time;
                 }
-                       
-            } else
-            {
-                animator.SetBool("Ultimate", false);
+                UltimateTimer -= (Time.time * 2);
+                yield return new WaitForSeconds(0.01f);
             }
-
+            animator.SetBool("Ultimate", false);
         }
-        UnityEngine.Debug.Log(character.characterName + " performs their ultimate ability!");
+        yield break;
+    }
+
+    void TrackAndAddTarget(List<GameObject> targets)
+    {
+        Collider2D[] trackAndAddTargets = Physics2D.OverlapCircleAll(transform.position, character.shootingRange * 2);
+
+        foreach (Collider2D target in trackAndAddTargets)
+        {
+            if (target != null)
+            {
+                if (!targets.Contains(target.gameObject))
+                {
+                    EnemyProfiling entityProfile = target.gameObject.GetComponent<EnemyProfiling>();
+                    CharacterProfiling characterProfile = target.gameObject.GetComponent<CharacterProfiling>();
+
+                    if (entityProfile != null)
+                    {
+                        if (entityProfile.team != team) { targets.Add(target.gameObject); }
+                    }
+
+                    if (characterProfile != null)
+                    {
+                        if (characterProfile.team != team) { targets.Add(target.gameObject); }
+                    }
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

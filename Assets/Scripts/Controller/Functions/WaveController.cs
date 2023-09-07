@@ -380,6 +380,7 @@ public class WaveController : MonoBehaviour
 
     public void InformBossDead()
     {
+        StartWave(currentWaveIndex);
         bossPresent = false;
     }
 }

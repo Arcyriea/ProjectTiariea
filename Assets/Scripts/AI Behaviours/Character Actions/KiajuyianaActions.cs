@@ -124,9 +124,26 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 
     public override void PerformUltimate()
     {
+        StartCoroutine(UltimateCoroutine());
         // Define your ultimate ability logic here
         // For example, deal massive damage or apply powerful effects
         UnityEngine.Debug.Log(character.characterName + " performs their ultimate ability!");
+    }
+
+    private IEnumerator UltimateCoroutine()
+    {
+        if (UltimateTimer >= UltimateMeter)
+        {
+            animator.SetBool("Ultimate", true);
+            while (UltimateTimer > 0)
+            {
+                
+                UltimateTimer -= (Time.time * 2);
+                yield return new WaitForSeconds(0.01f);
+            }
+            animator.SetBool("Ultimate", false);
+        }
+        yield break;
     }
 
     void OnDrawGizmosSelected()

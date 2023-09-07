@@ -50,6 +50,7 @@ public class NiexpieriaBoss : EnemyProfiling
         // Additional behavior specific to the derived class's Start method
     }
 
+    bool trackingTarget = false;
     protected override void Update()
     {
         base.Update(); // Call the base class's Update method first
@@ -62,7 +63,14 @@ public class NiexpieriaBoss : EnemyProfiling
             if (inMeleeRange == true) AttackMode("melee");
             else AttackMode("ranged");
         }
-        if (mainTarget != null) FireAtMainTarget();
+        if (mainTarget != null)
+        {
+            if (!trackingTarget) {
+                trackingTarget = true;
+                StartCoroutine(TrackingMainTarget());
+            }
+            FireAtMainTarget();
+        }
 
     }
 
@@ -109,6 +117,28 @@ public class NiexpieriaBoss : EnemyProfiling
                     UnityEngine.Debug.Log("Set main target");
                 }
             }
+        }
+    }
+
+    private IEnumerator TrackingMainTarget()
+    {
+        while (true)
+        {
+            if (mainTarget != null)
+            {
+                float distance = Vector3.Distance(transform.position, mainTarget.transform.position);
+
+                // Check if the mainTarget is out of range (you can replace the threshold distance)
+                if (distance > enemyData.attackRange)
+                {
+                    mainTarget = null; // Set mainTarget to null if out of range
+                    SetMainWeaponTargets(mainTarget);
+                    trackingTarget = false;
+                    yield break;
+                }
+                yield return null;
+            }
+            else yield break;
         }
     }
 

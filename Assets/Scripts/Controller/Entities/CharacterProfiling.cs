@@ -68,7 +68,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     {
         isDead = false;
         UltimateMeter = 100f;
-        UltimateTimer = 0;
+        UltimateTimer = UltimateMeter;
     }
 
     public virtual void SyncRangedAttacks()
@@ -157,7 +157,7 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
         if (Energy < character.maximumEnergy && character.energyRegen != 0) Energy += character.energyRegen;
         if (Mana < character.maximumMana && character.manaRegen != 0) Mana += character.manaRegen;
 
-        if (UltimateTimer < UltimateMeter) UltimateTimer += Time.deltaTime;
+        if (UltimateTimer < UltimateMeter && !animator.GetBool("Ultimate")) UltimateTimer += Time.deltaTime;
 
     }
 
@@ -234,7 +234,10 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
 
     public virtual void PerformUltimate()
     {
-        throw new NotImplementedException();
+        if (UltimateTimer > 0)
+        {
+            UltimateTimer -= (Time.time * 2);
+        }
     }
 
     protected void ResetAnimation()
