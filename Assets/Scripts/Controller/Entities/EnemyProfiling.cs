@@ -4,7 +4,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using UnityEngine;
 
-public class EnemyProfiling : MonoBehaviour
+public class EnemyProfiling : MonoBehaviour, EffectsManager
 {
     public Enemy enemyData { get; private set; }
     private Animator animator;
@@ -24,21 +24,11 @@ public class EnemyProfiling : MonoBehaviour
     public int? WaveIndex = null;
     public float Health { get; private set; }
     public float Shield { get; private set; }
-    private class StatusEffect
-    {
-        public Enums.StatusEffectType type;
-        public int stackCount;
-        public float duration;
 
-        public StatusEffect(Enums.StatusEffectType type, int stackCount, float duration)
-        {
-            this.type = type;
-            this.stackCount = stackCount;
-            this.duration = duration;
-        }
-    }
+    protected LinkedList<EffectsManager.StatusEffect> statusEffects = new LinkedList<EffectsManager.StatusEffect>();
 
-    private LinkedList<StatusEffect> statusEffects = new LinkedList<StatusEffect>();
+    public GameObject barPrefab { get; set; }
+    public HealthBar healthBar { get; protected set; }
 
     // Start is called before the first frame update
     protected virtual void Start()

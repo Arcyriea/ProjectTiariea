@@ -8,9 +8,13 @@ using UnityEngine;
 public class KiajuyianaActions : CharacterProfiling, IDefaultActions
 {
     public BulletProperties bullet;
+    public BulletProperties beamStream;
     public Transform meleeAttackPoint;
+    public Transform ultimateStreamPoint;
 
     public AudioClip swordWhoosh;
+    public AudioClip chargeAudio;
+    public AudioClip beamAudio;
     public AudioClip[] swordSwing;
 
     public override void CharacterAction(string action)
@@ -21,6 +25,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
     protected override void Start()
     {
         base.Start();
+        beamStream.damage = character.rangedDamage / 10;
     }
 
     // Update is called once per frame
@@ -134,13 +139,17 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
     {
         if (UltimateTimer >= UltimateMeter)
         {
+            StreamInitializer streamInitializer = new StreamInitializer();
+            streamInitializer.SetOriginTransform(transform);
             animator.SetBool("Ultimate", true);
-            while (UltimateTimer > 0)
-            {
-                
-                UltimateTimer -= (Time.time * 2);
-                yield return new WaitForSeconds(0.01f);
-            }
+            UltimateTimer = 0;
+            Vector3 firingOffset = new Vector3(1f, 0, 0);
+            StartCoroutine(GenericActions.ChargingUp(
+            streamInitializer.StreamBulletAttack(beamStream, team, character, beamStream.bulletPrefab, (ultimateStreamPoint.position - transform.position) + firingOffset, 180f, 0.01f, beamAudio.length, null),
+            chargeAudio.length, chargeAudio, beamAudio)
+            );
+
+            yield return new WaitForSeconds(chargeAudio.length + beamAudio.length);
             animator.SetBool("Ultimate", false);
         }
         yield break;

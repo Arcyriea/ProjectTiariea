@@ -92,7 +92,7 @@ public class NiexpieriaBoss : EnemyProfiling
                         SetMainWeaponTargets(mainTarget);
                     }
                 }
-                if (characterProfiling != null && characterProfiling.team != team) {
+                if (characterProfiling != null && characterProfiling.team != team && !characterProfiling.isDead) {
                     if (mainTarget == null)
                     {
                         mainTarget = collider.gameObject;
@@ -128,6 +128,18 @@ public class NiexpieriaBoss : EnemyProfiling
             {
                 float distance = Vector3.Distance(transform.position, mainTarget.transform.position);
 
+                CharacterProfiling characterProfiling = mainTarget.GetComponent<CharacterProfiling>();
+
+                if (characterProfiling != null)
+                {
+                    if (characterProfiling.isDead)
+                    {
+                        mainTarget = null; // Set mainTarget to null if out of range
+                        SetMainWeaponTargets(mainTarget);
+                        trackingTarget = false;
+                        yield break;
+                    }
+                }
                 // Check if the mainTarget is out of range (you can replace the threshold distance)
                 if (distance > enemyData.attackRange)
                 {

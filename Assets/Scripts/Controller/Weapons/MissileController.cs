@@ -52,6 +52,7 @@ public class MissileController : MonoBehaviour
         if (health <= 0) Destroy(gameObject);
         currentlyInsides.RemoveAll(inside => inside == null);
 
+        if (target == null) MoveUntilOutOfLifeTime(); 
         RotatePerpetually();
 
         if (properties.homing)

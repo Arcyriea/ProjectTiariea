@@ -32,7 +32,7 @@ MonoBehaviour:
   ammoReplicate: 0
   maximumGas: 0
   gasSynthesis: 0
-  shootingRange: 1000
+  shootingRange: 1300
   accelerateSpeed: 90
   explodeRadius: 0
   rangedDamage: 152

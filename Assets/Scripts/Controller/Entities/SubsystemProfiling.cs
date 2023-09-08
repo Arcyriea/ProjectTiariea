@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubsystemProfiling : MonoBehaviour
+public class SubsystemProfiling : MonoBehaviour, EffectsManager
 {
     public GameObject parent { get; private set; }
     public Subsystem subsystemData;
@@ -14,22 +14,11 @@ public class SubsystemProfiling : MonoBehaviour
 
     public float Health { get; protected set; }
     public float Shield { get; protected set; }
-    private class StatusEffect
-    {
-        public Enums.StatusEffectType type;
-        public int stackCount;
-        public float duration;
 
-        public StatusEffect(Enums.StatusEffectType type, int stackCount, float duration)
-        {
-            this.type = type;
-            this.stackCount = stackCount;
-            this.duration = duration;
-        }
-    }
-
-    private LinkedList<StatusEffect> statusEffects = new LinkedList<StatusEffect>();
+    protected LinkedList<EffectsManager.StatusEffect> statusEffects = new LinkedList<EffectsManager.StatusEffect>();
     // Start is called before the first frame update
+    public GameObject barPrefab { get; set; }
+    public HealthBar healthBar { get; protected set; }
     protected virtual void Start()
     {
         animator = subsystemData == null ? null : gameObject.GetComponent<Animator>();

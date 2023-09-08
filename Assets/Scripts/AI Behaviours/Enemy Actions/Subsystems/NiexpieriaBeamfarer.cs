@@ -76,7 +76,7 @@ public class NiexpieriaBeamfarer : SubsystemProfiling
     protected override void PerformRanged()
     {
         StartCoroutine(GenericActions.ChargingUp(
-            streamInitializer.StreamBulletAttack(bulletStream, team, subsystemData, bulletStream.bulletPrefab, firingPoint, bulletStreamInterval, BeamAudio.length, null),
+            streamInitializer.StreamBulletAttack(bulletStream, team, subsystemData, bulletStream.bulletPrefab, firingPoint, 0, bulletStreamInterval, BeamAudio.length, null),
             chargeAudio.length, chargeAudio, BeamAudio)
             );
         UnityEngine.Debug.Log("Starting Coroutine for Charging up");

@@ -196,21 +196,20 @@ public class ShiariakyiaActions : CharacterProfiling
             {
                 TrackAndAddTarget(targets);
 
-                if (Time.time - homingRaysDelay >= character.fireRate / (dartMinions.Length * 20))
-                {
-                    float RandX = Random.Range(0f, 1.01f)
-                       , RandY = Random.Range(0f, 1.01f);
-                    GameObject rays = Instantiate(homingRays.prefab, transform.position, Quaternion.identity);
+                Vector3 offset = new Vector3(0, 6f, 0);                
+                    float RandX = Random.Range(-1f, 1f)
+                       , RandY = Random.Range(-1f, 1f);
+                    GameObject rays = Instantiate(homingRays.prefab, transform.position + offset, Quaternion.identity);
                     GenericActions.MissileAttack(homingRays, team, character, rays, new Vector3(RandX, RandY, 0), gameObject);
                     targets.RemoveAll(target => target == null);
                     if (targets.Count > 0)
                     {
                         int selectedTarget = Random.Range(0, targets.Count);
-                        rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
+                        
+                        if (targets.ToArray()[selectedTarget] != null) rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
                     }
-                    homingRaysDelay = Time.time;
-                }
-                UltimateTimer -= (Time.time * 2);
+                    
+                UltimateTimer -= (Time.time / dartMinions.Length);
                 yield return new WaitForSeconds(0.01f);
             }
             animator.SetBool("Ultimate", false);

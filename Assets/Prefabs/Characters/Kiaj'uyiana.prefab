@@ -56,8 +56,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punctured: 0
   bullet: {fileID: 11400000, guid: 22a686b84de5fd844bee1fc0f4ba7a7e, type: 2}
+  beamStream: {fileID: 11400000, guid: a26693976a3c4fc4f818a58b6eaa0ebe, type: 2}
   meleeAttackPoint: {fileID: 9167279316472282414}
+  ultimateStreamPoint: {fileID: 508995553190100570}
   swordWhoosh: {fileID: 8300000, guid: 23ba2af8c01fb7747a729ef25f5390d1, type: 3}
+  chargeAudio: {fileID: 8300000, guid: 55b48cf46755e384aa6242bfcc29b052, type: 3}
+  beamAudio: {fileID: 8300000, guid: fe189b39ea61abe4faaacb72fa21e197, type: 3}
   swordSwing:
   - {fileID: 8300000, guid: ae420b62c69c01d4788cc4c78f94d633, type: 3}
   - {fileID: 8300000, guid: 688fc3ad20d45b449884562cf425ba3a, type: 3}

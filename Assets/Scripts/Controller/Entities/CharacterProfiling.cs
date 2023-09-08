@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CharacterProfiling : MonoBehaviour, IDefaultActions
+public class CharacterProfiling : MonoBehaviour, IDefaultActions, EffectsManager
 {
     private SpriteRenderer spriteRenderer;
     protected Animator animator;
@@ -25,6 +25,9 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     public float rangedAttackTime { get; set; }
 
     protected MoveToMouse moveToMouse { get; private set; }
+
+    public GameObject barPrefab { get; set; }
+    public HealthBar healthBar { get; protected set; }
     //protected LayerMask enemyLayerMask;
 
     // status control
@@ -37,22 +40,8 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions
     private PartyController partyController;
     private bool inParty = false;
 
-    protected class StatusEffect
-    {
-        public Enums.StatusEffectType type;
-        public int stackCount;
-        public int maxStack;
-        public float duration;
+    protected LinkedList<EffectsManager.StatusEffect> statusEffects = new LinkedList<EffectsManager.StatusEffect>();
 
-        public StatusEffect(Enums.StatusEffectType type, int stackCount, float duration)
-        {
-            this.type = type;
-            this.stackCount = stackCount;
-            this.duration = duration;
-        }
-    }
-
-    private LinkedList<StatusEffect> statusEffects = new LinkedList<StatusEffect>();
     public CharacterProfiling(Character character, int partyPositions)
     {
         this.character = character;
