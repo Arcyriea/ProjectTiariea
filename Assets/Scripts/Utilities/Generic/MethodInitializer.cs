@@ -102,6 +102,7 @@ public static class GenericActions
         Character character = obj.GetType() == typeof(Character) ? (Character)obj : null;
         Enemy enemy = obj.GetType() == typeof(Enemy) ? (Enemy)obj : null;
         Subsystem subsystem = obj.GetType() == typeof(Subsystem) ? (Subsystem)obj : null;
+        Battleship battleship = obj.GetType() == typeof(Battleship) ? (Battleship)obj : null;
 
         float Range, Damage, Speed, Explosion;
 
@@ -126,6 +127,14 @@ public static class GenericActions
             Speed = bullet.speed == 0 ? subsystem.projectileSpeed : bullet.speed;
             Explosion = subsystem.splashRadius;
         }
+        else if (battleship != null)
+        {
+            Range = battleship.attackRange;
+            Damage = bullet.damage == 0 ? battleship.attackDamage : bullet.damage;
+            Speed = bullet.speed == 0 ? battleship.projectileSpeed : bullet.speed;
+            Explosion = battleship.splashRadius;
+        }
+
         else
         {
             UnityEngine.Debug.LogError("Invalid Object Type for BulletAttack method of static GenericActions class");
@@ -134,7 +143,7 @@ public static class GenericActions
 
         if (bullet == null)
         {
-            UnityEngine.Debug.Log(character.characterName + " bullet property not defined!");
+            UnityEngine.Debug.Log("Bullet property not defined!");
             return;
         }
 

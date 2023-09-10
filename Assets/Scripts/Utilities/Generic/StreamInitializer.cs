@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Enums;
+using static UnityEngine.GraphicsBuffer;
 
 public class StreamInitializer : MonoBehaviour
 {
     public Transform attachedParent { get; private set; }
-    public IEnumerator StreamBulletAttack(BulletProperties bullet, Team team, UnityEngine.Object obj, GameObject bulletGO, Vector3 offset, float firingAngle, float streamInterval, float duration, AudioClip audioClip)
+    public IEnumerator StreamBulletAttack(BulletProperties bullet, Team team, UnityEngine.Object obj, GameObject bulletGO, Vector3 offset, float firingAngle, float streamInterval, float duration, AudioClip audioClip, float volume)
     {
         if (attachedParent == null)
         {
@@ -26,14 +27,14 @@ public class StreamInitializer : MonoBehaviour
             Vector3 rotatedDirection = rotationQuaternion * firingDirection;
 
             GenericActions.BulletAttack(bullet, team, obj, Instantiate(bulletGO, attachedParent.position + worldOffset, attachedParent.rotation), rotatedDirection);
-            if (audioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(audioClip);
+            if (audioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(audioClip, volume);
             UnityEngine.Debug.Log("On the coroutine's firing loop");
             yield return new WaitForSeconds(streamInterval);
         }
         yield break;
     }
 
-    public IEnumerator StreamMissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, GameObject missileGO, Vector3 missileDirection, GameObject parentTransform, float streamInterval, float duration, AudioClip audioClip)
+    public IEnumerator StreamMissileAttack(MissileProperties missileProperties, Team team, UnityEngine.Object obj, Vector3 launchPos, Vector3 missileDirection, GameObject parentTransform, float streamInterval, float duration, AudioClip audioClip)
     {
         if (attachedParent == null)
         {
@@ -43,8 +44,10 @@ public class StreamInitializer : MonoBehaviour
         float attackEndTime = Time.time + duration;
         while (Time.time <= attackEndTime)
         {
-            GenericActions.MissileAttack(missileProperties, team, obj, Instantiate(missileGO, attachedParent.position, Quaternion.identity), missileDirection, parentTransform);
+            GameObject missileGO = Instantiate(missileProperties.prefab, launchPos, Quaternion.identity);
+            GenericActions.MissileAttack(missileProperties, team, obj, missileGO, missileDirection, parentTransform);
             if (audioClip != null) GlobalSoundManager.GlobalSoundPlayer.PlayOneShot(audioClip);
+            UnityEngine.Debug.Log("Coroutine firing missiles");
             yield return new WaitForSeconds(streamInterval);
         }
         yield break;

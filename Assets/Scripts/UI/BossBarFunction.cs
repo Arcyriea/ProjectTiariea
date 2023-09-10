@@ -26,11 +26,16 @@ public class BossBarFunction : MonoBehaviour
         {
             bossName.SetText(bossEntity.enemyData.enemyName);
             InitializeSliders(bossEntity.enemyData.maximumHealth, bossEntity.enemyData.maximumShield);
-        } 
+        }
         else if (bossProfiling is CharacterProfiling bossCharacter)
         {
             bossName.SetText(bossCharacter.character.characterName);
             InitializeSliders(bossCharacter.character.maximumHealth, bossCharacter.character.maximumShield);
+        }
+        else if (bossProfiling is BattleshipProfiling bossBattleship)
+        {
+            bossName.SetText(bossBattleship.battleshipProperty.batteshipName);
+            InitializeSliders(bossBattleship.battleshipProperty.maximumHealth, bossBattleship.battleshipProperty.maximumShield);
         }
     }
 
@@ -53,6 +58,11 @@ public class BossBarFunction : MonoBehaviour
         {
             if (healthSlider.value != characterProfiling.Health) healthSlider.value = characterProfiling.Health;
             if (shieldSlider.value != characterProfiling.Shield) shieldSlider.value = characterProfiling.Shield;
+        } 
+        else if (bossProfiling is BattleshipProfiling battleshipProfiling)
+        {
+            if (healthSlider.value != battleshipProfiling.Health) healthSlider.value = battleshipProfiling.Health;
+            if (shieldSlider.value != battleshipProfiling.Shield) shieldSlider.value = battleshipProfiling.Shield;
         }
         
     }
@@ -79,6 +89,11 @@ public class BossBarFunction : MonoBehaviour
             {
                 bossName.SetText(bossCharacter.character.characterName);
                 InitializeSliders(bossCharacter.character.maximumHealth, bossCharacter.character.maximumShield);
+            } 
+            else if (bossProfiling is BattleshipProfiling bossBattleship)
+            {
+                bossName.SetText(bossBattleship.battleshipProperty.batteshipName);
+                InitializeSliders(bossBattleship.battleshipProperty.maximumHealth, bossBattleship.battleshipProperty.maximumShield);   
             }
         }
     }

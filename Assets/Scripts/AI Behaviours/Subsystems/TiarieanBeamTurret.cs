@@ -15,7 +15,7 @@ public class TiarieanBeamTurret : SubsystemProfiling
     private float nextAttackCooldown = 0;
 
     private Quaternion originalRotation;
-    private Vector3 firingPoint = new Vector3(-5f, 0, 0);
+    private Vector3 firingPoint = new Vector3(5f, 0, 0);
     // Start is called before the first frame update
 
     private void Awake()
@@ -25,6 +25,14 @@ public class TiarieanBeamTurret : SubsystemProfiling
     protected override void Start()
     {
         base.Start();
+        originalRotation = transform.rotation;
+        nextAttackCooldown = Time.time + subsystemData.attackCooldown;
+        if (streamInitializer == null)
+        {
+            streamInitializer = gameObject.AddComponent<StreamInitializer>();
+            streamInitializer.SetOriginTransform(transform);
+        }
+        StartCoroutine(PointToTarget());
     }
 
     // Update is called once per frame
@@ -41,7 +49,7 @@ public class TiarieanBeamTurret : SubsystemProfiling
             {
                 Vector3 targetDirection = target.transform.position - transform.position;
                 float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-                targetAngle += 180f;
+                //targetAngle += 180f;
 
                 // Smoothly rotate the turret towards the target only on the Z-axis
                 Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
@@ -68,7 +76,7 @@ public class TiarieanBeamTurret : SubsystemProfiling
     protected override void PerformRanged()
     {
         StartCoroutine(GenericActions.ChargingUp(
-            streamInitializer.StreamBulletAttack(bulletStream, team, subsystemData, bulletStream.bulletPrefab, firingPoint, 0, bulletStreamInterval, BeamAudio.length, null),
+            streamInitializer.StreamBulletAttack(bulletStream, team, subsystemData, bulletStream.bulletPrefab, firingPoint, 180, bulletStreamInterval, BeamAudio.length, null, 1f),
             chargeAudio.length, chargeAudio, BeamAudio)
             );
         UnityEngine.Debug.Log("Starting Coroutine for Charging up");

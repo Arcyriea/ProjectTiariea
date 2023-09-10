@@ -33,6 +33,7 @@ public class WaveControllerEditor : Editor
 
     [CustomPropertyDrawer(typeof(Enemy))]
     [CustomPropertyDrawer(typeof(Character))]
+    [CustomPropertyDrawer(typeof(Battleship))]
     public class ObjectDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -67,7 +68,7 @@ public class WaveControllerEditor : Editor
     private static bool IsValidObjectType(Object obj)
     {
         // Add your allowed object types here
-        return obj is Enemy || obj is Character; // Example: GameObject and Texture2D are allowed
+        return obj is Enemy || obj is Character || obj is Battleship; // Example: GameObject and Texture2D are allowed
     }
 }
 

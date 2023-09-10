@@ -33,6 +33,11 @@ public class MissileController : MonoBehaviour
     private bool isBoomerang = false;
     private int penetrationCounts;
 
+    private void Awake()
+    {
+        target = null;
+    }
+
     private void Start()
     {
         penetrationCounts = properties.penetrationCount == 0 ? 2 : properties.penetrationCount;
@@ -150,7 +155,19 @@ public class MissileController : MonoBehaviour
             parentHealth = enemy.maximumHealth;
             parentDamage = enemy.attackDamage;
             parentRange = enemy.attackRange;
-        } else
+        } else if (parentEntity is Battleship battleship)
+        {
+            parentHealth = battleship.maximumHealth;
+            parentDamage = battleship.attackDamage;
+            parentRange = battleship.attackRange;
+        } else if (parentEntity is Subsystem subsystem)
+        {
+            parentHealth = subsystem.maximumHealth;
+            parentDamage = subsystem.attackDamage;
+            parentRange = subsystem.attackRange;
+        }
+        
+        else
         {
             UnityEngine.Debug.LogError("Invalid Object assigned for Initialize method of MissileController");
             return;
@@ -313,6 +330,7 @@ public class MissileController : MonoBehaviour
         CharacterProfiling character = collision.gameObject.GetComponent<CharacterProfiling>();
         EnemyProfiling entity = collision.gameObject.GetComponent<EnemyProfiling>();
         SubsystemProfiling subsystem = collision.gameObject.GetComponent<SubsystemProfiling>();
+        BattleshipProfiling battleship = collision.gameObject.GetComponent<BattleshipProfiling>();
 
         //UnityEngine.Debug.Log("Bullet Collision Triggered");
 
@@ -478,6 +496,44 @@ public class MissileController : MonoBehaviour
                     if (!properties.boomerang) health -= remainingHealth;
                 }
                 if (entity.Health <= 0 && team == Team.ALLIES) PartyController.score += 100;
+            }
+        }
+
+        if (battleship != null)
+        {
+            if (battleship.team != team)
+            {
+                //UnityEngine.Debug.Log("entityBulletCollision Triggered");
+                if (battleship.Health > damage)
+                {
+                    if (properties.penetrates != true)
+                    {
+                        battleship.TakeDamage(damage);
+                        if (!properties.boomerang) Destroy(gameObject);
+                        else
+                        {
+                            target = parentGameObject.transform;
+                            MoveTowardsTarget();
+                        }
+                    }
+                    else
+                    {
+                        if (!currentlyInsides.Contains(collision.gameObject))
+                        {
+                            battleship.TakeDamage(damage);
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            currentlyInsides.Add(collision.gameObject);
+                        }
+                    }
+                }
+                else
+                {
+                    float remainingHealth = battleship.Health;
+                    battleship.TakeDamage(damage);
+                    if (!properties.boomerang) health -= remainingHealth;
+                }
+                if (battleship.Health <= 0 && team == Team.ALLIES) PartyController.score += 200;
             }
         }
     }

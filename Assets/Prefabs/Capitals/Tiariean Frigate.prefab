@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3482877006238943699}
-  - component: {fileID: 6523973240269230338}
-  - component: {fileID: 5159728442833048621}
-  - component: {fileID: 7817108783423244010}
   - component: {fileID: 9060810875815097815}
+  - component: {fileID: 5159728442833048621}
+  - component: {fileID: 6523973240269230338}
+  - component: {fileID: 7817108783423244010}
   m_Layer: 0
   m_Name: Beam Turret
   m_TagString: Untagged
@@ -28,32 +28,34 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281296719064201880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: -2}
-  m_LocalScale: {x: 0.1, y: 0.2, z: 0}
+  m_LocalPosition: {x: 2.919, y: 0.03, z: -1}
+  m_LocalScale: {x: 0.11415187, y: 0.11527408, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4960846144781576887}
-  m_RootOrder: 0
+  m_Father: {fileID: 5654162356332200053}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6523973240269230338
-MonoBehaviour:
+--- !u!50 &9060810875815097815
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281296719064201880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 633394273e7f8c84e9a0fe34f13ae7a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  subsystemData: {fileID: 0}
-  turnSpeed: 25
-  bulletStreamInterval: 0.01
-  firingArc: 0
-  bulletStream: {fileID: 0}
-  BeamAudio: {fileID: 8300000, guid: 5ca2c4d470f210142b252d3ed847a2c0, type: 3}
-  chargeAudio: {fileID: 8300000, guid: 55b48cf46755e384aa6242bfcc29b052, type: 3}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!212 &5159728442833048621
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -106,6 +108,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6523973240269230338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281296719064201880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633394273e7f8c84e9a0fe34f13ae7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subsystemData: {fileID: 11400000, guid: 315b8bd485c2b7e43a25512b3ea37835, type: 2}
+  turnSpeed: 25
+  bulletStreamInterval: 0.01
+  firingArc: 0
+  bulletStream: {fileID: 11400000, guid: 0d80044e254fcc74e9f5e77749224a93, type: 2}
+  BeamAudio: {fileID: 8300000, guid: 5ca2c4d470f210142b252d3ed847a2c0, type: 3}
+  chargeAudio: {fileID: 8300000, guid: 55b48cf46755e384aa6242bfcc29b052, type: 3}
 --- !u!60 &7817108783423244010
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -116,7 +137,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -442,27 +463,6 @@ PolygonCollider2D:
       - {x: 0.84, y: -3.02}
       - {x: 0.78, y: -3.02}
       - {x: 0.77, y: -3.01}
---- !u!50 &9060810875815097815
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281296719064201880}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
 --- !u!1 &497054963437289452
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,12 +487,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497054963437289452}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9108, y: -0.3747, z: 1}
-  m_LocalScale: {x: 1.2017, y: 0.7067, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.9108, y: -0.37470004, z: 1}
+  m_LocalScale: {x: 1.2017, y: 0.7067, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3482877006238943699}
+  m_Children: []
   m_Father: {fileID: 5654162356332200053}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -557,6 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5654162356332200053}
+  - component: {fileID: 2281183607674933914}
   - component: {fileID: 8359152148943324437}
   - component: {fileID: 669581117127358917}
   - component: {fileID: 6552546874215642128}
@@ -576,14 +576,31 @@ Transform:
   m_GameObject: {fileID: 4567388411997669789}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1417368980779154882}
   - {fileID: 4960846144781576887}
+  - {fileID: 3482877006238943699}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2281183607674933914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4567388411997669789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9dc9f00fa8148479bde901b5582550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainBeamTurret: {fileID: 281296719064201880}
+  mainPhantomEmitter: {fileID: 1417368980779154882}
+  mainOrbProperty: {fileID: 11400000, guid: 73db0614487dfa44f8841a901347136f, type: 2}
+  orbLaunchAudio: {fileID: 0}
 --- !u!212 &8359152148943324437
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -782,7 +799,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1417368980779154882}
   m_Layer: 0
-  m_Name: Ray Emitter Point
+  m_Name: Orb Emitter Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

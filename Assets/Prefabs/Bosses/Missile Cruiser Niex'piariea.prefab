@@ -862,7 +862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184968295493063372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 0.579923, z: -5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1465,6 +1465,8 @@ MonoBehaviour:
   - {fileID: 4122025010317320948}
   - {fileID: 6364517630804162756}
   - {fileID: 8002127222486234941}
+  missileProperties: {fileID: 11400000, guid: 88b95df1fe5963c46a6ffc84f8491bab, type: 2}
+  audioClip: {fileID: 8300000, guid: 2ce916d86537d2c4b9efd650eacdeaed, type: 3}
 --- !u!212 &6415277932534433520
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2035,7 +2037,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4853418097680439579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.8374028, y: 0.520348, z: -5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2643,7 +2645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8d61f11c3d8fe47b264742b4b2d38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  punctured: 0
   missile: {fileID: 11400000, guid: 88b95df1fe5963c46a6ffc84f8491bab, type: 2}
   missileLaunchClip: {fileID: 8300000, guid: 78aa93d4e34fe1341b6326862832eabb, type: 3}
   mainTurret: {fileID: 2721638413199854852}

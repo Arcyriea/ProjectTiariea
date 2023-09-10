@@ -145,7 +145,7 @@ public class KiajuyianaActions : CharacterProfiling, IDefaultActions
             UltimateTimer = 0;
             Vector3 firingOffset = new Vector3(1f, 0, 0);
             StartCoroutine(GenericActions.ChargingUp(
-            streamInitializer.StreamBulletAttack(beamStream, team, character, beamStream.bulletPrefab, (ultimateStreamPoint.position - transform.position) + firingOffset, 180f, 0.01f, beamAudio.length, null),
+            streamInitializer.StreamBulletAttack(beamStream, team, character, beamStream.bulletPrefab, (ultimateStreamPoint.position - transform.position) + firingOffset, 180f, 0.01f, beamAudio.length, null, 0.6f),
             chargeAudio.length, chargeAudio, beamAudio)
             );
 

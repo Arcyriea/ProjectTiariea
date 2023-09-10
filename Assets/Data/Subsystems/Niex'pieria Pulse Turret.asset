@@ -19,7 +19,7 @@ MonoBehaviour:
   maximumHealth: 200
   maximumShield: 2000
   attackRange: 500
-  attackDamage: 36
+  attackDamage: 16
   splashRadius: 0
   projectileSpeed: 80
   attackCooldown: 1

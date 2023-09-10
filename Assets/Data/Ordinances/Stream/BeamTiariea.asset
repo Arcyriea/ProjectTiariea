@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BeamTiariea
   m_EditorClassIdentifier: 
   damage: 36.7
-  speed: 200
+  speed: 100
   size: 0
   growRate: 0
   bulletPrefab: {fileID: 1490463374563602654, guid: 3758399ed2fe63141a8eaa6cc95ab49a, type: 3}

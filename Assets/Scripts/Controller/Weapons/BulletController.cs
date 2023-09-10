@@ -100,6 +100,7 @@ public class BulletController : MonoBehaviour
         BulletController otherBullet = collision.gameObject.GetComponent<BulletController>();
         MissileController missile = collision.gameObject.GetComponent<MissileController>();
         CharacterProfiling character = collision.gameObject.GetComponent<CharacterProfiling>();
+        BattleshipProfiling battleship = collision.gameObject.GetComponent<BattleshipProfiling>();
         EnemyProfiling entity = collision.gameObject.GetComponent<EnemyProfiling>();
         SubsystemProfiling subsystem = collision.gameObject.GetComponent<SubsystemProfiling>();
 
@@ -191,6 +192,41 @@ public class BulletController : MonoBehaviour
                     damage -= remainingHealth;
                 }
                 if (entity.Health <= 0 && team == Enums.Team.ALLIES) PartyController.score += 100;
+            }
+        }
+
+        if (battleship != null)
+        {
+            if (battleship.team != team)
+            {
+
+                if (battleship.Health > damage)
+                {
+                    if (penetrates != true)
+                    {
+                        battleship.TakeDamage(damage);
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        if (!penetrated && !currentlyInsides.Contains(collision.gameObject))
+                        {
+                            battleship.TakeDamage(damage);
+                            penetrationCounts -= 1;
+                            if (penetrationCounts <= 0) Destroy(gameObject);
+                            penetrated = true;
+                            currentlyInsides.Add(collision.gameObject);
+                        }
+
+                    }
+                }
+                else
+                {
+                    float remainingHealth = battleship.Health;
+                    battleship.TakeDamage(damage);
+                    damage -= remainingHealth;
+                }
+                if (battleship.Health <= 0 && team == Enums.Team.ALLIES) PartyController.score += 200;
             }
         }
 
