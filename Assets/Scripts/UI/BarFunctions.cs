@@ -87,6 +87,7 @@ public class BarFunctions : MonoBehaviour
         characterProfiling = null;
         charName.SetText("");
         InitializeSliders(0, 0, 0, 0, 0);
+        ultimateButton.onClick.RemoveAllListeners();
         gameObject.SetActive(false);
     }
 

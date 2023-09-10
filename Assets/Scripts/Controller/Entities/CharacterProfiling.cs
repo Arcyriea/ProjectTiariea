@@ -102,12 +102,6 @@ public class CharacterProfiling : MonoBehaviour, IDefaultActions, EffectsManager
         {
             Regeneration();
 
-            if (animator.GetBool("Ultimate"))
-            {
-                PerformUltimate();
-                UltimateTimer -= Time.deltaTime;
-            }
-
             if (punctured && punctureCooldown <= 0)
             {
                 punctureCooldown = 3;
