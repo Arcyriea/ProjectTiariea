@@ -18,7 +18,7 @@ MonoBehaviour:
   team: 2
   maximumHealth: 4000
   maximumShield: 0
-  attackRange: 200
+  attackRange: 600
   attackDamage: 12
   splashRadius: 0
   projectileSpeed: 64

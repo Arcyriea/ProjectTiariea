@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,31 +69,6 @@ public class Character : ScriptableObject
     public virtual void CharacterBehaviour()
     {
 
-    }
-}
-
-public static class CharacterList
-{
-    public static List<Character> characters = new List<Character>
-    {
-        //new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), null, "RI_241", "Mythri'theia", 1000f, null, 0f, 100f, 0f, 65.6f, 1.2f, 0f, null, null, null, null),
-        //new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), null, "LI_K21", "Kiaj'uyiana", 1000f, 500f, 0f, 100f, 0f, 65.6f, 1.2f, 0f, null, null, null, null),
-        //new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), null, "LI_S22", "Shiar'iakyia", 1000f, 500f, 0f, 100f, 0f, 65.6f, 1.2f, 0f, null, null, null, null),
-        //new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), null, "VAL_K42", "Krist'ven", 1000f, null, 0f, 100f, 0f, 65.6f, 1.2f, 0f, null, null, null, null),
-        //new Character(LoadSpriteByGUID("0fe7b0717ff2e164a956115a709e873a"), null, "SP_SPAR32", "Spa'riat", 1000f, null, 0f, 100f, 0f, 65.6f, 1.2f, 0f, null, null, null, null),
-    };
-
-
-    private static Sprite LoadSpriteByGUID(string spriteGUID)
-    {
-        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(spriteGUID);
-        return UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(path);
-    }
-
-    private static Animator LoadAnimatorByGUID(string animGUID)
-    {
-        string path = UnityEditor.AssetDatabase.GUIDToAssetPath(animGUID);
-        return UnityEditor.AssetDatabase.LoadAssetAtPath<Animator>(path);
     }
 }
 
