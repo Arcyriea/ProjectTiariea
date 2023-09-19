@@ -5,6 +5,7 @@ This is the first game project of my own that I started, in which I began to und
 Artworks from my DeviantArt may be delivered to this project. I also help drawing spritesheets for the characters as well as units
 
 Some sound assets are borrowed from Realspace 3, Battleship Forever.
+
 ----
 
 I would just try to find ways to port this over to Godot or Unreal if this were to be developed and published to be an actual game, since it's currently developed in Unity atm.
