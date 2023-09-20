@@ -54,7 +54,7 @@ public class DefaultEnemy : EnemyProfiling
 
     private void MoveToTheGoal()
     {
-        float directionSpeed = team == Enums.Team.ALLIES ? 0.01f : -0.01f; 
+        float directionSpeed = team == Enums.Team.ALLIES ? 0.001f : -0.001f; 
         transform.position = new Vector3(transform.position.x + directionSpeed, transform.position.y, transform.position.z);
     }
 

@@ -94,7 +94,7 @@ public class PartyController : MonoBehaviour
         Camera.main.transform.position = Vector3.Lerp(transform.position, newPos, followSpeed * Time.deltaTime);
 
         ZoomControl();
-        PartyMarchCommand();
+        //PartyMarchCommand();
         SelectPartyMember();
 
         foreach (GameObject member in spawnedPrefabs)
