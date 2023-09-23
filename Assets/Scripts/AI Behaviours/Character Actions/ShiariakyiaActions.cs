@@ -196,24 +196,25 @@ public class ShiariakyiaActions : CharacterProfiling
             {
                 TrackAndAddTarget(targets);
 
-                Vector3 offset = new Vector3(0, 6f, 0);                
-                    float RandX = Random.Range(-1f, 1f)
-                       , RandY = Random.Range(-1f, 1f);
-                    GameObject rays = Instantiate(homingRays.prefab, transform.position + offset, Quaternion.identity);
-                    GenericActions.MissileAttack(homingRays, team, character, rays, new Vector3(RandX, RandY, 0), gameObject);
-                    targets.RemoveAll(target => target == null);
-                    if (targets.Count > 0)
-                    {
-                        int selectedTarget = Random.Range(0, targets.Count);
-                        
-                        if (targets.ToArray()[selectedTarget] != null) rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
-                    }
-                    
+                Vector3 offset = new Vector3(0, 6f, 0);
+                float RandX = Random.Range(-1f, 1f)
+                   , RandY = Random.Range(-1f, 1f);
+                GameObject rays = Instantiate(homingRays.prefab, transform.position + offset, Quaternion.identity);
+                GenericActions.MissileAttack(homingRays, team, character, rays, new Vector3(RandX, RandY, 0), gameObject);
+                targets.RemoveAll(target => target == null);
+                if (targets.Count > 0)
+                {
+                    int selectedTarget = Random.Range(0, targets.Count);
+
+                    if (targets.ToArray()[selectedTarget] != null) rays.GetComponent<MissileController>().SetTarget(targets.ToArray()[selectedTarget]);
+                }
+
                 UltimateTimer -= (Time.time / dartMinions.Length);
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.1f);
             }
-            animator.SetBool("Ultimate", false);
+
         }
+        if (animator.GetBool("Ultimate")) animator.SetBool("Ultimate", false);
         yield break;
     }
 
